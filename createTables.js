@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 require("dotenv").config();
+const questions = require('./questions.json');
 
 const con = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -14,6 +15,9 @@ con.connect(function (err) {
     return;
   }
   console.log("Connected to MySQL server");
+
+  
+  /* Define SQL Queries */
 
   const createGraphsTable = `
     CREATE TABLE IF NOT EXISTS test_graphs (
@@ -64,21 +68,14 @@ con.connect(function (err) {
   const insertDataIntoGraphsTable = `
             INSERT INTO test_graphs (graph_name, graph_url) 
             VALUES ('my-equity-gap', 'https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps')`;
+  
+  const graph_questions = questions["graph_questions"];
+  const graph_questions_sqlQuery = generateSQLFromJSON(graph_questions);
 
-  const insertDataIntoQuestionsTable = `
-          INSERT INTO test_questions (question_text, options, correct_ans, question_type, graph_type, graph_id, url_params) VALUES
-          ('Each grad cap is equal to how many students?', JSON_ARRAY('1 student', '100 students', '10 students', 'Not specified'), '10 students', 'graph', 'csu', 1, 
-            JSON_OBJECT('campus', 'Bakersfield', 'college', 'School of Arts & Humanities', 'major', '*All Majors', 'student_type', 'freshmen', 'student_type_name', 'Freshmen', 'cohort', 2019, 'persistence', 1, 'year1', 4, 'year2', 6, 'outcome', '6th-Year Graduation', 'gap_type', 'firstgen')),
-          ('In the provided graph, what does the yellow line signify?', JSON_ARRAY('Recent First-Generation Rate', 'Recent Not First-Generation Rate', 'Recent Not Pell Rate', 'Recent Not URM Rate'), 'Recent Not First-Generation Rate', 'graph', 'csu', 1, 
-            JSON_OBJECT('campus', 'Bakersfield', 'college', 'School of Arts & Humanities', 'major', '*All Majors', 'student_type', 'freshmen', 'student_type_name', 'Freshmen', 'cohort', 2019, 'persistence', 1, 'year1', 4, 'year2', 6, 'outcome', '6th-Year Graduation', 'gap_type', 'firstgen')),
-          ('The purple grad caps indicate that the students are first-generation.', JSON_ARRAY('True','False'), 'True', 'graph', 'csu', 1, 
-            JSON_OBJECT('campus', 'Bakersfield', 'college', 'School of Arts & Humanities', 'major', '*All Majors', 'student_type', 'freshmen', 'student_type_name', 'Freshmen', 'cohort', 2019, 'persistence', 1, 'year1', 4, 'year2', 6, 'outcome', '6th-Year Graduation', 'gap_type', 'firstgen')),
-          ('How many criminal justice students contributed to the graph?', JSON_ARRAY(10, 12, 15, 19), 19, 'data', 'csu', 1, 
-            JSON_OBJECT('campus', 'Bakersfield', 'college', 'School of Arts & Humanities', 'major', 'Criminal Justice', 'student_type', 'all', 'student_type_name', 'All Students', 'cohort', 2019, 'persistence', 1, 'year1', 4, 'year2', 6, 'outcome', '6th-Year Graduation', 'gap_type', 'firstgen')),
-          ('How many computer engineering students contributed to the graph?', JSON_ARRAY(6, 9, 12, 15), 9, 'data', 'csu', 1, 
-            JSON_OBJECT('campus', 'Bakersfield', 'college', 'Engineering', 'major', 'Computer Engineering', 'student_type', 'all', 'student_type_name', 'All Students', 'cohort', 2019, 'persistence', 1, 'year1', 4, 'year2', 6, 'outcome', '6th-Year Graduation', 'gap_type', 'firstgen')),
-          ('Which major has the largest gap?', JSON_ARRAY('Criminal Justice', 'Sociology', 'Computer Engineering', 'Political Science'), 'Criminal Justice', 'data', 'csu', 1, 
-            JSON_OBJECT('campus', 'Bakersfield', 'college', 'School of Arts & Humanities', 'major', '*All Majors', 'student_type', 'all', 'student_type_name', 'All Students', 'cohort', 2019, 'persistence', 1, 'year1', 4, 'year2', 6, 'outcome', '6th-Year Graduation', 'gap_type', 'firstgen'));`;
+  const insertDataIntoQuestionsTable = graph_questions_sqlQuery
+
+
+  /* Execute SQL Queries */
 
   con.query(createGraphsTable, (err) => {
     if (err) {
@@ -147,3 +144,36 @@ con.connect(function (err) {
   });
 
 });
+
+/**
+ * Helper function for converting test questions from question.json to sql syntax 
+ * */ 
+function generateSQLFromJSON(questions) {
+  let query = `INSERT INTO test_questions (question_text, options, correct_ans, question_type, graph_type, graph_id, url_params) VALUES `
+  
+  questions.forEach((question, idx, array) => {
+    const { question_text, options, correct_ans, question_type, graph_type, graph_id, url_params } = question;
+    
+    const optionsSQL = `JSON_ARRAY(${options.map(opt => `'${opt}'`).join(", ")})`;
+    const urlParamsSQL = `JSON_OBJECT(${Object.entries(url_params).map(([key, value]) => `'${key}', '${value}'`).join(", ")})`;
+    
+    query += `
+      (
+        '${question_text}',
+        ${optionsSQL},
+        '${correct_ans}',
+        '${question_type}',
+        '${graph_type}',
+        ${graph_id},
+        ${urlParamsSQL}
+      )`;
+
+    if(idx !== array.length - 1) {
+      query += `,`
+    }
+
+  });
+
+  query += `;`
+  return query;
+}

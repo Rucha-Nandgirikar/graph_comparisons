@@ -1,0 +1,151 @@
+{
+    "graph_questions": [
+        {
+            "question_text": "Each grad cap is equal to how many students?", 
+            "options": [ "1 student", "100 students", "10 students", "Not specified" ], 
+            "correct_ans": "10 students", 
+            "question_type": "graph", 
+            "graph_type": "csu", 
+            "graph_id": 1, 
+            "url_params": {
+                "campus": "Bakersfield", 
+                "college": "School of Arts & Humanities",
+                "major": "*All Majors", 
+                "student_type": "freshmen",
+                 "student_type_name": "Freshmen",
+                "cohort": 2019, 
+                "persistence": 1, 
+                "year1": 4, 
+                "year2": 6, 
+                "outcome": "6th-Year Graduation",
+                "gap_type": "firstgen"
+            }
+        },
+        {
+          "question_text": "In the provided graph, what does the yellow line signify?",
+          "options": [
+            "Recent First-Generation Rate",
+            "Recent Not First-Generation Rate",
+            "Recent Not Pell Rate",
+            "Recent Not URM Rate"
+          ],
+          "correct_ans": "Recent Not First-Generation Rate",
+          "question_type": "graph",
+          "graph_type": "csu",
+          "graph_id": 1,
+          "url_params": {
+            "campus": "Bakersfield",
+            "college": "School of Arts & Humanities",
+            "major": "*All Majors",
+            "student_type": "freshmen",
+            "student_type_name": "Freshmen",
+            "cohort": 2019,
+            "persistence": 1,
+            "year1": 4,
+            "year2": 6,
+            "outcome": "6th-Year Graduation",
+            "gap_type": "firstgen"
+          }
+        },
+        {
+          "question_text": "The purple grad caps indicate that the students are first-generation.",
+          "options": ["True", "False"],
+          "correct_ans": "True",
+          "question_type": "graph",
+          "graph_type": "csu",
+          "graph_id": 1,
+          "url_params": {
+            "campus": "Bakersfield",
+            "college": "School of Arts & Humanities",
+            "major": "*All Majors",
+            "student_type": "freshmen",
+            "student_type_name": "Freshmen",
+            "cohort": 2019,
+            "persistence": 1,
+            "year1": 4,
+            "year2": 6,
+            "outcome": "6th-Year Graduation",
+            "gap_type": "firstgen"
+          }
+        },
+        {
+          "question_text": "How many criminal justice students contributed to the graph?",
+          "options": [10, 12, 15, 19],
+          "correct_ans": 19,
+          "question_type": "data",
+          "graph_type": "csu",
+          "graph_id": 1,
+          "url_params": {
+            "campus": "Bakersfield",
+            "college": "School of Arts & Humanities",
+            "major": "Criminal Justice",
+            "student_type": "all",
+            "student_type_name": "All Students",
+            "cohort": 2019,
+            "persistence": 1,
+            "year1": 4,
+            "year2": 6,
+            "outcome": "6th-Year Graduation",
+            "gap_type": "firstgen"
+          }
+        },
+        {
+          "question_text": "How many computer engineering students contributed to the graph?",
+          "options": [6, 9, 12, 15],
+          "correct_ans": 9,
+          "question_type": "data",
+          "graph_type": "csu",
+          "graph_id": 1,
+          "url_params": {
+            "campus": "Bakersfield",
+            "college": "Engineering",
+            "major": "Computer Engineering",
+            "student_type": "all",
+            "student_type_name": "All Students",
+            "cohort": 2019,
+            "persistence": 1,
+            "year1": 4,
+            "year2": 6,
+            "outcome": "6th-Year Graduation",
+            "gap_type": "firstgen"
+          }
+        },
+        {
+          "question_text": "Which major has the largest gap?",
+          "options": ["Criminal Justice", "Sociology", "Computer Engineering", "Political Science"],
+          "correct_ans": "Criminal Justice",
+          "question_type": "data",
+          "graph_type": "csu",
+          "graph_id": 1,
+          "url_params": {
+            "campus": "Bakersfield",
+            "college": "School of Arts & Humanities",
+            "major": "*All Majors",
+            "student_type": "all",
+            "student_type_name": "All Students",
+            "cohort": 2019,
+            "persistence": 1,
+            "year1": 4,
+            "year2": 6,
+            "outcome": "6th-Year Graduation",
+            "gap_type": "firstgen"
+          }
+        },
+        {
+            "question_text": "Which major has the largest gap?",
+            "options": ["Criminal Justice", "Sociology", "Computer Engineering", "Political Science"],
+            "correct_ans": "Criminal Justice",
+            "question_type": "data",
+            "graph_type": "csu",
+            "graph_id": 2,
+            "url_params": {
+                "campus": "Pomona",
+                "college": "School of Agriculture",
+                "major": "First-time Full-time Freshman",
+                "student_type": "all",
+                "student_type_name": "All Students",
+                "cohort": 2017
+            }
+        }
+    ]
+}
