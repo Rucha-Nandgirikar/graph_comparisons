@@ -108,9 +108,7 @@ function fetchEntireTableFromDatabase(tableName) {
     FROM 
       test_questions questions
     INNER JOIN 
-      test_graphs graphs ON questions.graph_id = graphs.graph_id
-	WHERE
-		graphs.graph_id = 1;`;
+      test_graphs graphs ON questions.graph_id = graphs.graph_id`;
     connection.query(query, (err, results) => {
       if (err) {
         console.error("Error fetching table data:", err);
@@ -182,7 +180,7 @@ app.get("/fetch-entire-table", async (req, res) => {
     res.json({ data: tableData });
 
     // If you want to log something after sending the response, it's okay as long as it doesn't try to modify the response
-    console.log("Data sent successfully:", tableData);
+    //console.log("Data sent successfully:", tableData);
   } catch (error) {
     console.error("Error fetching table data:", error);
 

@@ -16,7 +16,7 @@ con.connect(function (err) {
   }
   console.log("Connected to MySQL server");
 
-  
+
   /* Define SQL Queries */
 
   const createGraphsTable = `
@@ -66,8 +66,12 @@ con.connect(function (err) {
         timestamp VARCHAR(40))
 `;
   const insertDataIntoGraphsTable = `
-            INSERT INTO test_graphs (graph_name, graph_url) 
-            VALUES ('my-equity-gap', 'https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps')`;
+            INSERT INTO test_graphs (graph_name, graph_url) VALUES 
+            ('my-equity-gap', 'https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps'),
+            ('student-progress-units', 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/student-progress-units'),
+            ('goal-trajectories', 'https://studentresearch.dashboards.calstate.edu/graduation-initiative/goal-trajectories'),
+            ('what-paths-do-they-follow', 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/what-paths-do-they-follow'),
+            ('csu-by-the-numbers/enrolling-and-graduating', 'https://studentresearch.dashboards.calstate.edu/csu-by-the-numbers/enrolling-and-graduating ')`;
   
   const graph_questions = questions["graph_questions"];
   const graph_questions_sqlQuery = generateSQLFromJSON(graph_questions);
