@@ -595,7 +595,7 @@
             }
         },
         {
-            "question_text": "    The graph represents the students' journey",
+            "question_text": "The graph represents the students'' journey",
             "options": ["Strongly Disagree", "Agree", "Neutral", "Agree", "Strongly Agree"],
             "correct_ans": null,
             "question_type": "subjective",
