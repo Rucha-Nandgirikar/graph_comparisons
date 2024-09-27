@@ -1,48 +1,47 @@
 import {
-    prestudyQuestions,
-    displayPrestudyQuestions,
-    prestudyContent,
-    recordInteraction,
-    currentQuestion,
-    currentAnswer,
-    calibrationScreen,
-  } from "./prestudy.js";
+  prestudyQuestions,
+  displayPrestudyQuestions,
+  prestudyContent,
+  recordInteraction,
+  currentQuestion,
+  currentAnswer,
+  calibrationScreen,
+} from "./prestudy.js";
   
-  import { questionOrder } from "./mainStudyOrderSequence.js";
+import { questionOrder } from "./mainStudyOrderSequence.js";
 
-  
-  //main study elements
-  const studyContent = document.getElementById("study-content");
-  const questionElement = document.getElementById("question");
-  const optionsElement = document.getElementById("options");
-  const submitButton = document.getElementById("submit-button");
-  const prestudyNotif = document.getElementById("prestudy-notif");
-  const beginStudyButton = document.getElementById("begin-study-button");
-  export const beginMainStudyButton = document.getElementById(
-    "begin-main-study-button"
-  );
-  
-  //welcome screen or home screen
-  export const homeContent = document.getElementById("home-content");
-  const claimUserIDButton = document.getElementById("claim-user-id");
-  const showUserID = document.getElementById("show-user-id");
-  
-  //prestudy elements
-  const beginPrestudyButton = document.getElementById("begin-prestudy-button");
-  const chartPlaceholder = document.getElementById("chart");
-  
-  //end of study
-  const postStudyCongrats = document.getElementById("congrats-cat");
-  
-  export let currentQuestionId;
-  // let currentQuestionIndex = 0;
-  let currentCorrectAnswer;
-  export let userId = 0; //Declare userId globally
-  let questionOrderRow;
-  
-  let tableData = [];
-  let data2DArray = []; //stores all queries from test_questions in database locally
-  let currentQuestionIndex = 0;
+
+//main study elements
+const studyContent = document.getElementById("study-content");
+const questionElement = document.getElementById("question");
+const optionsElement = document.getElementById("options");
+const submitButton = document.getElementById("submit-button");
+const prestudyNotif = document.getElementById("prestudy-notif");
+const beginStudyButton = document.getElementById("begin-study-button");
+export const beginMainStudyButton = document.getElementById(
+  "begin-main-study-button"
+);
+
+//welcome screen or home screen
+export const homeContent = document.getElementById("home-content");
+const claimUserIDButton = document.getElementById("claim-user-id");
+const showUserID = document.getElementById("show-user-id");
+
+//prestudy elements
+const beginPrestudyButton = document.getElementById("begin-prestudy-button");
+const chartPlaceholder = document.getElementById("chart");
+
+//end of study
+const postStudyCongrats = document.getElementById("congrats-cat");
+
+export let currentQuestionId;
+// let currentQuestionIndex = 0;
+let currentCorrectAnswer;
+export let userId = 0; //Declare userId globally
+let questionOrderRow;
+
+let data2DArray = []; //stores all queries from test_questions in database locally
+let currentQuestionIndex = 0;
 
 
 function displayQuestion() {
@@ -63,19 +62,32 @@ function displayQuestion() {
 
     currentCorrectAnswer = currentRow[4];
 
-    // Create and append the iframe element using graphURL and URLParams
+    // Create iframe element using graphURL and URLParams
     const graphURL = currentRow[1];
     const iframeElement = document.createElement("iframe");
     iframeElement.src = `${graphURL}`;
     iframeElement.width = "100%";
     iframeElement.height = "600px";
     iframeElement.style.border = "none";
-    chartPlaceholder.appendChild(iframeElement);
+    
+    // Show either CSU Graph or Alt Graph
+    // TODO: Implement display logic for graphs
+    const graphId = currentRow[7]
 
-    // Display options
+    if(graphId === 1){
+      displayMyEquityGapsMajorGaps();
+    } 
+    else if(graphId === 2){
+      displayStudentProgressUnits();
+    }
+    else {
+      chartPlaceholder.appendChild(iframeElement);
+    }
    
-       const options = JSON.parse(currentRow[3]); // Convert the options string into an array
-      options.forEach((option, index) => {
+    // const options = JSON.parse(currentRow[3]); // Convert the options string into an array
+    const options = currentRow[3];  // options is always in array format
+
+    options.forEach((option, index) => {
       const label = document.createElement("label");
       const input = document.createElement("input");
       input.type = "radio";
@@ -85,6 +97,7 @@ function displayQuestion() {
       label.appendChild(document.createTextNode(option));
       optionsElement.appendChild(label);
     });
+    
     currentQuestionIndex++;
   } else {
     currentQuestionIndex = 0;
@@ -207,14 +220,14 @@ function displayMyEquityGapsMajorGaps()
 
           const canvasElementMajorAtEntry = document.createElement("canvas");
           canvasElementMajorAtEntry.id = "majorAtEntryChart";
-          canvasElementMajorAtEntry.width = 400;  // Set width (optional)
-          canvasElementMajorAtEntry.height = 500; // Set height (optional)
+          canvasElementMajorAtEntry.width = 200;  // Set width (optional)
+          canvasElementMajorAtEntry.height = 250; // Set height (optional)
           chartPlaceholder.appendChild(canvasElementMajorAtEntry);
     
           const canvasElementLastMajorHeld = document.createElement("canvas");
           canvasElementLastMajorHeld.id = "lastMajorHeldChart";
-          canvasElementLastMajorHeld.width = 400;  // Set width (optional)
-          canvasElementLastMajorHeld.height = 500; // Set height (optional)
+          canvasElementLastMajorHeld.width = 200;  // Set width (optional)
+          canvasElementLastMajorHeld.height = 250; // Set height (optional)
           chartPlaceholder.appendChild(canvasElementLastMajorHeld);
 
           // Extract data for "Major At Entry"
@@ -495,11 +508,8 @@ function displayGoalTracjectories()
         },
       });
   
-      const data = await response.json();
-      tableData = data;
-      // console.log(tableData);
-      storeQuestionsInArray();
-      
+      const tableData = await response.json();
+      storeQuestionsInArray(tableData);
   
       homeContent.style.display = "none"; // Hide the welcome message
       studyContent.style.display = "block"; // Show the study content
@@ -511,7 +521,7 @@ function displayGoalTracjectories()
     }
   }
   
-  function storeQuestionsInArray() {
+  function storeQuestionsInArray(tableData) {
     for (const entry of tableData.data) {
       const questionText = entry.question_text;
       const graphURL = entry.graph_url;
@@ -520,6 +530,7 @@ function displayGoalTracjectories()
       const questionID = entry.question_id;
       const questionType = entry.question_type;
       const URLParams = entry.url_params;
+      const graphId = entry.graph_id;
   
       //temp array with extracted data
       const rowArray = [
@@ -529,7 +540,8 @@ function displayGoalTracjectories()
         options,
         correctAnswer,
         questionID,
-        questionType
+        questionType,
+        graphId,
       ];
   
       data2DArray.push(rowArray); //store all fetched data from table_questions into local 2d array data2DArray
@@ -570,7 +582,6 @@ function displayGoalTracjectories()
       const dataSubmit = await responseSubmit.json();
       console.log("Server response:", dataSubmit);
   
-      currentQuestionIndex++;
       displayQuestion();
     } catch (error) {
       console.error("Error submitting response:", error);
@@ -586,7 +597,10 @@ function displayGoalTracjectories()
   beginPrestudyButton.addEventListener("click", () => {
     recordInteraction("Begin Prestudy", false, false);
     homeContent.style.display = "none";
-    displayPrestudyQuestions(prestudyQuestions);
+
+    // Ignore prestudy for dev purposes
+    displayPrestudyQuestions(prestudyQuestions); 
+    //beginMainStudy(); 
   });
   
   claimUserIDButton.addEventListener("click", () => {

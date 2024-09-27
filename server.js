@@ -102,7 +102,8 @@ function fetchEntireTableFromDatabase(tableName) {
       questions.correct_ans,
       questions.question_type,
       questions.graph_type,
-	  questions.url_params,
+	    questions.url_params,
+      questions.graph_id,
       graphs.graph_name,
       graphs.graph_url
     FROM 
@@ -177,6 +178,7 @@ app.get("/fetch-entire-table", async (req, res) => {
   try {
     const tableData = await fetchEntireTableFromDatabase("test_questions");
     // Send the response once the data is fetched
+    console.log(tableData);
     res.json({ data: tableData });
 
     // If you want to log something after sending the response, it's okay as long as it doesn't try to modify the response
