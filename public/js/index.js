@@ -1,15 +1,14 @@
-import {
-  prestudyQuestions,
-  displayPrestudyQuestions,
-  prestudyContent,
-  recordInteraction,
-  currentQuestion,
-  currentAnswer,
-  calibrationScreen,
-} from "./prestudy.js";
-  
-import { questionOrder } from "./mainStudyOrderSequence.js";
+import { 
+    getTableData,
+    checkAnswer,
+} from "./mainstudy.js";
 
+import { 
+    getUserID,
+    recordInteraction,
+    recordPrestudyResponse,
+    prestudyQuestions,
+} from "./prestudy.js"
 
 //main study elements
 const studyContent = document.getElementById("study-content");
@@ -18,95 +17,139 @@ const optionsElement = document.getElementById("options");
 const submitButton = document.getElementById("submit-button");
 const prestudyNotif = document.getElementById("prestudy-notif");
 const beginStudyButton = document.getElementById("begin-study-button");
-export const beginMainStudyButton = document.getElementById(
-  "begin-main-study-button"
-);
+const beginMainStudyButton = document.getElementById("begin-main-study-button");
 
 //welcome screen or home screen
-export const homeContent = document.getElementById("home-content");
+const homeContent = document.getElementById("home-content");
 const claimUserIDButton = document.getElementById("claim-user-id");
 const showUserID = document.getElementById("show-user-id");
+const postStudyCongrats = document.getElementById("congrats-cat");
 
 //prestudy elements
 const beginPrestudyButton = document.getElementById("begin-prestudy-button");
 const chartPlaceholder = document.getElementById("chart");
+const prestudyContent = document.getElementById("prestudy");
+const prestudyQuestionElement = document.getElementById("prestudy-question");
+const prestudySubmitButton = document.getElementById("prestudy-submit-button");
+const startCalibrationButton = document.getElementById("start-calibration-button");
+const prestudyMsgElement = document.getElementById("prestudy-msg");
+const calibrationScreen = document.getElementById("calibration-screen");
+const prestudyChart = document.getElementById("prestudy-chart");
+const inputElement = document.getElementById("inputText");
 
-//end of study
-const postStudyCongrats = document.getElementById("congrats-cat");
+// Prestudy Variables
+let currentPrestudyQuestionIndex = 0;
+let currentQuestion = { value: "" };
+let currentAnswer = { value: null };
 
-export let currentQuestionId;
-// let currentQuestionIndex = 0;
+// Mainstudy Variables
+let userId;
+let currentQuestionId;
+let currentQuestionIndex = 0; 
 let currentCorrectAnswer;
-export let userId = 0; //Declare userId globally
-let questionOrderRow;
-
 let data2DArray = []; //stores all queries from test_questions in database locally
-let currentQuestionIndex = 0;
 
+// initial page setup
+init();
 
-function displayQuestion() {
+// Add event listeners
+submitButton.addEventListener("click", () => {
+    checkAnswer(currentQuestionId, currentCorrectAnswer);
+    recordInteraction(userId, "Submit", true, false, currentQuestionId, currentAnswer);
+});
+  
+beginPrestudyButton.addEventListener("click", () => {
+    recordInteraction(userId, "Begin Prestudy", false, false, currentQuestionId, currentAnswer);
+    homeContent.style.display = "none";
 
-    // displayMyEquityGapsComparisonData();
-    // displayMyEquityGapsMajorGaps();
-    // displayStudentProgressUnits();
-    // displayGoalTracjectories();
+    // Ignore prestudy for dev purposes
+    displayPrestudyQuestions(prestudyQuestions); 
+    //beginMainStudy(); 
+});
+  
+claimUserIDButton.addEventListener("click", async () => {
+    const userId = await getUserID();
+    setUserID(userId);
+});
+  
+beginStudyButton.addEventListener("click", () => {
+    // recordInteraction(userId, "Begin Study", false, false, currentQuestionId, currentAnswer);
+    homeContent.style.display = "block";
+    beginStudyButton.style.display = "none";
+});
+  
+beginMainStudyButton.addEventListener("click", () => {
+    recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentAnswer);
+    beginMainStudy(); 
+});
 
-  if (currentQuestionIndex < data2DArray.length) {
-    submitButton.style.display = "block";
-    
-    const currentRow = data2DArray[currentQuestionIndex];
-    // Assign value to the question text
-    questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${currentRow[0]}`;
-    optionsElement.innerHTML = "";
-    chartPlaceholder.innerHTML = "";
-
-    currentCorrectAnswer = currentRow[4];
-
-    // Create iframe element using graphURL and URLParams
-    const graphURL = currentRow[1];
-    const iframeElement = document.createElement("iframe");
-    iframeElement.src = `${graphURL}`;
-    iframeElement.width = "100%";
-    iframeElement.height = "600px";
-    iframeElement.style.border = "none";
-    
-    // Show either CSU Graph or Alt Graph
-    // TODO: Implement display logic for graphs
-    const graphId = currentRow[7]
-
-    if(graphId === 1){
-      displayMyEquityGapsMajorGaps();
-    } 
-    else if(graphId === 2){
-      displayStudentProgressUnits();
+//Record prestudy response and user click when prestudySubmitButton is clicked in prestudy_responses
+prestudySubmitButton.addEventListener("click", () => {
+    const inputValue = inputElement.value;
+    if (!inputValue) {
+      alert("Please enter an answer.");
+      currentAnswer.value = null;
+      return;
+    } else {
+      currentAnswer.value = inputValue;
     }
-    else {
-      chartPlaceholder.appendChild(iframeElement);
-    }
-   
-    // const options = JSON.parse(currentRow[3]); // Convert the options string into an array
-    const options = currentRow[3];  // options is always in array format
+  
+    recordPrestudyResponse(userId, currentQuestion, currentAnswer);
+    inputElement.value = "";
 
-    options.forEach((option, index) => {
-      const label = document.createElement("label");
-      const input = document.createElement("input");
-      input.type = "radio";
-      input.name = "answer";
-      input.value = option;
-      label.appendChild(input);
-      label.appendChild(document.createTextNode(option));
-      optionsElement.appendChild(label);
-    });
+    displayPrestudyQuestions(prestudyQuestions);
+    recordInteraction(userId, "Submit", false, true, currentQuestionId, currentAnswer);
+});
+  
+  //records user click, hides prestudy content, displays calibration screen, and hides calibration
+  //screen while starting main study (after 5 seconds) when beginButton is clicked
+  startCalibrationButton.addEventListener("click", () => {
+    recordInteraction(userId, "Start Calibration", false, false, currentQuestionId, currentAnswer);
+    prestudyContent.style.display = "none";
+    calibrationScreen.style.display = "block";
+    setTimeout(() => {
+      beginMainStudyButton.style.display = "block";
+      calibrationScreen.style.display = "none";
+    }, 5000);
+});
+
+// Initially, show the welcome message and hide the study content
+function init(){
+    homeContent.style.display = "none";
+    studyContent.style.display = "none";
+    prestudyContent.style.display = "none";
+}
+
+function displayPrestudyQuestions(questions) {
+    prestudyContent.style.display = "block";
+    prestudySubmitButton.style.display = "block";
+    startCalibrationButton.style.display = "none";
     
-    currentQuestionIndex++;
-  } else {
-    currentQuestionIndex = 0;
-    postStudyCongrats.style.display = "block";
-    questionElement.textContent = "Study complete. Thank you for participating!";
-    optionsElement.innerHTML = "";
-    chartPlaceholder.innerHTML = "";
-    submitButton.style.display = "none";
-  }
+    if (currentPrestudyQuestionIndex < 6) {
+      prestudyQuestionElement.innerHTML = currentQuestion.value =
+        questions[currentPrestudyQuestionIndex][0];
+      prestudyChart.innerHTML = "";
+    
+      var imageElement = document.createElement("img");
+      if (questions[currentPrestudyQuestionIndex][1] != null) {
+        imageElement.src =
+          "img/prestudy-img/" + questions[currentPrestudyQuestionIndex][1];
+        imageElement.alt = "prestudy Chart";
+        imageElement.style.width = "auto";
+        imageElement.style.height = "400px";
+        prestudyChart.appendChild(imageElement);
+      }
+    } else {
+      // Survey is complete
+      startCalibrationButton.style.display = "block";
+      prestudyMsgElement.textContent =
+        "Prestudy completed! When you click NEXT, you will be shown a blank screen with a tiny plus sign at the center, please focus your eyes on it for 5 seconds. ";
+      prestudyQuestionElement.innerHTML = "";
+      prestudySubmitButton.style.display = "none";
+      currentPrestudyQuestionIndex = 0;
+      prestudyChart.innerHTML = "";
+      inputElement.style.display = "none";
+    }
 }
 
 function displayMyEquityGapsComparisonData()
@@ -473,153 +516,114 @@ function displayGoalTracjectories()
 
 }
 
-  async function claimUserID() {
-    try {
-      //Fetch userId from the server when starting the survey
-      const response = await fetch("/claim-user-id", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
-      const data = await response.json();
-      userId = data.userId; // Store the userId globally or in a scope accessible by the checkAnswer function
-      showUserID.textContent = "Your user ID is: " + userId;
-      recordInteraction("Claim User ID", false, false);
-  
-      prestudyNotif.style.display = "block";
-  
-      console.log("User Id: " + userId);
-      claimUserIDButton.style.display = "none";
-      beginPrestudyButton.style.display = "block";
-    } catch (error) {
-      console.error("Error claim user ID:", error);
-    }
-  }
-  
-  //Start the main study
-  export async function beginMainStudy() {
-    try {
-      const response = await fetch("/fetch-entire-table", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
-      const tableData = await response.json();
-      storeQuestionsInArray(tableData);
-  
-      homeContent.style.display = "none"; // Hide the welcome message
-      studyContent.style.display = "block"; // Show the study content
-      beginMainStudyButton.style.display = "none";
-  
-      displayQuestion(); //display main study question
-    } catch (error) {
-      console.error("Error starting the study:", error);
-    }
-  }
-  
-  function storeQuestionsInArray(tableData) {
-    for (const entry of tableData.data) {
-      const questionText = entry.question_text;
-      const graphURL = entry.graph_url;
-      const options = entry.options;
-      const correctAnswer = entry.correct_ans;
-      const questionID = entry.question_id;
-      const questionType = entry.question_type;
-      const URLParams = entry.url_params;
-      const graphId = entry.graph_id;
-  
-      //temp array with extracted data
-      const rowArray = [
-        questionText,
-        graphURL,
-        URLParams,
-        options,
-        correctAnswer,
-        questionID,
-        questionType,
-        graphId,
-      ];
-  
-      data2DArray.push(rowArray); //store all fetched data from table_questions into local 2d array data2DArray
+async function setUserID(id) {
+    userId = id;
 
-      // console.log(data2DArray);
-    }
-  }
-  
-  // Function to check the answer and proceed to the next question
-  async function checkAnswer() {
-    if (!document.querySelector('input[name="answer"]:checked')) {
-      alert("Please select an answer.");
-      currentAnswer.value = null;
-      return;
-    } else {
-      currentAnswer.value = document.querySelector(
-        'input[name="answer"]:checked'
-      ).value;
-    }
-  
-    console.log(currentAnswer.value);
-  
-    try {
-      const responseSubmit = await fetch("/submit-response", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          userAnswer: currentAnswer.value,
-          questionNumber: currentQuestionId + 1,
-          question: currentQuestion.value.substring(0, 100),
-          isCorrect: currentAnswer.value === currentCorrectAnswer,
-        }),
-      });
-  
-      const dataSubmit = await responseSubmit.json();
-      console.log("Server response:", dataSubmit);
-  
-      displayQuestion();
-    } catch (error) {
-      console.error("Error submitting response:", error);
-    }
-  }
-  
-  // Add event listeners
-  submitButton.addEventListener("click", () => {
-    checkAnswer();
-    recordInteraction("Submit", true, false);
-  });
-  
-  beginPrestudyButton.addEventListener("click", () => {
-    recordInteraction("Begin Prestudy", false, false);
-    homeContent.style.display = "none";
+    showUserID.textContent = "Your user ID is: " + userId;
+    recordInteraction(userId, "Claim User ID", false, false, currentQuestionId, currentAnswer);
 
-    // Ignore prestudy for dev purposes
-    displayPrestudyQuestions(prestudyQuestions); 
-    //beginMainStudy(); 
-  });
-  
-  claimUserIDButton.addEventListener("click", () => {
-    claimUserID();
-  });
-  
-  beginStudyButton.addEventListener("click", () => {
-    recordInteraction("Begin Study", false, false);
-    homeContent.style.display = "block";
-    beginStudyButton.style.display = "none";
-  });
-  
-  beginMainStudyButton.addEventListener("click", () => {
-    recordInteraction("Begin Main Study", false, false);
-    beginMainStudy(); 
-  });
-  
-  // Initially, show the welcome message and hide the study content
-  homeContent.style.display = "none";
-  studyContent.style.display = "none";
-  prestudyContent.style.display = "none";
-  
+    prestudyNotif.style.display = "block";
+    claimUserIDButton.style.display = "none";
+    beginPrestudyButton.style.display = "block";
+}
+
+export async function beginMainStudy() {
+    const tableData= await getTableData();
+    storeQuestionsInArray(tableData);
+
+    homeContent.style.display = "none"; // Hide the welcome message
+    studyContent.style.display = "block"; // Show the study content
+    beginMainStudyButton.style.display = "none";
+
+    displayQuestions(); //display main study question
+}
+
+function displayQuestions() {
+
+    // displayMyEquityGapsComparisonData();
+    // displayMyEquityGapsMajorGaps();
+    // displayStudentProgressUnits();
+    // displayGoalTracjectories();
+
+  if (currentQuestionIndex < data2DArray.length) {
+    submitButton.style.display = "block";
+    
+    const currentRow = data2DArray[currentQuestionIndex];
+    // Assign value to the question text
+    questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${currentRow[0]}`;
+    optionsElement.innerHTML = "";
+    chartPlaceholder.innerHTML = "";
+
+    currentCorrectAnswer = currentRow[4];
+
+    // Create iframe element using graphURL and URLParams
+    const graphURL = currentRow[1];
+    const iframeElement = document.createElement("iframe");
+    iframeElement.src = `${graphURL}`;
+    iframeElement.width = "100%";
+    iframeElement.height = "600px";
+    iframeElement.style.border = "none";
+    
+    const graphId = currentRow[7]
+
+    if(graphId === 1){
+      displayMyEquityGapsMajorGaps();
+    } 
+    else if(graphId === 2){
+      displayStudentProgressUnits();
+    }
+    else {
+      chartPlaceholder.appendChild(iframeElement);
+    }
+   
+    // const options = JSON.parse(currentRow[3]); // Convert the options string into an array
+    const options = currentRow[3];  // options is always in array format
+
+    options.forEach((option, index) => {
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "answer";
+      input.value = option;
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(option));
+      optionsElement.appendChild(label);
+    });
+    
+    currentQuestionIndex++;
+  } else {
+    currentQuestionIndex = 0;
+    postStudyCongrats.style.display = "block";
+    questionElement.textContent = "Study complete. Thank you for participating!";
+    optionsElement.innerHTML = "";
+    chartPlaceholder.innerHTML = "";
+    submitButton.style.display = "none";
+  }
+}
+
+function storeQuestionsInArray(tableData) {
+  for (const entry of tableData.data) {
+    const questionText = entry.question_text;
+    const graphURL = entry.graph_url;
+    const options = entry.options;
+    const correctAnswer = entry.correct_ans;
+    const questionID = entry.question_id;
+    const questionType = entry.question_type;
+    const URLParams = entry.url_params;
+    const graphId = entry.graph_id;
+
+    //temp array with extracted data
+    const rowArray = [
+      questionText,
+      graphURL,
+      URLParams,
+      options,
+      correctAnswer,
+      questionID,
+      questionType,
+      graphId,
+    ];
+
+    data2DArray.push(rowArray); //store all fetched data from table_questions into local 2d array data2DArray
+  }
+}

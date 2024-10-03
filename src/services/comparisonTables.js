@@ -1,6 +1,4 @@
 const db = require('./db');
-const config = require('../config');
-
 
 // TODO (Rucha?): Create function to return most recent user_id from database
 

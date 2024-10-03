@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const programmingLanguages = require('../services/programmingLanguages');
+const comparisonTables = require('../services/comparisonTables');
 
 // TODO (Rucha?): Update route to fetch user_id from database
 
@@ -20,7 +20,7 @@ router.get("/claim-user-id", async (req, res) => {
 
 router.get("/fetch-entire-table", async (req, res) => {
     try {
-      const tableData = await fetchEntireTableFromDatabase();
+      const tableData = await comparisonTables.fetchEntireTableFromDatabase();
       res.json({ data: tableData });
     } 
     catch (error) {
@@ -38,7 +38,7 @@ router.post("/submit-response", async (req, res) => {
     try {
         const timestamp = new Date();
   
-        await insertResponseIntoDatabase(
+        await comparisonTables.insertResponseIntoDatabase(
             userId,
             questionNumber,
             userAnswer,
@@ -63,7 +63,7 @@ router.post("/submit-prestudy-response", async (req, res) => {
     try {
         const timestamp = new Date();
 
-        await insertPrestudyResponseIntoDatabase(
+        await comparisonTables.insertPrestudyResponseIntoDatabase(
             userId,
             question,
             userAnswer,
@@ -88,7 +88,7 @@ router.post("/submit-user-interaction", async (req, res) => {
       const timestamp = new Date();
   
       // Insert the response into the database
-      await insertDataIntoMasterTable(
+      await comparisonTables.insertDataIntoMasterTable(
         userId,
         buttonName,
         questionId,

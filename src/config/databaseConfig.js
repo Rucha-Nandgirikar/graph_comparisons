@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-export default config = {
+const config = {
     db: {
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -8,4 +8,6 @@ export default config = {
         database: process.env.DB_NAME,
     }
 }
+
+module.exports = { config }
 
