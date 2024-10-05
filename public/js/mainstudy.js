@@ -17,19 +17,7 @@ export async function getTableData() {
     }
 }
   
-export async function checkAnswer(currentQuestionId, currentCorrectAnswer) {
-    if (!document.querySelector('input[name="answer"]:checked')) {
-      alert("Please select an answer.");
-      currentAnswer.value = null;
-      return;
-    } else {
-      currentAnswer.value = document.querySelector(
-        'input[name="answer"]:checked'
-      ).value;
-    }
-  
-    console.log(currentAnswer.value);
-  
+export async function checkAnswer(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer) {
     try {
       const responseSubmit = await fetch("/submit-response", {
         method: "POST",
@@ -48,7 +36,6 @@ export async function checkAnswer(currentQuestionId, currentCorrectAnswer) {
       const dataSubmit = await responseSubmit.json();
       console.log("Server response:", dataSubmit);
   
-      displayQuestion();
     } catch (error) {
       console.error("Error submitting response:", error);
     }

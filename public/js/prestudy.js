@@ -1,6 +1,6 @@
 export const prestudyQuestions = [
-    ["What's your age?", null],
-    ["What's your major?", null],
+    ["What is your age?", null],
+    ["What is your major?", null],
     [
       "The graph above shows the percentage of people who die from different types of cancer." +
         "<br><br>About what percentage of people who die from cancer die from cancer B, cancer C, and cancer D combined?",
@@ -10,7 +10,7 @@ export const prestudyQuestions = [
       "You see two magazines advertisements on separate pages. Each advertisement is for a different " +
         "drug for treating heart disease. Each advertisement has a graph for showing the effectiveness of the drug " +
         "compared to a placebo (sugar pill).<br><br>Compared to the placebo, which treatment leads to a larger decrease " +
-        "in the percentage of patients who die? <br><br> Please enter an answer from the following: Crosicol, Hertinol, They are equal, Can't say",
+        "in the percentage of patients who die? <br><br> Please enter an answer from the following: Crosicol, Hertinol, They are equal, Can not say",
       "bar-graph.png",
     ],
   
@@ -24,7 +24,7 @@ export const prestudyQuestions = [
       "You see two newspaper advertisements on separate pages. Each advertisement is for a different treatment of a skin " +
         "disease. Each advertisement has a graph showing the effectiveness of the treatment over time.<br><br>" +
         "Which of the treatments show a larger decrease in the percentage of sick patients?" +
-        "<br><br>Please enter an answer from the following: Apsoriatin, Nopsorian, They are equal, Can't say",
+        "<br><br>Please enter an answer from the following: Apsoriatin, Nopsorian, They are equal, Can not say",
       "line-graph.png",
     ],
   ];
@@ -71,7 +71,7 @@ export async function recordPrestudyResponse(userId, currentQuestion, currentAns
 
   }
   
-export async function recordInteraction(userId, buttonName, isMainStudy, isPrestudy, currentQuestionId, currentAnswer) {
+export async function recordInteraction(userId, buttonName, isMainStudy, isPrestudy, currentQuestionId, currentQuestion, currentAnswer) {
     let localQuestionId = null;
     let localQuestion = null;
     let localUserAnswer = null;

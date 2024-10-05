@@ -36,7 +36,7 @@ router.post("/submit-response", async (req, res) => {
     const { userId, userAnswer, questionNumber, isCorrect } = req.body;
   
     try {
-        const timestamp = new Date();
+        const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ') 
   
         await comparisonTables.insertResponseIntoDatabase(
             userId,
@@ -61,7 +61,7 @@ router.post("/submit-prestudy-response", async (req, res) => {
     const { userId, userAnswer, question } = req.body;
 
     try {
-        const timestamp = new Date();
+        const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ') 
 
         await comparisonTables.insertPrestudyResponseIntoDatabase(
             userId,
@@ -83,10 +83,10 @@ router.post("/submit-prestudy-response", async (req, res) => {
 
 router.post("/submit-user-interaction", async (req, res) => {
     const { userId, buttonName, questionId, userAnswer, question } = req.body;
-  
+
     try {
-      const timestamp = new Date();
-  
+      const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ') 
+
       // Insert the response into the database
       await comparisonTables.insertDataIntoMasterTable(
         userId,

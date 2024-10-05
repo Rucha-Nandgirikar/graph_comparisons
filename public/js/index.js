@@ -10,6 +10,12 @@ import {
     prestudyQuestions,
 } from "./prestudy.js"
 
+//welcome screen or home screen
+const homeContent = document.getElementById("home-content");
+const claimUserIDButton = document.getElementById("claim-user-id");
+const showUserID = document.getElementById("show-user-id");
+const postStudyCongrats = document.getElementById("congrats-cat");
+
 //main study elements
 const studyContent = document.getElementById("study-content");
 const questionElement = document.getElementById("question");
@@ -18,12 +24,6 @@ const submitButton = document.getElementById("submit-button");
 const prestudyNotif = document.getElementById("prestudy-notif");
 const beginStudyButton = document.getElementById("begin-study-button");
 const beginMainStudyButton = document.getElementById("begin-main-study-button");
-
-//welcome screen or home screen
-const homeContent = document.getElementById("home-content");
-const claimUserIDButton = document.getElementById("claim-user-id");
-const showUserID = document.getElementById("show-user-id");
-const postStudyCongrats = document.getElementById("congrats-cat");
 
 //prestudy elements
 const beginPrestudyButton = document.getElementById("begin-prestudy-button");
@@ -43,10 +43,10 @@ let currentQuestion = { value: "" };
 let currentAnswer = { value: null };
 
 // Mainstudy Variables
-let userId;
-let currentQuestionId;
+let userId = null;
+let currentQuestionId = null;
 let currentQuestionIndex = 0; 
-let currentCorrectAnswer;
+let currentCorrectAnswer = null;
 let data2DArray = []; //stores all queries from test_questions in database locally
 
 // initial page setup
@@ -54,32 +54,46 @@ init();
 
 // Add event listeners
 submitButton.addEventListener("click", () => {
-    checkAnswer(currentQuestionId, currentCorrectAnswer);
-    recordInteraction(userId, "Submit", true, false, currentQuestionId, currentAnswer);
+    checkAnswer(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
+    recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
+
+    if (!document.querySelector('input[name="answer"]:checked')) {
+      alert("Please select an answer.");
+      currentAnswer.value = null;
+      return;
+    } else {
+      currentAnswer.value = document.querySelector(
+        'input[name="answer"]:checked'
+      ).value;
+    }
+    
+    displayQuestions()
 });
   
 beginPrestudyButton.addEventListener("click", () => {
-    recordInteraction(userId, "Begin Prestudy", false, false, currentQuestionId, currentAnswer);
+    recordInteraction(userId, "Begin Prestudy", false, false, currentQuestionId, currentQuestion, currentAnswer);
     homeContent.style.display = "none";
 
-    // Ignore prestudy for dev purposes
-    displayPrestudyQuestions(prestudyQuestions); 
-    //beginMainStudy(); 
+    /* Comment prestudy for dev purposes */
+    //displayPrestudyQuestions(prestudyQuestions); 
+    beginMainStudy(); 
 });
   
 claimUserIDButton.addEventListener("click", async () => {
-    const userId = await getUserID();
+    userId = await getUserID();
     setUserID(userId);
 });
   
 beginStudyButton.addEventListener("click", () => {
-    // recordInteraction(userId, "Begin Study", false, false, currentQuestionId, currentAnswer);
+    if(userId !== null) {
+        recordInteraction(userId, "Begin Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+    }
     homeContent.style.display = "block";
     beginStudyButton.style.display = "none";
 });
   
 beginMainStudyButton.addEventListener("click", () => {
-    recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentAnswer);
+    recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
     beginMainStudy(); 
 });
 
@@ -98,13 +112,13 @@ prestudySubmitButton.addEventListener("click", () => {
     inputElement.value = "";
 
     displayPrestudyQuestions(prestudyQuestions);
-    recordInteraction(userId, "Submit", false, true, currentQuestionId, currentAnswer);
+    recordInteraction(userId, "Submit", false, true, currentQuestionId, currentQuestion, currentAnswer);
 });
   
   //records user click, hides prestudy content, displays calibration screen, and hides calibration
   //screen while starting main study (after 5 seconds) when beginButton is clicked
   startCalibrationButton.addEventListener("click", () => {
-    recordInteraction(userId, "Start Calibration", false, false, currentQuestionId, currentAnswer);
+    recordInteraction(userId, "Start Calibration", false, false, currentQuestionId, currentQuestion, currentAnswer);
     prestudyContent.style.display = "none";
     calibrationScreen.style.display = "block";
     setTimeout(() => {
@@ -139,6 +153,8 @@ function displayPrestudyQuestions(questions) {
         imageElement.style.height = "400px";
         prestudyChart.appendChild(imageElement);
       }
+
+      currentPrestudyQuestionIndex++;
     } else {
       // Survey is complete
       startCalibrationButton.style.display = "block";
@@ -517,10 +533,8 @@ function displayGoalTracjectories()
 }
 
 async function setUserID(id) {
-    userId = id;
-
-    showUserID.textContent = "Your user ID is: " + userId;
-    recordInteraction(userId, "Claim User ID", false, false, currentQuestionId, currentAnswer);
+    showUserID.textContent = "Your user ID is: " + id;
+    recordInteraction(id, "Claim User ID", false, false, currentQuestionId, currentQuestion, currentAnswer);
 
     prestudyNotif.style.display = "block";
     claimUserIDButton.style.display = "none";
@@ -539,11 +553,6 @@ export async function beginMainStudy() {
 }
 
 function displayQuestions() {
-
-    // displayMyEquityGapsComparisonData();
-    // displayMyEquityGapsMajorGaps();
-    // displayStudentProgressUnits();
-    // displayGoalTracjectories();
 
   if (currentQuestionIndex < data2DArray.length) {
     submitButton.style.display = "block";
