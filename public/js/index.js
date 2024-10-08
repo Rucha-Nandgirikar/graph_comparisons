@@ -27,6 +27,7 @@ const postStudyCongrats = document.getElementById("congrats-cat");
 const studyContent = document.getElementById("study-content");
 const questionElement = document.getElementById("question");
 const optionsElement = document.getElementById("options");
+const reloadButton = document.getElementById("reload-button");
 const submitButton = document.getElementById("submit-button");
 const prestudyNotif = document.getElementById("prestudy-notif");
 const beginStudyButton = document.getElementById("begin-study-button");
@@ -92,16 +93,24 @@ claimUserIDButton.addEventListener("click", async () => {
 });
   
 beginStudyButton.addEventListener("click", () => {
-    if(userId !== null) {
-        recordInteraction(userId, "Begin Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
-    }
-    homeContent.style.display = "block";
-    beginStudyButton.style.display = "none";
+  if(userId !== null) {
+    recordInteraction(userId, "Begin Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+  }
+  homeContent.style.display = "block";
+  beginStudyButton.style.display = "none";
 });
-  
+
 beginMainStudyButton.addEventListener("click", () => {
-    recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
-    beginMainStudy(); 
+  recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+  beginMainStudy(); 
+});
+
+// Reload Button for chart
+reloadButton.addEventListener('click', () => {
+    clearGraphs()
+
+    const currentRow = data2DArray[currentQuestionIndex];
+    displayGraph(currentRow[7])
 });
 
 //Record prestudy response and user click when prestudySubmitButton is clicked in prestudy_responses
@@ -218,15 +227,7 @@ function displayQuestions() {
     
     const graphId = currentRow[7]
 
-    if(graphId === 1){
-      displayMyEquityGapsMajorGaps(chartPlaceholder);
-    } 
-    else if(graphId === 2){
-      displayStudentProgressUnits(chartPlaceholder);
-    }
-    else {
-      chartPlaceholder.appendChild(iframeElement);
-    }
+    displayGraph(graphId)
    
     // const options = JSON.parse(currentRow[3]); // Convert the options string into an array
     const options = currentRow[3];  // options is always in array format
@@ -277,5 +278,24 @@ function storeQuestionsInArray(tableData) {
     ];
 
     data2DArray.push(rowArray); //store all fetched data from table_questions into local 2d array data2DArray
+  }
+}
+
+function displayGraph(graphId) {
+  if(graphId === 1){
+    displayMyEquityGapsMajorGaps(chartPlaceholder);
+  } 
+  else if(graphId === 2){
+    displayStudentProgressUnits(chartPlaceholder);
+  }
+  else {
+    chartPlaceholder.appendChild(iframeElement);
+  }
+}
+
+function clearGraphs() {
+  const chart = document.getElementById("chart");
+  while (chart.firstChild) {
+    chart.removeChild(chart.lastChild);
   }
 }
