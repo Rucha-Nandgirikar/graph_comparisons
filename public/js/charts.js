@@ -39,8 +39,11 @@ export function displayMyEquityGapsComparisonData(chartPlaceholder)
         // Create a canvas element for Chart.js
         const canvasElement = document.createElement("canvas");
         canvasElement.id = "myChart";
-        canvasElement.width = 400;  // Set width (optional)
-        canvasElement.height = 500; // Set height (optional)
+        canvasElement.style.border = "1px solid black";
+        canvasElement.style.padding = "10px";
+        canvasElement.style.margin = "auto";
+        canvasElement.style.height = "400px";
+        canvasElement.style.width = "600px";
         chartPlaceholder.appendChild(canvasElement);
 
         // Get the 2D drawing context of the canvas
@@ -69,6 +72,8 @@ export function displayMyEquityGapsComparisonData(chartPlaceholder)
             ]
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
               y: {
                 beginAtZero: true
@@ -91,91 +96,102 @@ export function displayMyEquityGapsMajorGaps(chartPlaceholder)
       'outcome': "6th-Year Graduation",
       'gap_type': "firstgen",
     };
-     // Construct the query string from the parameters
-     const queryString1 = new URLSearchParams(params1).toString();
+    // Construct the query string from the parameters
+    const queryString1 = new URLSearchParams(params1).toString();
 
-     // Append the query string to the URL
-     const fullUrl1 = `${url1}?${queryString1}`;
+    // Append the query string to the URL
+    const fullUrl1 = `${url1}?${queryString1}`;
    
-     fetch(fullUrl1, {
+    fetch(fullUrl1, {
        method: 'GET',
        headers: {
          'Content-Type': 'application/json'
        }
-     })
+    })
        .then(response => response.json())
        .then(data => {
-          console.log('Data:', data);
 
-          const canvasElementMajorAtEntry = document.createElement("canvas");
-          canvasElementMajorAtEntry.id = "majorAtEntryChart";
-          canvasElementMajorAtEntry.width = 200;  // Set width (optional)
-          canvasElementMajorAtEntry.height = 250; // Set height (optional)
-          chartPlaceholder.appendChild(canvasElementMajorAtEntry);
-    
-          const canvasElementLastMajorHeld = document.createElement("canvas");
-          canvasElementLastMajorHeld.id = "lastMajorHeldChart";
-          canvasElementLastMajorHeld.width = 200;  // Set width (optional)
-          canvasElementLastMajorHeld.height = 250; // Set height (optional)
-          chartPlaceholder.appendChild(canvasElementLastMajorHeld);
+            const chartWrapper = document.createElement("div");
+            chartWrapper.style.display = "flex";
+            chartWrapper.style.height = "50%";
+            chartWrapper.style.width = "35%";
+            chartWrapper.style.marginLeft = "15%";                  
 
-          // Extract data for "Major At Entry"
-          const majorAtEntryLabels = [data[0].major1, data[0].major2, data[0].major3, data[0].major4, data[0].major5];
-          const majorAtEntryData = [data[0].n_major1_addtl, data[0].n_major2_addtl, data[0].n_major3_addtl, data[0].n_major4_addtl, data[0].n_major5_addtl];
+            const canvasElementMajorAtEntry = document.createElement("canvas");
+            canvasElementMajorAtEntry.id = "majorAtEntryChart";
+            canvasElementMajorAtEntry.width = "50px";  // Set width (optional)
+            canvasElementMajorAtEntry.height = "100px"; // Set height (optional)
+            chartWrapper.appendChild(canvasElementMajorAtEntry);
 
-          // Extract data for "Last Major Held"
-          const lastMajorHeldLabels = [data[1].major1, data[1].major2, data[1].major3, data[1].major4, data[1].major5];
-          const lastMajorHeldData = [data[1].n_major1_addtl, data[1].n_major2_addtl, data[1].n_major3_addtl, data[1].n_major4_addtl, data[1].n_major5_addtl];
+            const canvasElementLastMajorHeld = document.createElement("canvas");
+            canvasElementLastMajorHeld.id = "lastMajorHeldChart";
+            canvasElementLastMajorHeld.width = "50px";  // Set width (optional)
+            canvasElementLastMajorHeld.height = "100px"; // Set height (optional)
+            chartWrapper.appendChild(canvasElementLastMajorHeld);
 
-          // Plot "Major At Entry" Bar Chart
-          const ctx1 = document.getElementById('majorAtEntryChart').getContext('2d');
-          new Chart(ctx1, {
-              type: 'bar',
-              data: {
-                  labels: majorAtEntryLabels,
-                  datasets: [{
-                      label: 'Number of Students',
-                      data: majorAtEntryData,
-                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                      borderColor: 'rgba(75, 192, 192, 1)',
-                      borderWidth: 1
-                  }]
-              },
-              options: {
-                  scales: {
-                      y: {
-                          beginAtZero: true
-                      }
-                  }
-              }
-          });
+            chartPlaceholder.appendChild(chartWrapper)
 
-          // Plot "Last Major Held" Bar Chart
-          const ctx2 = document.getElementById('lastMajorHeldChart').getContext('2d');
-          new Chart(ctx2, {
-              type: 'bar',
-              data: {
-                  labels: lastMajorHeldLabels,
-                  datasets: [{
-                      label: 'Number of Students',
-                      data: lastMajorHeldData,
-                      backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                      borderColor: 'rgba(153, 102, 255, 1)',
-                      borderWidth: 1
-                  }]
-              },
-              options: {
-                  scales: {
-                      y: {
-                          beginAtZero: true
-                      }
-                  }
-              }
-          });
-       })
-       .catch((error) => {
-         console.error('Error:', error);
-       });
+            // Extract data for "Major At Entry"
+            const majorAtEntryLabels = [data[0].major1, data[0].major2, data[0].major3, data[0].major4, data[0].major5];
+            const majorAtEntryData = [data[0].n_major1_addtl, data[0].n_major2_addtl, data[0].n_major3_addtl, data[0].n_major4_addtl, data[0].n_major5_addtl];
+
+            // Extract data for "Last Major Held"
+            const lastMajorHeldLabels = [data[1].major1, data[1].major2, data[1].major3, data[1].major4, data[1].major5];
+            const lastMajorHeldData = [data[1].n_major1_addtl, data[1].n_major2_addtl, data[1].n_major3_addtl, data[1].n_major4_addtl, data[1].n_major5_addtl];
+
+            // Plot "Major At Entry" Bar Chart
+            const ctx1 = document.getElementById('majorAtEntryChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: majorAtEntryLabels,
+                    datasets: [{
+                        label: 'Number of Students',
+                        data: majorAtEntryData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Plot "Last Major Held" Bar Chart
+            const ctx2 = document.getElementById('lastMajorHeldChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: lastMajorHeldLabels,
+                    datasets: [{
+                        label: 'Number of Students',
+                        data: lastMajorHeldData,
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     
 }
 
@@ -194,38 +210,36 @@ export function displayStudentProgressUnits(chartPlaceholder)
 
     const url = "https://studentresearch.dashboards.calstate.edu/api/faculty-dashboard/what-paths-do-they-follow/chart-data?campus=Bakersfield&college=School%20of%20Arts%20%26%20Humanities&major=Art&flowOption=1";
 
-     // Construct the query string from the parameters
+    // Construct the query string from the parameters
     //  const queryString = new URLSearchParams(params).toString();
 
-     // Append the query string to the URL
+    // Append the query string to the URL
      const fullUrl = `${url}`
     // queryString;
-     console.log(fullUrl);
 
-     const canvasElement = document.createElement("canvas");
-        canvasElement.id = "myPieChart";
-        canvasElement.width = 400;  // Set width (optional)
-        canvasElement.height = 500; // Set height (optional)
-        chartPlaceholder.appendChild(canvasElement);
+    const canvasElement = document.createElement("canvas");
+    canvasElement.id = "myPieChart";
+    canvasElement.style.border = "1px solid black";
+    canvasElement.style.padding = "10px";
+    canvasElement.style.margin = "auto";
+    canvasElement.style.height = "400px";
+    canvasElement.style.width = "600px";
+    chartPlaceholder.appendChild(canvasElement);
 
-     fetch(fullUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+    fetch(fullUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Rucha:', data);
-
          // Extract the total number of students
          const totalStudents = data.nodes[0].totalStudents;
 
          // Extract labels and data
          const labels = data.seriesData.map(item => `${item.from} to ${item.to}`);
          const weights = data.seriesData.map(item => (item.weight / totalStudents) * 100); // Calculate percentage
-
-         console.log(weights);
  
          // Create the pie chart
          const ctx = document.getElementById('myPieChart').getContext('2d');
@@ -254,6 +268,7 @@ export function displayStudentProgressUnits(chartPlaceholder)
              },
              options: {
                  responsive: true,
+                 maintainAspectRatio: false,
                  plugins: {
                      legend: {
                          position: 'top',
@@ -280,10 +295,14 @@ export function displayGoalTrajectories(chartPlaceholder)
 {
   const url = "https://studentresearch.dashboards.calstate.edu/api/graduation-initiative/goal-trajectories/ftf_6yr_pell/35";
   const fullUrl = `${url}`;
+
   const canvasElement = document.createElement("canvas");
   canvasElement.id = "myAreaChart";
-  canvasElement.width = 400;  // Set width (optional)
-  canvasElement.height = 500; // Set height (optional)
+  canvasElement.style.border = "1px solid black";
+  canvasElement.style.padding = "10px";
+  canvasElement.style.margin = "auto";
+  canvasElement.style.height = "400px";
+  canvasElement.style.width = "600px";
   chartPlaceholder.appendChild(canvasElement);
 
   fetch(fullUrl, {
@@ -328,6 +347,7 @@ export function displayGoalTrajectories(chartPlaceholder)
            },
            options: {
                responsive: true,
+               maintainAspectRatio: false,
                scales: {
                    x: {
                        title: {
