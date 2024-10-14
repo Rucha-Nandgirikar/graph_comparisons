@@ -1,7 +1,7 @@
 //Start the main study
 export async function getTableData() {
     try {
-      const response = await fetch("/fetch-entire-table", {
+      const response = await fetch("/api/test-questions", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

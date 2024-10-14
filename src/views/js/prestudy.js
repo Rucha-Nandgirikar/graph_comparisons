@@ -31,7 +31,7 @@ export const prestudyQuestions = [
   
 export async function getUserID() {
   try {
-    const response = await fetch("/claim-user-id", {
+    const response = await fetch("/api/claim-user-id", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -48,9 +48,30 @@ export async function getUserID() {
   }
 }
 
+export async function getCurrentUserID() {
+  try {
+    const response = await fetch("/api/claim-user-id", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache",  // Disable caching
+      },
+    });
+
+    const data = await response.json();
+    const userId = data.userId; 
+
+    return userId;
+  } 
+  catch (error) {
+    console.error("Error claim user ID:", error);
+  }
+}
+
 export async function recordPrestudyResponse(userId, currentQuestion, currentAnswer) {
+    console.log(userId, currentQuestion, currentAnswer);
     try {
-      const responseSubmit = await fetch("/submit-prestudy-response", {
+      const responseSubmit = await fetch("/api/submit-prestudy-response", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

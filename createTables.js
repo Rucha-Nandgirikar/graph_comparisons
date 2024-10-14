@@ -18,15 +18,15 @@ con.connect(function (err) {
 
 
   /* Define SQL Queries */
-
-  const createGraphsTable = `
+  
+const createGraphsTable = `
     CREATE TABLE IF NOT EXISTS test_graphs (
         graph_id INT PRIMARY KEY AUTO_INCREMENT,
         graph_name VARCHAR(255),
         graph_url VARCHAR(255) NOT NULL
     )
     `;
-  const createQuestionsTable = `
+const createQuestionsTable = `
     CREATE TABLE IF NOT EXISTS test_questions (
       question_id INT PRIMARY KEY AUTO_INCREMENT,
       question_text VARCHAR(255) NOT NULL,
@@ -38,32 +38,33 @@ con.connect(function (err) {
       url_params VARCHAR(700)
     )
   `;
-  const createResponsesTable = `
-      CREATE TABLE IF NOT EXISTS test_responses (
-          response_id INT PRIMARY KEY AUTO_INCREMENT,
-          user_id INT,
-          question_id INT,
-          user_response VARCHAR(255),
-          is_correct BOOLEAN NOT NULL,
-          timestamp DATETIME
-      )
+const createResponsesTable = `
+  CREATE TABLE IF NOT EXISTS test_responses (
+      response_id INT PRIMARY KEY AUTO_INCREMENT,
+      user_id INT,
+      question_id INT,
+      user_response VARCHAR(255),
+      is_correct BOOLEAN NOT NULL,
+      timestamp DATETIME
+  );
 `;
-  const createMasterTable = `
-    CREATE TABLE IF NOT EXISTS master_table (
-        user_id VARCHAR(10) NOT NULL,
-        button_name VARCHAR(100),
-        question_id INT,
-        question_text VARCHAR(700),
-        user_answer VARCHAR(255),
-        timestamp DATETIME
-)
+const createMasterTable = `
+  CREATE TABLE IF NOT EXISTS master_table (
+      user_id VARCHAR(10) NOT NULL,
+      button_name VARCHAR(100),
+      question_id INT,
+      question_text VARCHAR(700),
+      user_answer VARCHAR(255),
+      timestamp DATETIME
+  );
 `;
-  const createPrestudyResponsesTable = `
-      CREATE TABLE IF NOT EXISTS prestudy_responses (
-        user_id VARCHAR(10) NOT NULL,
-        question_text VARCHAR(700),
-        user_answer VARCHAR(255),
-        timestamp VARCHAR(40))
+const createPrestudyResponsesTable = `
+  CREATE TABLE IF NOT EXISTS prestudy_responses (
+      user_id VARCHAR(10) NOT NULL,
+      question_text TEXT,
+      user_answer VARCHAR(255),
+      timestamp VARCHAR(40)
+  );
 `;
   const insertDataIntoGraphsTable = `
             INSERT INTO test_graphs (graph_name, graph_url) VALUES 

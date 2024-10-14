@@ -15,7 +15,7 @@ con.connect(function (err) {
   console.log("Connected to MySQL server");
 
   const createDatabaseSQL =
-    "CREATE DATABASE IF NOT EXISTS csu_alternate_graph_comparison CHARACTER SET utf8 COLLATE utf8_general_ci";
+    "CREATE DATABASE IF NOT EXISTS standard_non_standard_graph_comparison CHARACTER SET utf8 COLLATE utf8_general_ci";
 
   con.query(createDatabaseSQL, (err) => {
     if (err) {

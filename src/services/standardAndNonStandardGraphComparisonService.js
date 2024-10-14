@@ -1,4 +1,4 @@
-const { query } = require('./db');
+const { query } = require('../config/db');
 
 // TODO (Rucha?): Create function to return most recent user_id from database
 
@@ -31,31 +31,35 @@ async function insertPrestudyResponseIntoDatabase(userId, question, userAnswer, 
     return response;
 }
 
-async function fetchEntireTableFromDatabase() {
+async function fetchAllTestQuestionsFromDatabase() {
     const response = await query(
         `SELECT questions.question_id, questions.question_text, questions.options, questions.correct_ans, questions.question_type, questions.graph_type, questions.url_params, questions.graph_id, graphs.graph_name, graphs.graph_url FROM test_questions questions INNER JOIN test_graphs graphs ON questions.graph_id = graphs.graph_id`
     );
 
-    return response;
+    return response[0];
 }
 
-async function insertResponseIntoDatabase(userId, questionId, userAnswer, isCorrect, timestamp) {
-    const userIdQuery = userId !== null ? `${userId}`: null;
-    const questionIdQuery = questionId !== null ? `'${questionId}'`: null;
-    const userAnswerQuery = userAnswer !== null ? `'${userAnswer}'`: null;
-    const isCorrectQuery = isCorrect !== null ? `${isCorrect}` : null;
-    const timestampQuery = timestamp !== null ? `'${timestamp}'`: null;
+// async function insertResponseIntoDatabase(userId, questionId, userAnswer, isCorrect, timestamp) {
+//     const userIdQuery = userId !== null ? `${userId}`: null;
+//     const questionIdQuery = questionId !== null ? `'${questionId}'`: null;
+//     const userAnswerQuery = userAnswer !== null ? `'${userAnswer}'`: null;
+//     const isCorrectQuery = isCorrect !== null ? `${isCorrect}` : null;
+//     const timestampQuery = timestamp !== null ? `'${timestamp}'`: null;
 
-    const response = await query(
-        `INSERT INTO test_responses (user_id, question_id, user_response, is_correct, timestamp) VALUES (${userIdQuery}, ${questionIdQuery}, ${userAnswerQuery}, ${isCorrectQuery}, ${timestampQuery})`
-    );
+//     const response = await query(
+//         `INSERT INTO test_responses (user_id, question_id, user_response, is_correct, timestamp) VALUES (${userIdQuery}, ${questionIdQuery}, ${userAnswerQuery}, ${isCorrectQuery}, ${timestampQuery})`
+//     );
 
-    return response;
-}
+//     return response;
+// }
+
+// insertDataIntoMasterTable,
+//     insertPrestudyResponseIntoDatabase,
+//     fetchEntireTableFromDatabase,
+//     insertResponseIntoDatabase,
 
 module.exports = {
     insertDataIntoMasterTable,
     insertPrestudyResponseIntoDatabase,
-    fetchEntireTableFromDatabase,
-    insertResponseIntoDatabase,
+    fetchAllTestQuestionsFromDatabase,
 }
