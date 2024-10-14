@@ -2,7 +2,23 @@ body {
     margin: 0 auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
-  
+
+  .begin-alignment{
+    display: flex;justify-content: center;align-items: center;text-align: center;  height: 100vh;
+  }
+  .home-content-alignment{
+    display: none;flex-direction: column;justify-content: center;align-items: center;gap: 20px;height: 100vh; text-align: center;
+  }
+  .prestudy-alignment{
+    display: flex;flex-direction: column;justify-content: center;align-items: flex-start;height: 100vh;max-width: 60%;
+  }
+  .prestudy-question-alignment{
+    display: flex; flex-direction: column; margin-bottom: 20px;
+  }
+  .begin-main-study-alignment{
+    display: none;justify-content: center;align-items: center;text-align: center;  height: 100vh;
+  }
+
   #home-content {
     font-size: 1.5em;
   }
