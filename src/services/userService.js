@@ -114,7 +114,7 @@ async function getCurrentUserId(req) {
 
 async function getNewUserId(latestUserId) {
     try {
-        const newUserId = latestUserId + 1;
+        const newUserId =  parseInt(latestUserId) + 1;
         return newUserId;
     } catch (error) {
         throw new Error('Error returning new user ID');

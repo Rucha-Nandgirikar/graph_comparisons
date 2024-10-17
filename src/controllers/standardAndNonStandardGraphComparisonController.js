@@ -36,11 +36,10 @@ class StandardAndNonStandardGraphComparisonController {
       // This method will interact with the service to get data
       // Fetch all questions from the service
     const questions = await questionService.fetchAllQuestions();
-    
+
     // Return the array of questions as a JSON response
     res.json(questions);
 
-    console.log(questions);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

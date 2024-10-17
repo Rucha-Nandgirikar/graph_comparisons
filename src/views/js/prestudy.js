@@ -28,45 +28,6 @@ export const prestudyQuestions = [
       "line-graph.png",
     ],
   ];
-  
-export async function getUserID() {
-  try {
-    const response = await fetch("/api/claim-user-id", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-    const userId = data.userId; 
-
-    return userId;
-  } 
-  catch (error) {
-    console.error("Error claim user ID:", error);
-  }
-}
-
-export async function getCurrentUserID() {
-  try {
-    const response = await fetch("/api/claim-user-id", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache",  // Disable caching
-      },
-    });
-
-    const data = await response.json();
-    const userId = data.userId; 
-
-    return userId;
-  } 
-  catch (error) {
-    console.error("Error claim user ID:", error);
-  }
-}
 
 export async function recordPrestudyResponse(userId, currentQuestion, currentAnswer) {
     console.log(userId, currentQuestion, currentAnswer);
@@ -93,43 +54,120 @@ export async function recordPrestudyResponse(userId, currentQuestion, currentAns
   }
   
 export async function recordInteraction(userId, buttonName, isMainStudy, isPrestudy, currentQuestionId, currentQuestion, currentAnswer) {
-    let localQuestionId = null;
-    let localQuestion = null;
-    let localUserAnswer = null;
+  let localQuestionId = null;
+  let localQuestion = null;
+  let localUserAnswer = null;
+
+  if (!isMainStudy && !isPrestudy) {
+    localQuestionId = null;
+    localQuestion = null;
+    localUserAnswer = null;
+  } else if (isPrestudy && !isMainStudy) {
+    localQuestionId = null;
+    localQuestion = currentQuestion.value.substring(0, 80);
+    localUserAnswer = currentAnswer.value;
+  } else if (isMainStudy && !isPrestudy) {
+    localQuestionId = currentQuestionId + 1;
+    localQuestion = currentQuestion.value.substring(0, 80);
+    localUserAnswer = currentAnswer.value;
+  }
   
-    if (!isMainStudy && !isPrestudy) {
-      localQuestionId = null;
-      localQuestion = null;
-      localUserAnswer = null;
-    } else if (isPrestudy && !isMainStudy) {
-      localQuestionId = null;
-      localQuestion = currentQuestion.value.substring(0, 80);
-      localUserAnswer = currentAnswer.value;
-    } else if (isMainStudy && !isPrestudy) {
-      localQuestionId = currentQuestionId + 1;
-      localQuestion = currentQuestion.value.substring(0, 80);
-      localUserAnswer = currentAnswer.value;
-    }
-    
-    try {
-      const responseSubmit = await fetch("/submit-user-interaction", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          buttonName,
-          questionId: localQuestionId,
-          question: localQuestion,
-          userAnswer: localUserAnswer,
-        }),
-      });
-  
-      const dataSubmit = await responseSubmit.json();
-      console.log("Server response:", dataSubmit);
-    } catch (error) {
-      console.error("Error submitting response:", error);
-    }
+  try {
+    const responseSubmit = await fetch("/api/submit-user-interaction", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+        buttonName,
+        questionId: localQuestionId,
+        question: localQuestion,
+        userAnswer: localUserAnswer,
+      }),
+    });
+
+    const dataSubmit = await responseSubmit.json();
+
+    console.log("Server response:", dataSubmit);
+  } catch (error) {
+    console.error("Error submitting response:", error);
+  }
 }
+
+// Age submission function
+export async function ageSubmission(age) {
+  if (!age || isNaN(age)) {
+      alert("Please enter a valid age");
+      return;
+  }
+
+  try {
+      const userId = await getUserId();
+      if (!userId) {
+          alert("Could not fetch user ID");
+          return;
+      }
+
+      const data = await postUserAge(userId, age);
+
+      if (data.success) {
+          alert("Age saved successfully!");
+      } else {
+          alert("Error saving age.");
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while saving age.');
+  }
+}
+
+export async function assignUserId() {
+  try {
+    const response = await fetch('/api/claim-user-id', {
+      method: 'GET', // Change method to 'GET'
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    const data = await response.json();
   
+    return data;
+  } catch (error) {
+    console.error('Error claiming userId:', error);
+    showUserId.textContent = 'Error claiming User ID';
+  }
+}
+
+export async function getUserId() {
+  try {
+      const userId = await fetch('/api/get-current-user-id')
+          .then(res => res.json())
+          .then(data => {
+              console.log('User ID:', data.userId);
+              return data.userId;
+          });
+      return userId;
+  } catch (error) {
+      console.error('Error fetching user ID:', error);
+      throw new Error('Unable to fetch user ID');
+  }
+}
+
+export async function postUserAge(userId, age) {
+  try {
+      const response = await fetch('/api/insert-user-age', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId: userId, userAge: age }),
+      });
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error('Error posting user age:', error);
+      throw new Error('Unable to save user age');
+  }
+}
