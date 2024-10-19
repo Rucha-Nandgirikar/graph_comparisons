@@ -6,7 +6,6 @@ import {
 import { 
   recordInteraction,
   recordPrestudyResponse,
-  prestudyQuestions,
   assignUserId,
   prestudyQuestions,
 } from "./prestudy.js"
@@ -136,12 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Step 5: Begin Main Study
-  beginMainStudyButton.addEventListener("click", () => {
+  beginMainStudyButton.addEventListener("click", async () => {
     recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
     hideBeginMainStudyScreen();
     
     // Start Study
-    loadStudyQuestions(); 
+    await loadStudyQuestions(); 
     showMainStudyScreen();
     displayNextQuestion();
   });
@@ -189,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showUserIdElements() {
     claimUserIdButton.style.display = "none";
-    showUserId.textContent = `User ID: ${data.userId}`; 
+    showUserId.textContent = `User ID: ${userId}`; 
     prestudyNotif.style.display = 'block'; 
     beginPrestudyButton.style.display = 'block';
   }
@@ -317,21 +316,20 @@ document.addEventListener('DOMContentLoaded', () => {
     chartPlaceholder.innerHTML = "";
 
     currentCorrectAnswer = currentRow[4];
+    const options = currentRow[3]; 
+    const graphURL = currentRow[1];
+    const graphId = currentRow[7]
 
     // Create iframe element using graphURL and URLParams
-    const graphURL = currentRow[1];
     const iframeElement = document.createElement("iframe");
     iframeElement.src = `${graphURL}`;
     iframeElement.width = "100%";
     iframeElement.height = "600px";
     iframeElement.style.border = "none";
     
-    const graphId = currentRow[7]
-
     displayGraph(graphId)
     
-    const options = currentRow[3]; 
-
+    // Initialize Options
     options.forEach((option, index) => {
       const label = document.createElement("label");
       const input = document.createElement("input");
