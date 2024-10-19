@@ -116,21 +116,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // beginMainStudyButton.addEventListener("click", () => {
-  //   recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
-  //   // beginMainStudy(); 
-  // });
+  beginMainStudyButton.addEventListener("click", async () => {
+    try {
+      await recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+      beginGraphComparisonStudy(); 
+    } catch (error) {
+      console.error("Error occurred:", error);
+    }
+  });
+  
 
-  // async function beginMainStudy() {
-  //   const tableData= await getTableData();
-  //   storeQuestionsInArray(tableData);
+  async function beginGraphComparisonStudy() {
+    const tableData= await getTableData();
+
+    console.log(tableData);
+
+    storeQuestionsInArray(tableData);
   
-  //   homeContent.style.display = "none"; // Hide the welcome message
-  //   studyContent.style.display = "block"; // Show the study content
-  //   beginMainStudyButton.style.display = "none";
+    homeContent.style.display = "none"; // Hide the welcome message
+    studyContent.style.display = "block"; // Show the study content
+    beginMainStudyButton.style.display = "none";
   
-  //   displayQuestions(); //display main study question
-  // }
+    displayQuestions(); //display main study question
+  }
 
   function displayPrestudyQuestions(questions) {
     prestudyContent.style.display = "flex";

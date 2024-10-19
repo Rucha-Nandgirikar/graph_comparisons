@@ -65,9 +65,6 @@ class StandardAndNonStandardGraphComparisonController {
     try {
       // Extract data from the request body
       const { userId, userAnswer, question } = req.body;
-      // console.log("Rucha");
-      // console.log(userId, userAnswer, question);
-      
       const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
       // Call the service to insert the responses into the database

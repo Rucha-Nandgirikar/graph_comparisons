@@ -91,7 +91,7 @@ function getLatestUserId() {
             let latestUserId = 0;
 
             // Check if firstRow is defined and has user_id
-            if (firstRow && firstRow.user_id !== undefined) {
+            if (firstRow && firstRow.user_id !== null) {
                 latestUserId = firstRow.user_id;
             } 
             return latestUserId;
@@ -114,10 +114,16 @@ async function getCurrentUserId(req) {
 
 async function getNewUserId(latestUserId) {
     try {
-        const newUserId = latestUserId + 1;
+        const parsedUserId = parseInt(latestUserId, 10); // Parse latestUserId to an integer (base 10)
+        
+        if (isNaN(parsedUserId)) {
+            throw new Error('Invalid user ID');
+        }
+
+        const newUserId = parsedUserId + 1;
         return newUserId;
     } catch (error) {
-        throw new Error('Error returning new user ID');
+        throw new Error('Error returning new user ID: ' + error.message);
     }
 }
 
