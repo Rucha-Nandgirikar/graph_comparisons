@@ -10,12 +10,16 @@ body {
     display: none;flex-direction: column;justify-content: center;align-items: center;gap: 20px;height: 100vh; text-align: center;
   }
   .prestudy-alignment{
-    display: flex;flex-direction: column;justify-content: center;align-items: flex-start;height: 100vh;max-width: 60%;
+    display: none;flex-direction: column;justify-content: center;align-items: flex-start;height: 100vh;max-width: 60%;
   }
   .prestudy-question-alignment{
-    display: flex; flex-direction: column; margin-bottom: 20px;
+    display: none; flex-direction: column; margin-bottom: 20px;
   }
   .begin-main-study-alignment{
+    display: none;justify-content: center;align-items: center;text-align: center;  height: 100vh;
+  }
+
+  .main-study {
     display: none;justify-content: center;align-items: center;text-align: center;  height: 100vh;
   }
 
@@ -77,9 +81,9 @@ body {
   
  
   #question {
-    position: absolute;
-    top: 600px;
-    left: 20px;
+    position: relative;
+    /* top: 600px;
+    left: 20px; */
   }
   
   #chart {
@@ -88,13 +92,7 @@ body {
   }
   
   #options {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: left;
-    position: absolute;
-    left: 20px;
-    top: 640px;
+
   }
   
   #options label {

@@ -4,28 +4,18 @@ const { query } = require('../config/db');
 
 
 async function insertDataIntoMasterTable(userId, button, questionId, question, userAnswer, timestamp) {
-    const userIdQuery = userId !== null ? `${userId}`: null;
-    const buttonQuery = button !== null  ? `'${button}'`: null;
-    const questionIdQuery = questionId !== null ? `${questionId}`: null;
-    const questionQuery = question !== null ? `'${question}'`: null;
-    const userAnswerQuery = userAnswer !== null ? `'${userAnswer}'`: null;
-    const timestampQuery = timestamp !== null ? `'${timestamp}'`: null;
-
     const response = await query(
-        `INSERT INTO master_table (user_id, button_name, question_id, question_text, user_answer, timestamp) VALUES (${userIdQuery}, ${buttonQuery}, ${questionIdQuery}, ${questionQuery}, ${userAnswerQuery}, ${timestampQuery})`
+        `INSERT INTO master_table (user_id, button_name, question_id, question_text, user_answer, timestamp) VALUES (?, ?, ?, ?, ?, ?)`,
+        [userId, button, questionId, question, userAnswer, timestamp]
     );
 
     return response;
 }
 
 async function insertPrestudyResponseIntoDatabase(userId, question, userAnswer, timestamp) {
-    const userIdQuery = userId !== null ? `${userId}`: null;
-    const questionQuery = question !== null ? `'${question}'`: null;
-    const userAnswerQuery = userAnswer !== null ? `'${userAnswer}'`: null;
-    const timestampQuery = timestamp !== null ? `'${timestamp}'`: null;
-
     const response = await query(
-        `INSERT INTO prestudy_responses (user_id, question_text, user_answer, timestamp) VALUES (${userIdQuery}, ${questionQuery}, ${userAnswerQuery}, ${timestampQuery})`
+        `INSERT INTO prestudy_responses (user_id, question_text, user_answer, timestamp) VALUES (?, ?, ?, ?)`,
+        [userId, question, userAnswer, timestamp]
     );
 
     return response;

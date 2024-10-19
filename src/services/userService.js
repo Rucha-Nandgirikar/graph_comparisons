@@ -114,13 +114,7 @@ async function getCurrentUserId(req) {
 
 async function getNewUserId(latestUserId) {
     try {
-        const parsedUserId = parseInt(latestUserId, 10); // Parse latestUserId to an integer (base 10)
-        
-        if (isNaN(parsedUserId)) {
-            throw new Error('Invalid user ID');
-        }
-
-        const newUserId = parsedUserId + 1;
+        const newUserId =  parseInt(latestUserId) + 1;
         return newUserId;
     } catch (error) {
         throw new Error('Error returning new user ID: ' + error.message);
