@@ -5,6 +5,7 @@ class Question {
       this.options = data.options; 
       this.correct_ans = data.correct_ans;
       this.question_type = data.question_type;
+      this.answer_type = data.answer_type;
       this.graph_type = data.graph_type;
       this.url_params = data.url_params; 
       this.graph_id = data.graph_id;

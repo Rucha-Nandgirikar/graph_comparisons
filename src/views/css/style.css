@@ -95,6 +95,11 @@ body {
     left: 20px;
   }
   
+  #frq-answer {
+    margin: auto;
+    width: 30%;
+  }
+
   #options {
     margin: auto;
     width: fit-content;

@@ -5,6 +5,7 @@
             "options": [ "1 student", "100 students", "10 students", "Not specified" ], 
             "correct_ans": "10 students", 
             "question_type": "graph", 
+            "answer_type": "multiple-choice", 
             "graph_type": "csu", 
             "graph_id": 1, 
             "url_params": {
@@ -31,6 +32,7 @@
           ],
           "correct_ans": "Recent Not First-Generation Rate",
           "question_type": "graph",
+          "answer_type": "multiple-choice", 
           "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
@@ -52,6 +54,7 @@
           "options": ["True", "False"],
           "correct_ans": "True",
           "question_type": "graph",
+          "answer_type": "multiple-choice", 
           "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
@@ -73,6 +76,7 @@
           "options": [10, 12, 15, 19],
           "correct_ans": 19,
           "question_type": "data",
+          "answer_type": "multiple-choice", 
           "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
@@ -94,6 +98,7 @@
           "options": [6, 9, 12, 15],
           "correct_ans": 9,
           "question_type": "data",
+          "answer_type": "multiple-choice", 
           "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
@@ -115,6 +120,7 @@
           "options": ["Criminal Justice", "Sociology", "Computer Engineering", "Political Science"],
           "correct_ans": "Criminal Justice",
           "question_type": "data",
+          "answer_type": "multiple-choice", 
           "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
@@ -136,6 +142,7 @@
             "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 1,
             "url_params": {
@@ -157,6 +164,7 @@
             "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 1,
             "url_params": {
@@ -178,6 +186,7 @@
             "options": ["Yes", "No"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 1,
             "url_params": {
@@ -199,6 +208,7 @@
             "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 1,
             "url_params": {
@@ -220,6 +230,7 @@
             "options": ["Enrolled", "Graduated"],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -236,6 +247,7 @@
             "options": ["Enrolled", "Graduated"],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -252,6 +264,7 @@
             "options": ["Show Equity Summary", "Show Detailed Report", "Enroll Now", "Contact Support"],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -268,6 +281,7 @@
             "options": ["True", "False"],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -284,6 +298,7 @@
             "options": ["3", "10", "0"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -300,6 +315,7 @@
             "options": ["4", "6", "0"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -316,6 +332,7 @@
             "options": ["40 units", "57 units", "140 units"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -332,6 +349,7 @@
             "options": ["10%", "20%", "30%", "40%"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -348,6 +366,7 @@
             "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -364,6 +383,7 @@
             "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -380,6 +400,7 @@
             "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
@@ -396,6 +417,7 @@
             "options": ["Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.", "Pell and Not Pell equity gap Percentage Points of Graduated students."],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -407,6 +429,7 @@
             "options": ["Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.", "Pell and Not Pell equity gap Percentage Points of Graduated students."],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -418,6 +441,7 @@
             "options": ["Done"],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -429,6 +453,7 @@
             "options": ["Yes", "No"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -440,6 +465,7 @@
             "options": ["2009 - 2015", "2011 - 2017", "2010 - 2016", "2017 - 2023"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -451,6 +477,7 @@
             "options": ["Done"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -462,6 +489,7 @@
             "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -473,6 +501,7 @@
             "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -484,6 +513,7 @@
             "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
@@ -495,6 +525,7 @@
             "options": ["Light Green", "Blue", "Pink", "Violet"],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
@@ -508,6 +539,7 @@
             "options": ["Percentage of Students graduating in CSU in different majors", "Percentage of Migration of majors to Computer Science in CSU (California State University)"],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
@@ -521,6 +553,7 @@
             "options": ["It tracks the evolution of students majors from entry to graduation", "It specifies percentage of students at different majors"],
             "correct_ans": "",
             "question_type": "graph",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
@@ -534,6 +567,7 @@
             "options": ["Done"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
@@ -547,6 +581,7 @@
             "options": ["Undeclared", "Computer Engineering", "Biology", "Physics", "Information Systems"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
@@ -560,6 +595,7 @@
             "options": ["Yes", "No"],
             "correct_ans": "",
             "question_type": "data",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
@@ -573,6 +609,7 @@
             "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
@@ -586,6 +623,7 @@
             "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
@@ -599,6 +637,7 @@
             "options": ["Strongly Disagree", "Agree", "Neutral", "Agree", "Strongly Agree"],
             "correct_ans": null,
             "question_type": "subjective",
+            "answer_type": "multiple-choice", 
             "graph_type": "csu",
             "graph_id": 4,
             "url_params": {

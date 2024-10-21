@@ -1,6 +1,6 @@
 import { 
   getTableData,
-  checkAnswer,
+  recordMainStudyResponse,
 } from "./mainstudy.js"
 
 import { 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mainstudy Variables
   let userId = null;
   let currentQuestionId = null;
-  let currentQuestionIndex = 0; 
+  let currentQuestionIndex = 6; // 0; 
   let currentCorrectAnswer = null;
   let data2DArray = []; //stores all queries from test_questions in database locally
 
@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const reloadButton = document.getElementById('reload-button');
   const chartPlaceholder = document.getElementById("chart");
   const questionElement = document.getElementById('question');
+  const frqInput = document.getElementById('frq-answer');
   const optionsElement = document.getElementById('options');
   const submitButton = document.getElementById('submit-button');
 
@@ -152,19 +153,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Submit user response and display next question
   submitButton.addEventListener("click", () => {
-    checkAnswer(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
-    recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
-
     if (!document.querySelector('input[name="answer"]:checked')) {
       alert("Please select an answer.");
       currentAnswer.value = null;
       return;
-    } else {
-      currentAnswer.value = document.querySelector(
-        'input[name="answer"]:checked'
-      ).value;
-    }
+    } 
     
+    currentAnswer.value = document.querySelector(
+      'input[name="answer"]:checked'
+    ).value;
+    
+    // recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
+    recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
+
     if (currentQuestionIndex < data2DArray.length) {
       displayNextQuestion()
     } else {
@@ -235,6 +236,18 @@ document.addEventListener('DOMContentLoaded', () => {
     chartPlaceholder.innerHTML = "";
   }
 
+  function showFrqInput() {
+    frqInput.style.display = "block";
+  }
+
+  function hideFrqInput() {
+    frqInput.style.display = "none";
+  }
+
+  function clearFrqInput() {
+    frqInput.value = '';
+  }
+
   function showPostStudyCongrats() {
     postStudyCongrats.style.display = "block";
     questionElement.textContent = "Study complete. Thank you for participating!";
@@ -253,33 +266,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * Retrieve/store questions and begin Main Study
+   * -  Store all fetched data from table_questions into local 2d array data2DArray
    */
   async function loadStudyQuestions() { 
     const tableData = await getTableData();
 
     for (const entry of tableData) {
-      const questionText = entry.question_text;
-      const graphURL = entry.graph_url;
-      const options = entry.options;
-      const correctAnswer = entry.correct_ans;
-      const questionID = entry.question_id;
-      const questionType = entry.question_type;
-      const URLParams = entry.url_params;
-      const graphId = entry.graph_id;
+      const questionObj = {
+        "questionText": entry.question_text,
+        "graphURL": entry.graph_url,
+        "URLParams": entry.url_params,
+        "options": entry.options,
+        "correctAnswer": entry.correct_ans,
+        "questionID": entry.question_id,
+        "questionType": entry.question_type,
+        "answerType" : entry.answer_type,
+        "graphId": entry.graph_id
+      };
   
-      //temp array with extracted data
-      const rowArray = [
-        questionText,
-        graphURL,
-        URLParams,
-        options,
-        correctAnswer,
-        questionID,
-        questionType,
-        graphId,
-      ];
-  
-      data2DArray.push(rowArray); //store all fetched data from table_questions into local 2d array data2DArray
+      data2DArray.push(questionObj); 
     }
   }
 
@@ -287,8 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
    *  Display next prestudy question
    */
   function displayNextPrestudyQuestion() {
-    prestudyQuestionElement.innerHTML = currentQuestion.value =
-    userQuestions[currentPrestudyQuestionIndex][0];
+    prestudyQuestionElement.innerHTML = currentQuestion.value = userQuestions[currentPrestudyQuestionIndex][0];
     prestudyChart.innerHTML = "";
   
     var imageElement = document.createElement("img");
@@ -308,17 +312,22 @@ document.addEventListener('DOMContentLoaded', () => {
    * Display next Question in question array
    */
   function displayNextQuestion() {
-    const currentRow = data2DArray[currentQuestionIndex];
+    const currentQuestionObj = data2DArray[currentQuestionIndex];
+
+    currentCorrectAnswer = currentQuestionObj["currentQuestion"];
+    const options = currentQuestionObj["options"]; 
+    const graphURL = currentQuestionObj["graphURL"];
+    const graphId = currentQuestionObj["graphId"];
+    const questionId = currentQuestionObj["questionId"];
+    const questionType = currentQuestionObj["questionType"];
+    const questionText = currentQuestionObj["questionText"];
+    const answerType = currentQuestionObj["answerType"];
 
     // Assign value to the question text
-    questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${currentRow[0]}`;
+    questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${questionText}`;
     optionsElement.innerHTML = "";
     chartPlaceholder.innerHTML = "";
 
-    currentCorrectAnswer = currentRow[4];
-    const options = currentRow[3]; 
-    const graphURL = currentRow[1];
-    const graphId = currentRow[7]
 
     // Create iframe element using graphURL and URLParams
     const iframeElement = document.createElement("iframe");
@@ -328,6 +337,14 @@ document.addEventListener('DOMContentLoaded', () => {
     iframeElement.style.border = "none";
     
     displayGraph(graphId)
+
+    clearFrqInput();
+
+    if(answerType == "free-response") {
+      showFrqInput();
+    } else {
+      hideFrqInput();
+    }
     
     // Initialize Options
     options.forEach((option, index) => {
@@ -367,8 +384,10 @@ document.addEventListener('DOMContentLoaded', () => {
       chartPlaceholder.removeChild(chartPlaceholder.lastChild);
     }
 
-    const currentRow = data2DArray[currentQuestionIndex];
-    displayGraph(currentRow[7])
+    const currentQuestionObj = data2DArray[currentQuestionIndex];
+    const graphId = currentQuestionObj["graphId"];
+
+    displayGraph(graphId)
   }
 
 });

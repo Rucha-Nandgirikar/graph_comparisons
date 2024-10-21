@@ -33,6 +33,7 @@ const createQuestionsTable = `
       options JSON NOT NULL,
       correct_ans VARCHAR(255) NOT NULL,
       question_type VARCHAR(30),
+      answer_type VARCHAR(30),
       graph_type VARCHAR(30),
       graph_id INT,
       url_params VARCHAR(700)
@@ -44,7 +45,7 @@ const createResponsesTable = `
       user_id INT,
       question_id INT,
       user_response VARCHAR(255),
-      is_correct BOOLEAN NOT NULL,
+      is_correct BOOLEAN,
       timestamp DATETIME
   );
 `;
@@ -154,10 +155,10 @@ const createPrestudyResponsesTable = `
  * Helper function for converting test questions from question.json to sql syntax 
  * */ 
 function generateSQLFromJSON(questions) {
-  let query = `INSERT INTO test_questions (question_text, options, correct_ans, question_type, graph_type, graph_id, url_params) VALUES `
+  let query = `INSERT INTO test_questions (question_text, options, correct_ans, question_type, answer_type, graph_type, graph_id, url_params) VALUES `
   
   questions.forEach((question, idx, array) => {
-    const { question_text, options, correct_ans, question_type, graph_type, graph_id, url_params } = question;
+    const { question_text, options, correct_ans, question_type, answer_type, graph_type, graph_id, url_params } = question;
     
     const optionsSQL = `JSON_ARRAY(${options.map(opt => `'${opt}'`).join(", ")})`;
     const urlParamsSQL = `JSON_OBJECT(${Object.entries(url_params).map(([key, value]) => `'${key}', '${value}'`).join(", ")})`;
@@ -168,6 +169,7 @@ function generateSQLFromJSON(questions) {
         ${optionsSQL},
         '${correct_ans}',
         '${question_type}',
+        '${answer_type}',
         '${graph_type}',
         ${graph_id},
         ${urlParamsSQL}
