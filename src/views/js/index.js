@@ -83,17 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Step 3: Switch to prestudy questions when "BEGIN PRESTUDY" is clicked
-  beginPrestudyButton.addEventListener('click', () => {
+  beginPrestudyButton.addEventListener('click', async () => {
     hideHomeScreen();
     
-    showPrestudyScreen();
-    displayNextPrestudyQuestion();
+    /* showPrestudyScreen();
+    displayNextPrestudyQuestion(); */
 
     // uncomment for main study
-    /* 
-      showMainStudyScreen();
-      displayNextQuestion();
-    */
+    await loadStudyQuestions(); 
+    showMainStudyScreen();
+    displayNextQuestion();
+   
    
   });
 
