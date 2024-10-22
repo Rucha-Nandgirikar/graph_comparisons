@@ -4,6 +4,7 @@ const Question = require('./src/models/Question');
 const UserInteraction = require('./src/models/UserInteraction');
 const PreStudyResponse = require('./src/models/PrestudyResponse');
 const MainStudyResponse = require('./src/models/MainstudyResponse');
+const User = require('./src/models/User') 
 const Graph = require('./src/models/Graph');
 const questions = require('./questions.json'); 
 require("dotenv").config();
