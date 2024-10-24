@@ -17,18 +17,20 @@ export async function getTableData() {
     }
 }
   
-// TODO: Incorporate frq questions to answer
+// TODO: Incorporate frq questions to answer for isCorrect
 export async function recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer) {
     try {
-      const responseSubmit = await fetch("/submit-response", {
+      console.log(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer)
+
+      const responseSubmit = await fetch("/api/submit-mainstudy-response", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId,
+          userId: userId,
           userAnswer: currentAnswer.value,
-          questionNumber: currentQuestionId + 1,
+          questionNumber: currentQuestionId,
           question: currentQuestion.value.substring(0, 100),
           isCorrect: currentAnswer.value === currentCorrectAnswer,
         }),
@@ -40,5 +42,5 @@ export async function recordMainStudyResponse(userId, currentQuestionId, current
     } catch (error) {
       console.error("Error submitting response:", error);
     }
-  }
+}
   

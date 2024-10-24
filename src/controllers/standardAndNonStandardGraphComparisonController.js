@@ -33,6 +33,19 @@ class StandardAndNonStandardGraphComparisonController {
         }
     }
 
+    // Method to update user data
+    async updateUser(req, res) {
+        const userId = req.params.id; 
+        const data = req.body;
+        try {
+            const user = await userService.updateUser(userId, data);
+            return res.status(201).json(user);
+        } catch (error) {
+            console.error("Error creating user:", error);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+
     // Method to get all questions
     async getAllQuestions(req, res) {
         try {
@@ -48,7 +61,7 @@ class StandardAndNonStandardGraphComparisonController {
     async postMainStudyResponse(req, res) {
         const responseData = req.body; // Assuming response data is sent in the request body
         try {
-            const response = await responseService.insertMainStudyResponse(responseData);
+            const response = await responseService.insertMainstudyResponse(responseData);
             return res.status(201).json(response);
         } catch (error) {
             console.error("Error adding main study response:", error);
@@ -58,9 +71,9 @@ class StandardAndNonStandardGraphComparisonController {
 
     // Method to add a pre-study response
     async postPreStudyResponse(req, res) {
-        const responseData = req.body; // Assuming response data is sent in the request body
+        const responseData = req.body; 
         try {
-            const response = await responseService.insertPreStudyResponse(responseData);
+            const response = await responseService.insertPrestudyResponse(responseData);
             return res.status(201).json(response);
         } catch (error) {
             console.error("Error adding pre study response:", error);

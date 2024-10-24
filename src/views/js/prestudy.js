@@ -30,21 +30,20 @@ export const prestudyQuestions = [
   ];
 
 export async function recordPrestudyResponse(userId, currentQuestion, currentAnswer) {
-    console.log(userId, currentQuestion, currentAnswer);
     try {
-      const responseSubmit = await fetch("/api/submit-prestudy-response", {
+      const response = await fetch("/api/submit-prestudy-response", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId,
+          userId: userId,
           userAnswer: currentAnswer.value,
           question: currentQuestion.value.substring(0, 80),
         }),
       });
   
-      const dataSubmit = await responseSubmit.json();
+      const dataSubmit = await response.json();
       console.log("Server response:", dataSubmit);
   
     } catch (error) {
@@ -79,7 +78,7 @@ export async function recordInteraction(userId, buttonName, isMainStudy, isPrest
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userId,
+        userId: userId,
         buttonName,
         questionId: localQuestionId,
         question: localQuestion,
@@ -95,79 +94,37 @@ export async function recordInteraction(userId, buttonName, isMainStudy, isPrest
   }
 }
 
-// Age submission function
-export async function ageSubmission(age) {
-  if (!age || isNaN(age)) {
-      alert("Please enter a valid age");
-      return;
-  }
-
+export async function createNewUser() {
   try {
-      const userId = await getUserId();
-      if (!userId) {
-          alert("Could not fetch user ID");
-          return;
-      }
-
-      const data = await postUserAge(userId, age);
-
-      if (data.success) {
-          alert("Age saved successfully!");
-      } else {
-          alert("Error saving age.");
-      }
-  } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred while saving age.');
-  }
-}
-
-export async function assignUserId() {
-  try {
-    const response = await fetch('/api/claim-user-id', {
-      method: 'GET', // Change method to 'GET'
+    const response = await fetch('/api/users', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({}) 
     });
     
     const data = await response.json();
-  
     return data;
   } catch (error) {
-    console.error('Error claiming userId:', error);
-    showUserId.textContent = 'Error claiming User ID';
+    console.error('Error creating user:', error);
   }
 }
 
-export async function getUserId() {
-  try {
-      const userId = await fetch('/api/get-current-user-id')
-          .then(res => res.json())
-          .then(data => {
-              console.log('User ID:', data.userId);
-              return data.userId;
-          });
-      return userId;
-  } catch (error) {
-      console.error('Error fetching user ID:', error);
-      throw new Error('Unable to fetch user ID');
-  }
-}
 
-export async function postUserAge(userId, age) {
+export async function updateUser(userId, userData) {
   try {
-      const response = await fetch('/api/insert-user-age', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ userId: userId, userAge: age }),
-      });
-      const data = await response.json();
-      return data;
+    const response = await fetch(`/api/users/${userId}`, {
+      method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData) 
+    });
+    
+    const data = await response.json();
+    return data;
   } catch (error) {
-      console.error('Error posting user age:', error);
-      throw new Error('Unable to save user age');
+    console.error('Error updating user:', error);
   }
 }

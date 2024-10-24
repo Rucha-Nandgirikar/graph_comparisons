@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('./controllers/standardAndNonStandardGraphComparisonController');
+const controller = require('../../controllers/standardAndNonStandardGraphComparisonController');
 
 // User routes
 router.post('/users', controller.createUser);

@@ -2,7 +2,7 @@ const app = require('./src/app');
 
 const PORT = process.env.PORT || 3000;
 
-const { initDB } = require('./models'); // Adjust path as necessary
+const { initDB } = require('./src/models'); 
 
 (async () => {
     await initDB(); // Initialize the database

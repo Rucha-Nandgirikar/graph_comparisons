@@ -6,7 +6,8 @@ import {
 import { 
   recordInteraction,
   recordPrestudyResponse,
-  assignUserId,
+  createNewUser,
+  updateUser,
   prestudyQuestions,
 } from "./prestudy.js"
 
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mainstudy Variables
   let userId = null;
   let currentQuestionId = null;
-  let currentQuestionIndex = 6; // 0; 
+  let currentQuestionIndex = 0; 
   let currentCorrectAnswer = null;
   let data2DArray = []; //stores all queries from test_questions in database locally
 
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const frqInput = document.getElementById('frq-answer');
   const optionsElement = document.getElementById('options');
   const submitButton = document.getElementById('submit-button');
+  let iframeElement;
 
   // Post study elements
   const postStudyCongrats = document.getElementById('congrats-cat')
@@ -77,8 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Step 2: Show user ID and prestudy info when "CLAIM YOUR USER ID" is clicked
   claimUserIdButton.addEventListener('click', async () => {
-    const data = await assignUserId();
-    userId = data.userId;
+    // Creates new User
+    const user = await createNewUser();
+    userId = user.userId;
 
     showUserIdElements()
   });
@@ -87,20 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
   beginPrestudyButton.addEventListener('click', async () => {
     hideHomeScreen();
     
-    /* showPrestudyScreen();
-    displayNextPrestudyQuestion(); */
+    showPrestudyScreen();
+    displayNextPrestudyQuestion();  
 
     // uncomment for main study
-    await loadStudyQuestions(); 
+
+    /* await loadStudyQuestions(); 
     showMainStudyScreen();
-    displayNextQuestion();
-   
+    displayNextQuestion();  */
    
   });
 
   // Step 4: Handle prestudy submission and show the next button
   prestudySubmitButton.addEventListener("click", async () => {
-
     const inputValue = inputElement.value;
     if (!inputValue) {
       alert("Please enter an answer.");
@@ -110,8 +112,19 @@ document.addEventListener('DOMContentLoaded', () => {
       currentAnswer.value = inputValue;
     }
 
-    recordPrestudyResponse(userId, currentQuestion, currentAnswer);
-    recordInteraction(userId, "Submit", false, true, currentQuestionId, currentQuestion, currentAnswer);
+    if (currentPrestudyQuestionIndex == 0) {
+      await updateUser(userId, {
+        age: parseInt(currentAnswer.value),
+      });
+    }
+    else if (currentPrestudyQuestionIndex == 1) {
+      await updateUser(userId, {
+        major: currentAnswer.value,
+      });
+    }
+
+    await recordPrestudyResponse(userId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Submit", false, true, currentQuestionId, currentQuestion, currentAnswer);
     inputElement.value = "";
   
     if (currentPrestudyQuestionIndex < 6) {
@@ -137,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Step 5: Begin Main Study
   beginMainStudyButton.addEventListener("click", async () => {
-    recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
     hideBeginMainStudyScreen();
     
     // Start Study
@@ -152,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Submit user response and display next question
-  submitButton.addEventListener("click", () => {
+  submitButton.addEventListener("click", async () => {
     if (!document.querySelector('input[name="answer"]:checked')) {
       alert("Please select an answer.");
       currentAnswer.value = null;
@@ -163,8 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'input[name="answer"]:checked'
     ).value;
     
-    // recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
-    recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
+    await recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
+    await recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
 
     if (currentQuestionIndex < data2DArray.length) {
       displayNextQuestion()
@@ -283,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "answerType" : entry.answer_type,
         "graphId": entry.graph_id
       };
-  
+
       data2DArray.push(questionObj); 
     }
   }
@@ -318,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const options = currentQuestionObj["options"]; 
     const graphURL = currentQuestionObj["graphURL"];
     const graphId = currentQuestionObj["graphId"];
-    const questionId = currentQuestionObj["questionId"];
+    const questionId = currentQuestionObj["questionID"];
     const questionType = currentQuestionObj["questionType"];
     const questionText = currentQuestionObj["questionText"];
     const answerType = currentQuestionObj["answerType"];
@@ -328,11 +341,13 @@ document.addEventListener('DOMContentLoaded', () => {
     optionsElement.innerHTML = "";
     chartPlaceholder.innerHTML = "";
 
+    // Set vars
+    currentQuestionId = questionId;
 
     // Create iframe element using graphURL and URLParams
-    const iframeElement = document.createElement("iframe");
+    iframeElement = document.createElement("iframe");
     iframeElement.src = `${graphURL}`;
-    iframeElement.width = "100%";
+    iframeElement.width = "50%";
     iframeElement.height = "600px";
     iframeElement.style.border = "none";
     
@@ -357,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
       label.appendChild(document.createTextNode(option));
       optionsElement.appendChild(label);
     });
-    
+
     currentQuestionIndex++;
   }
 

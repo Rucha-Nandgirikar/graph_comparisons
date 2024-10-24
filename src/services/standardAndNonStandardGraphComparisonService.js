@@ -7,7 +7,7 @@ const UserInteraction = require('../models/UserInteraction');
  */ 
 class ResponseService {
     // Add a Main Study Response
-    async insertMainStudyResponse(data) {
+    async insertMainstudyResponse(data) {
         try {
             const response = await MainStudyResponse.create(data);
             return response;

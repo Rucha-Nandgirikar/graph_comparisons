@@ -1,5 +1,5 @@
 // models/index.js
-const sequelize = require('../config/database');
+const sequelize = require('../config/db');
 const Question = require('./Question');
 const UserInteraction = require('./UserInteraction');
 const PreStudyResponse = require('./PrestudyResponse');
@@ -9,6 +9,11 @@ const User = require('./User')
 
 const initDB = async () => {
     try {
+        // Define model relationships
+        Graph.hasMany(Question, { foreignKey: 'graph_id', sourceKey: 'graph_id' });
+        Question.belongsTo(Graph, { foreignKey: 'graph_id', targetKey: 'graph_id' });
+
+        // Authenticate and sync the database
         await sequelize.authenticate();
         console.log('Connection established successfully.');
         await sequelize.sync({ alter: true }); // Sync all models

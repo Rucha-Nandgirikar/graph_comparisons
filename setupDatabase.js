@@ -34,6 +34,10 @@ async function setupDatabase() {
             console.log("Database already exists");
         }
 
+        // After creating or confirming database existence, sync models and insert data
+        await syncDatabase();
+        await insertData();
+
     } catch (error) {
         console.error("Error during database setup:", error);
     } finally {
@@ -41,9 +45,7 @@ async function setupDatabase() {
         console.log("MySQL connection closed.");
     }
 
-    // After creating or confirming database existence, sync models and insert data
-    await syncDatabase();
-    await insertData();
+    
 }
 
 async function syncDatabase() {
