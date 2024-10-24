@@ -1,55 +1,43 @@
-const { query } = require('../config/db');
+const PreStudyResponse = require('../models/PrestudyResponse');
+const MainStudyResponse = require('../models/MainstudyResponse');
+const UserInteraction = require('../models/UserInteraction');
 
-// TODO (Rucha?): Create function to return most recent user_id from database
+/**
+ *  Response Service is in charge of recording main study and prestudy responses, as well as user interactions  
+ */ 
+class ResponseService {
+    // Add a Main Study Response
+    async insertMainstudyResponse(data) {
+        try {
+            const response = await MainStudyResponse.create(data);
+            return response;
+        } catch (error) {
+            console.error("Error adding main study response:", error);
+            throw error;
+        }
+    }
 
+    // Add a Pre Study Response
+    async insertPrestudyResponse(data) {
+        try {
+            const response = await PreStudyResponse.create(data);
+            return response;
+        } catch (error) {
+            console.error("Error adding pre study response:", error);
+            throw error;
+        }
+    }
 
-async function insertDataIntoMasterTable(userId, button, questionId, question, userAnswer, timestamp) {
-    const response = await query(
-        `INSERT INTO master_table (user_id, button_name, question_id, question_text, user_answer, timestamp) VALUES (?, ?, ?, ?, ?, ?)`,
-        [userId, button, questionId, question, userAnswer, timestamp]
-    );
-
-    return response;
+    // Add a User Interaction
+    async insertUserInteraction(data) {
+        try {
+            const interaction = await UserInteraction.create(data);
+            return interaction;
+        } catch (error) {
+            console.error("Error adding user interaction:", error);
+            throw error;
+        }
+    }
 }
 
-async function insertPrestudyResponseIntoDatabase(userId, question, userAnswer, timestamp) {
-    const response = await query(
-        `INSERT INTO prestudy_responses (user_id, question_text, user_answer, timestamp) VALUES (?, ?, ?, ?)`,
-        [userId, question, userAnswer, timestamp]
-    );
-
-    return response;
-}
-
-async function fetchAllTestQuestionsFromDatabase() {
-    const response = await query(
-        `SELECT questions.question_id, questions.question_text, questions.options, questions.correct_ans, questions.question_type, questions.graph_type, questions.url_params, questions.graph_id, graphs.graph_name, graphs.graph_url FROM test_questions questions INNER JOIN test_graphs graphs ON questions.graph_id = graphs.graph_id`
-    );
-
-    return response[0];
-}
-
-// async function insertResponseIntoDatabase(userId, questionId, userAnswer, isCorrect, timestamp) {
-//     const userIdQuery = userId !== null ? `${userId}`: null;
-//     const questionIdQuery = questionId !== null ? `'${questionId}'`: null;
-//     const userAnswerQuery = userAnswer !== null ? `'${userAnswer}'`: null;
-//     const isCorrectQuery = isCorrect !== null ? `${isCorrect}` : null;
-//     const timestampQuery = timestamp !== null ? `'${timestamp}'`: null;
-
-//     const response = await query(
-//         `INSERT INTO test_responses (user_id, question_id, user_response, is_correct, timestamp) VALUES (${userIdQuery}, ${questionIdQuery}, ${userAnswerQuery}, ${isCorrectQuery}, ${timestampQuery})`
-//     );
-
-//     return response;
-// }
-
-// insertDataIntoMasterTable,
-//     insertPrestudyResponseIntoDatabase,
-//     fetchEntireTableFromDatabase,
-//     insertResponseIntoDatabase,
-
-module.exports = {
-    insertDataIntoMasterTable,
-    insertPrestudyResponseIntoDatabase,
-    fetchAllTestQuestionsFromDatabase,
-}
+module.exports = new ResponseService();

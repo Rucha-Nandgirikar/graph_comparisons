@@ -1,29 +1,41 @@
-const Question = require('../models/questionModel');
-const standardAndNonStandardGraphsService = require('../services/standardAndNonStandardGraphComparisonService'); // Assuming this is the service for fetching data
+const Question = require('../models/Question');
+const Graph = require('../models/Graph');
 
+/**
+ *  Question Service is in charge of returning main study questions stored in questions database   
+ */ 
 class QuestionService {
-  // Method to fetch questions from the database and return them as Question instances
-  async fetchAllQuestions() {
-    try {
-      // Fetch data from the database using the existing service
-      const data = await standardAndNonStandardGraphsService.fetchAllTestQuestionsFromDatabase();
-      // Initialize an array to hold the Question instances
-      const questionsArray = [];
 
-      // Iterate through the fetched data and create Question instances
-      data.forEach(questionData => {
-        const question = new Question(questionData); // Create a new Question object
-        questionsArray.push(question); // Add to the questions array
-      });
-
-      // Return the array of questions
-      return questionsArray;
-
-    } catch (error) {
-      console.error('Error fetching test questions:', error);
-      throw new Error('Failed to fetch test questions');
+    // Get all questions with associated graph_url in Graph table
+    async getAllQuestions() {
+        try {
+            const questions = await Question.findAll({
+                include: [{
+                    model: Graph,
+                    attributes: ['graph_url'] 
+                }]
+            });
+    
+            const formattedQuestions = questions.map(question => {
+                return {
+                    question_id: question.question_id,
+                    question_text: question.question_text,
+                    options: question.options,
+                    correct_ans: question.correct_ans,
+                    question_type: question.question_type,
+                    answer_type: question.answer_type,
+                    graph_id: question.graph_id,
+                    graph_url: question.Graph.graph_url
+                };
+            });
+        
+            return formattedQuestions;
+        } catch (error) {
+            console.error("Error fetching questions:", error);
+            throw error;
+        }
     }
-  }
+    
 }
 
-module.exports = new QuestionService(); // Export an instance of the service
+module.exports = new QuestionService();
