@@ -17,7 +17,8 @@ export async function getTableData() {
     }
 }
   
-export async function checkAnswer(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer) {
+// TODO: Incorporate frq questions to answer
+export async function recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer) {
     try {
       const responseSubmit = await fetch("/submit-response", {
         method: "POST",

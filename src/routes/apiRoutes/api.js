@@ -5,13 +5,14 @@ const controller = require('./controllers/standardAndNonStandardGraphComparisonC
 // User routes
 router.post('/users', controller.createUser);
 router.get('/users/:id', controller.getUserById);
+router.put('/users/:id', controller.updateUser);
 
 // Question routes
-router.get('/questions', controller.getAllQuestions);
+router.get('/test-questions', controller.getAllQuestions);
 
 // Response routes
-router.post('/responses/main', controller.addMainStudyResponse);
-router.post('/responses/pre', controller.addPreStudyResponse);
-router.post('/interactions', controller.addUserInteraction);
+router.post('/submit-mainstudy-response', controller.postMainStudyResponse);
+router.post('/submit-prestudy-response', controller.postPreStudyResponse);
+router.post('/submit-user-interaction', controller.postUserInteraction);
 
 module.exports = router;

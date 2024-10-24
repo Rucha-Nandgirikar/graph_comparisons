@@ -9,7 +9,15 @@ User.init({
         primaryKey: true,       
         autoIncrement: true,     
         allowNull: false
-    }
+    },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    major: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
 }, {
     sequelize,
     modelName: 'User',

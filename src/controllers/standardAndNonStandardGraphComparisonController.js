@@ -1,8 +1,10 @@
-const standardAndNonStandardGraphsService = require('../services/standardAndNonStandardGraphComparisonService');
 const questionService = require('../services/questionService'); 
 const userService = require('../services/userService');
-const responseService = require('../services/responseService'); // Include the ResponseService
+const responseService = require('../services/standardAndNonStandardGraphComparisonService');
 
+/**
+ * GraphController handles all requests including user management, retrieving main study questions, and handling user response recording
+ */
 class StandardAndNonStandardGraphComparisonController {
     
     // Method to create a new user
@@ -43,10 +45,10 @@ class StandardAndNonStandardGraphComparisonController {
     }
 
     // Method to add a main study response
-    async addMainStudyResponse(req, res) {
+    async postMainStudyResponse(req, res) {
         const responseData = req.body; // Assuming response data is sent in the request body
         try {
-            const response = await responseService.addMainStudyResponse(responseData);
+            const response = await responseService.insertMainStudyResponse(responseData);
             return res.status(201).json(response);
         } catch (error) {
             console.error("Error adding main study response:", error);
@@ -55,10 +57,10 @@ class StandardAndNonStandardGraphComparisonController {
     }
 
     // Method to add a pre-study response
-    async addPreStudyResponse(req, res) {
+    async postPreStudyResponse(req, res) {
         const responseData = req.body; // Assuming response data is sent in the request body
         try {
-            const response = await responseService.addPreStudyResponse(responseData);
+            const response = await responseService.insertPreStudyResponse(responseData);
             return res.status(201).json(response);
         } catch (error) {
             console.error("Error adding pre study response:", error);
@@ -67,10 +69,10 @@ class StandardAndNonStandardGraphComparisonController {
     }
 
     // Method to add a user interaction
-    async addUserInteraction(req, res) {
+    async postUserInteraction(req, res) {
         const interactionData = req.body; // Assuming interaction data is sent in the request body
         try {
-            const interaction = await responseService.addUserInteraction(interactionData);
+            const interaction = await responseService.insertUserInteraction(interactionData);
             return res.status(201).json(interaction);
         } catch (error) {
             console.error("Error adding user interaction:", error);

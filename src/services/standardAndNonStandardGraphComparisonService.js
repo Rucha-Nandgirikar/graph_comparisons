@@ -2,20 +2,23 @@ const PreStudyResponse = require('../models/PrestudyResponse');
 const MainStudyResponse = require('../models/MainstudyResponse');
 const UserInteraction = require('../models/UserInteraction');
 
+/**
+ *  Response Service is in charge of recording main study and prestudy responses, as well as user interactions  
+ */ 
 class ResponseService {
     // Add a Main Study Response
-    async addMainStudyResponse(data) {
+    async insertMainStudyResponse(data) {
         try {
             const response = await MainStudyResponse.create(data);
             return response;
         } catch (error) {
             console.error("Error adding main study response:", error);
-            throw error; // Rethrow the error to be handled by the caller
+            throw error;
         }
     }
 
     // Add a Pre Study Response
-    async addPreStudyResponse(data) {
+    async insertPrestudyResponse(data) {
         try {
             const response = await PreStudyResponse.create(data);
             return response;
@@ -26,7 +29,7 @@ class ResponseService {
     }
 
     // Add a User Interaction
-    async addUserInteraction(data) {
+    async insertUserInteraction(data) {
         try {
             const interaction = await UserInteraction.create(data);
             return interaction;
