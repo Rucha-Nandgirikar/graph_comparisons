@@ -18,6 +18,7 @@ import {
   displayStudentProgressUnits,
 } from "./charts.js" 
 
+
 document.addEventListener('DOMContentLoaded', () => {
   // on-launch elements
   const beginStudyButtonWrapper = document.getElementById('begin');
@@ -90,14 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
   beginPrestudyButton.addEventListener('click', async () => {
     hideHomeScreen();
     
-    showPrestudyScreen();
-    displayNextPrestudyQuestion();  
+    // showPrestudyScreen();
+    // displayNextPrestudyQuestion();  
 
     // uncomment for main study
 
-    /* await loadStudyQuestions(); 
+     await loadStudyQuestions(); 
     showMainStudyScreen();
-    displayNextQuestion();  */
+    displayNextQuestion();  
    
   });
 
@@ -328,7 +329,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentQuestionObj = data2DArray[currentQuestionIndex];
 
     currentCorrectAnswer = currentQuestionObj["currentQuestion"];
-    const options = currentQuestionObj["options"]; 
+    let options =  currentQuestionObj["options"]; 
+    if(typeof options == "string")
+    {
+      options =  JSON.parse( currentQuestionObj["options"]); 
+    }
+   
     const graphURL = currentQuestionObj["graphURL"];
     const graphId = currentQuestionObj["graphId"];
     const questionId = currentQuestionObj["questionID"];
