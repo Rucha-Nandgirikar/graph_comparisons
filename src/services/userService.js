@@ -5,10 +5,18 @@ const User = require('../models/User'); // Adjust the path as necessary
  * User Service is in charge of creating new users and updating user data (age, major)
  */
 class UserService {
-    // Create a new user
+    // Create a new user and sets testOrderId
     async createUser() {
         try {
-            const newUser = await User.create({});
+            const MAX_ORDERS = 50 // set to num orders in graphpresorder.json
+
+            const user = await User.findOne({
+                order: [ [ 'createdAt', 'DESC' ]],
+            });
+            const prevId = user.testOrderId;
+            const nextId = (prevId === null || prevId === undefined) ? 0 : (prevId + 1) % MAX_ORDERS;
+
+            const newUser = await User.create({testOrderId: nextId});
             return newUser;
         } catch (error) {
             console.error("Error creating user:", error);

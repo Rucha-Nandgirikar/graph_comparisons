@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentQuestionId = null;
   let currentQuestionIndex = 0; 
   let currentCorrectAnswer = null;
+  let testOrderId = null;
   let data2DArray = []; //stores all queries from test_questions in database locally
 
   // Mainstudy elements
@@ -80,10 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Step 2: Show user ID and prestudy info when "CLAIM YOUR USER ID" is clicked
   claimUserIdButton.addEventListener('click', async () => {
-    // Creates new User
-    const user = await createNewUser();
-    userId = user.userId;
-
+    await setupNewUser()
     showUserIdElements()
   });
 
@@ -91,52 +89,20 @@ document.addEventListener('DOMContentLoaded', () => {
   beginPrestudyButton.addEventListener('click', async () => {
     hideHomeScreen();
     
-    // showPrestudyScreen();
-    // displayNextPrestudyQuestion();  
+    showPrestudyScreen();
+    displayNextPrestudyQuestion();  
 
     // uncomment for main study
 
-     await loadStudyQuestions(); 
+    /* await loadStudyQuestions(); 
     showMainStudyScreen();
-    displayNextQuestion();  
+    displayNextQuestion();   */
    
   });
 
   // Step 4: Handle prestudy submission and show the next button
   prestudySubmitButton.addEventListener("click", async () => {
-    const inputValue = inputElement.value;
-    if (!inputValue) {
-      alert("Please enter an answer.");
-      currentAnswer.value = null;
-      return;
-    } else {
-      currentAnswer.value = inputValue;
-    }
-
-    if (currentPrestudyQuestionIndex == 0) {
-      await updateUser(userId, {
-        age: parseInt(currentAnswer.value),
-      });
-    }
-    else if (currentPrestudyQuestionIndex == 1) {
-      await updateUser(userId, {
-        major: currentAnswer.value,
-      });
-    }
-
-    await recordPrestudyResponse(userId, currentQuestion, currentAnswer);
-    await recordInteraction(userId, "Submit", false, true, currentQuestionId, currentQuestion, currentAnswer);
-    inputElement.value = "";
-  
-    if (currentPrestudyQuestionIndex < 6) {
-      displayNextPrestudyQuestion();
-    }
-    else {
-      hidePrestudyScreen();
-      //showCalibrationScreen();
-      showBeginMainStudyScreen();
-    }
-
+    handlePrestudyQuestionSubmit()
   });
 
   // Step 4.5 (OPTIONAL): Switch to calibration screen when "NEXT" is clicked
@@ -151,13 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Step 5: Begin Main Study
   beginMainStudyButton.addEventListener("click", async () => {
-    await recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
-    hideBeginMainStudyScreen();
-    
-    // Start Study
-    await loadStudyQuestions(); 
-    showMainStudyScreen();
-    displayNextQuestion();
+    beginMainStudy();
   });
   
   // Reload Button for chart
@@ -167,25 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Submit user response and display next question
   submitButton.addEventListener("click", async () => {
-    if (!document.querySelector('input[name="answer"]:checked')) {
-      alert("Please select an answer.");
-      currentAnswer.value = null;
-      return;
-    } 
-    
-    currentAnswer.value = document.querySelector(
-      'input[name="answer"]:checked'
-    ).value;
-    
-    await recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
-    await recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
-
-    if (currentQuestionIndex < data2DArray.length) {
-      displayNextQuestion()
-    } else {
-      hideMainStudyScreen();
-      showPostStudyCongrats();
-    }
+    handleMainstudyQuestionSubmit();
   });
 
 
@@ -276,6 +218,100 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPrestudyQuestionIndex = 0;
     prestudyChart.innerHTML = "";
     inputElement.style.display = "none";
+  }
+
+  /**
+   *  Setup new user procedure
+   *  - Create new User in User database
+   *  - Setup mainstudy variables
+   */
+  async function setupNewUser() {
+    const user = await createNewUser();
+
+    console.log(user)
+    
+    userId = user.userId;
+    testOrderId = user.testOrderId;
+  }
+
+  /**
+   *  Handles Logic for submitting prestudy questions
+   *  - Checks for selected Input
+   *  - Updates user data
+   *  - Submits user records
+   *  - displays next question or displays mainstudy Screen
+   */
+  async function handlePrestudyQuestionSubmit() {
+    const inputValue = inputElement.value;
+    if (!inputValue) {
+      alert("Please enter an answer.");
+      currentAnswer.value = null;
+      return;
+    } else {
+      currentAnswer.value = inputValue;
+    }
+
+    if (currentPrestudyQuestionIndex == 0) {
+      await updateUser(userId, {
+        age: parseInt(currentAnswer.value),
+      });
+    }
+    else if (currentPrestudyQuestionIndex == 1) {
+      await updateUser(userId, {
+        major: currentAnswer.value,
+      });
+    }
+
+    await recordPrestudyResponse(userId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Submit", false, true, currentQuestionId, currentQuestion, currentAnswer);
+    inputElement.value = "";
+  
+    if (currentPrestudyQuestionIndex < 6) {
+      displayNextPrestudyQuestion();
+    }
+    else {
+      hidePrestudyScreen();
+      //showCalibrationScreen();
+      showBeginMainStudyScreen();
+    }
+  }
+
+  /**
+   * 
+   */
+  async function beginMainStudy() {
+    await recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+    hideBeginMainStudyScreen();
+    
+    // Start Study
+    await loadStudyQuestions(); 
+    showMainStudyScreen();
+    displayNextQuestion();
+  }
+
+  /**
+   *  Handles logic for submitting mainstudy Questions
+   */
+  async function handleMainstudyQuestionSubmit() {
+    if (!document.querySelector('input[name="answer"]:checked')) {
+      alert("Please select an answer.");
+      currentAnswer.value = null;
+      return;
+    } 
+    
+    currentAnswer.value = document.querySelector(
+      'input[name="answer"]:checked'
+    ).value;
+    
+    await recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
+    await recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
+
+    if (currentQuestionIndex < data2DArray.length) {
+      displayNextQuestion()
+    } else {
+      hideMainStudyScreen();
+      showPostStudyCongrats();
+    }
   }
 
   /**

@@ -9,8 +9,9 @@ class StandardAndNonStandardGraphComparisonController {
     
     // Method to create a new user
     async createUser(req, res) {
-        try {
+        try {            
             const user = await userService.createUser();
+
             return res.status(201).json(user);
         } catch (error) {
             console.error("Error creating user:", error);
