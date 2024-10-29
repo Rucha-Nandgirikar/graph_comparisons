@@ -1,5 +1,6 @@
 // src/services/userService.js
 const User = require('../models/User'); // Adjust the path as necessary
+const graphOrdersJSON = require('../../graphPresentationOrder.json'); 
 
 /**
  * User Service is in charge of creating new users and updating user data (age, major)
@@ -8,7 +9,7 @@ class UserService {
     // Create a new user and sets testOrderId
     async createUser() {
         try {
-            const MAX_ORDERS = 50 // set to num orders in graphpresorder.json
+            const MAX_ORDERS = graphOrdersJSON["graphOrders"].length;
 
             const user = await User.findOne({
                 order: [ [ 'createdAt', 'DESC' ]],
