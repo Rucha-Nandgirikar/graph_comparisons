@@ -89,14 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
   beginPrestudyButton.addEventListener('click', async () => {
     hideHomeScreen();
     
-    showPrestudyScreen();
-    displayNextPrestudyQuestion();  
+    //showPrestudyScreen();
+    //displayNextPrestudyQuestion();  
 
     // uncomment for main study
 
-    /* await loadStudyQuestions(); 
+    await loadStudyQuestions(); 
     showMainStudyScreen();
-    displayNextQuestion();   */
+    displayNextQuestion();   
    
   });
 
@@ -227,8 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   async function setupNewUser() {
     const user = await createNewUser();
-
-    console.log(user)
     
     userId = user.userId;
     testOrderId = user.testOrderId;
@@ -319,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * -  Store all fetched data from table_questions into local 2d array data2DArray
    */
   async function loadStudyQuestions() { 
-    const tableData = await getTableData();
+    const tableData = await getTableData(userId);
 
     for (const entry of tableData) {
       const questionObj = {

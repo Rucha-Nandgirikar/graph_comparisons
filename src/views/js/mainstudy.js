@@ -1,7 +1,7 @@
 //Start the main study
-export async function getTableData() {
+export async function getTableData(userId) {
     try {
-      const response = await fetch("/api/test-questions", {
+      const response = await fetch(`/api/test-questions/${userId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -50,7 +50,9 @@ class StandardAndNonStandardGraphComparisonController {
     // Method to get all questions
     async getAllQuestions(req, res) {
         try {
-            const questions = await questionService.getAllQuestions();
+            const userId = req.params.id; 
+
+            const questions = await questionService.getAllQuestions(userId);
             return res.status(200).json(questions);
         } catch (error) {
             console.error("Error fetching questions:", error);

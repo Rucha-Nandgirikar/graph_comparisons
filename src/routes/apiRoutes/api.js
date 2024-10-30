@@ -8,7 +8,7 @@ router.get('/users/:id', controller.getUserById);
 router.put('/users/:id', controller.updateUser);
 
 // Question routes
-router.get('/test-questions', controller.getAllQuestions);
+router.get('/test-questions/:id', controller.getAllQuestions);
 
 // Response routes
 router.post('/submit-mainstudy-response', controller.postMainStudyResponse);
