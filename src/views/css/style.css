@@ -85,24 +85,39 @@ body {
     /* top: 600px;
     left: 20px; */
   }
+
+  #reload-button {
+    margin-top: 20px;
+  }
   
   #chart {
     top: 10px;
     left: 20px;
   }
   
-  #options {
+  #frq-answer {
+    margin: auto;
+    width: 30%;
+  }
 
+  #options {
+    margin: auto;
+    width: fit-content;
   }
   
   #options label {
     display: block;
+    text-align: left;
     margin: 5px 0;
     cursor: pointer;
   }
   
   #options input[type="radio"],
   #options input[type="checkbox"] {
+  }
+
+  #submit-button {
+    margin-top: 10px;
   }
   
   #study-content button:hover {

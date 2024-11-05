@@ -1,18 +1,18 @@
 const express = require('express');
-
 const router = express.Router();
-const standardAndNonStandardGraphsController = require('../../controllers/standardAndNonStandardGraphComparisonController.js');
+const controller = require('../../controllers/standardAndNonStandardGraphComparisonController');
 
-// Define the route for /claim-user-id
-router.get('/claim-user-id', standardAndNonStandardGraphsController.claimUserId);
-router.get('/test-questions', standardAndNonStandardGraphsController.getAllTestQuestions);
-router.get('/get-current-user-id',standardAndNonStandardGraphsController.getCurrentUserId);
+// User routes
+router.post('/users', controller.createUser);
+router.get('/users/:id', controller.getUserById);
+router.put('/users/:id', controller.updateUser);
 
-// POST Pre Study Response
-router.post('/submit-prestudy-response',standardAndNonStandardGraphsController.postPreStudyResponses);
-router.post('/submit-user-interaction',standardAndNonStandardGraphsController.postUserInteraction);
+// Question routes
+router.get('/test-questions/:id', controller.getAllQuestions);
 
-// router.post('/insert-user-age',standardAndNonStandardGraphsController.postUserAge);
-
+// Response routes
+router.post('/submit-mainstudy-response', controller.postMainStudyResponse);
+router.post('/submit-prestudy-response', controller.postPreStudyResponse);
+router.post('/submit-user-interaction', controller.postUserInteraction);
 
 module.exports = router;
