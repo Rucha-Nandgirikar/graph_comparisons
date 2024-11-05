@@ -387,8 +387,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create iframe element using graphURL and URLParams
     iframeElement = document.createElement("iframe");
     iframeElement.src = `${graphURL}`;
-    iframeElement.width = "50%";
-    iframeElement.height = "600px";
+    iframeElement.width = "150%";
+    iframeElement.height = "100%";
+    iframeElement.style.transform = "scale(0.50)";
+    iframeElement.style.transformOrigin = "20% top"
+    iframeElement.style.marginBottom = "-400px";
     iframeElement.style.border = "none";
     
     displayGraph(graphId)
