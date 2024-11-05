@@ -441,7 +441,7 @@
             "options": ["Done"],
             "correct_ans": "",
             "question_type": "graph",
-            "answer_type": "multiple-choice", 
+            "answer_type": "free-response", 
             "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
