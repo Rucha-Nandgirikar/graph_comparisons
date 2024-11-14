@@ -28,10 +28,6 @@ const Question = sequelize.define('Question', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    graph_type: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
     graph_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
@@ -39,7 +35,7 @@ const Question = sequelize.define('Question', {
             model: 'graphs',  
             key: 'graph_id'   
         }
-    },
+    }, 
     url_params: {
         type: DataTypes.TEXT, // Use TEXT to store the JSON string
         allowNull: true,

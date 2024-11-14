@@ -5,8 +5,7 @@
             "options": [ "1 student", "100 students", "10 students", "Not specified" ], 
             "correct_ans": "10 students", 
             "question_type": "graph", 
-            "answer_type": "multiple-choice", 
-            "graph_type": "csu", 
+            "answer_type": "multiple-choice",  
             "graph_id": 1, 
             "url_params": {
                 "campus": "Bakersfield", 
@@ -33,7 +32,6 @@
           "correct_ans": "Recent Not First-Generation Rate",
           "question_type": "graph",
           "answer_type": "multiple-choice", 
-          "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
             "campus": "Bakersfield",
@@ -55,7 +53,6 @@
           "correct_ans": "True",
           "question_type": "graph",
           "answer_type": "multiple-choice", 
-          "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
             "campus": "Bakersfield",
@@ -77,7 +74,6 @@
           "correct_ans": 19,
           "question_type": "data",
           "answer_type": "multiple-choice", 
-          "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
             "campus": "Bakersfield",
@@ -99,7 +95,6 @@
           "correct_ans": 9,
           "question_type": "data",
           "answer_type": "multiple-choice", 
-          "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
             "campus": "Bakersfield",
@@ -121,7 +116,6 @@
           "correct_ans": "Criminal Justice",
           "question_type": "data",
           "answer_type": "multiple-choice", 
-          "graph_type": "csu",
           "graph_id": 1,
           "url_params": {
             "campus": "Bakersfield",
@@ -143,7 +137,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 1,
             "url_params": {
                 "campus": "Bakersfield",
@@ -165,7 +158,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 1,
             "url_params": {
                 "campus": "Bakersfield",
@@ -187,7 +179,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 1,
             "url_params": {
                 "campus": "Bakersfield",
@@ -209,7 +200,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 1,
             "url_params": {
                 "campus": "Bakersfield",
@@ -231,7 +221,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -248,7 +237,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -265,7 +253,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -282,7 +269,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -299,7 +285,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -316,7 +301,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -333,7 +317,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -350,7 +333,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -367,7 +349,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -384,7 +365,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -401,7 +381,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 2,
             "url_params": {
                 "campus": "Pomona",
@@ -418,7 +397,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -430,7 +408,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -442,7 +419,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -454,7 +430,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -466,7 +441,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -478,7 +452,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -490,7 +463,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -502,7 +474,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -514,7 +485,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 3,
             "url_params": {
                 "campus": "Pomona"
@@ -526,7 +496,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -540,7 +509,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -554,7 +522,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -568,7 +535,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -582,7 +548,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -596,7 +561,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -610,7 +574,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -624,7 +587,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -638,7 +600,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "csu",
             "graph_id": 4,
             "url_params": {
                 "campus": "Bakersfield",
@@ -646,18 +607,12 @@
                 "major": "Art"
             }
         },
-
-
-
-        
-
         {
             "question_text": "Each grad cap is equal to how many students?", 
             "options": [ "1 student", "100 students", "10 students", "Not specified" ], 
             "correct_ans": "10 students", 
             "question_type": "graph", 
-            "answer_type": "multiple-choice", 
-            "graph_type": "alternate", 
+            "answer_type": "multiple-choice",  
             "graph_id": 6, 
             "url_params": {
                 "campus": "Bakersfield", 
@@ -684,7 +639,6 @@
           "correct_ans": "Recent Not First-Generation Rate",
           "question_type": "graph",
           "answer_type": "multiple-choice", 
-          "graph_type": "alternate",
           "graph_id": 6,
           "url_params": {
             "campus": "Bakersfield",
@@ -706,7 +660,6 @@
           "correct_ans": "True",
           "question_type": "graph",
           "answer_type": "multiple-choice", 
-          "graph_type": "alternate",
           "graph_id": 6,
           "url_params": {
             "campus": "Bakersfield",
@@ -728,7 +681,6 @@
           "correct_ans": 19,
           "question_type": "data",
           "answer_type": "multiple-choice", 
-          "graph_type": "alternate",
           "graph_id": 6,
           "url_params": {
             "campus": "Bakersfield",
@@ -750,7 +702,6 @@
           "correct_ans": 9,
           "question_type": "data",
           "answer_type": "multiple-choice", 
-          "graph_type": "alternate",
           "graph_id": 6,
           "url_params": {
             "campus": "Bakersfield",
@@ -772,7 +723,6 @@
           "correct_ans": "Criminal Justice",
           "question_type": "data",
           "answer_type": "multiple-choice", 
-          "graph_type": "alternate",
           "graph_id": 6,
           "url_params": {
             "campus": "Bakersfield",
@@ -794,7 +744,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 6,
             "url_params": {
                 "campus": "Bakersfield",
@@ -816,7 +765,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 6,
             "url_params": {
                 "campus": "Bakersfield",
@@ -838,7 +786,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 6,
             "url_params": {
                 "campus": "Bakersfield",
@@ -860,7 +807,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 6,
             "url_params": {
                 "campus": "Bakersfield",
@@ -882,7 +828,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -899,7 +844,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -916,7 +860,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -933,7 +876,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -950,7 +892,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -967,7 +908,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -984,7 +924,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -1001,7 +940,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -1018,7 +956,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -1035,7 +972,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -1052,7 +988,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 7,
             "url_params": {
                 "campus": "Pomona",
@@ -1069,7 +1004,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1081,7 +1015,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1093,7 +1026,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1105,7 +1037,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1117,7 +1048,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1129,7 +1059,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1141,7 +1070,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1153,7 +1081,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1165,7 +1092,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 8,
             "url_params": {
                 "campus": "Pomona"
@@ -1177,7 +1103,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
@@ -1191,7 +1116,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
@@ -1205,7 +1129,6 @@
             "correct_ans": "",
             "question_type": "graph",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
@@ -1219,7 +1142,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
@@ -1233,7 +1155,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
@@ -1247,7 +1168,6 @@
             "correct_ans": "",
             "question_type": "data",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
@@ -1261,7 +1181,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
@@ -1275,7 +1194,6 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
@@ -1289,16 +1207,12 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice", 
-            "graph_type": "alternate",
             "graph_id": 9,
             "url_params": {
                 "campus": "Bakersfield",
                 "college": "School of Arts & Humanities",
                 "major": "Art"
             }
-        }
-     
-        
-        
+        }   
     ]
 }

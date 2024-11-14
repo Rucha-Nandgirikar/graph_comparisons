@@ -15,6 +15,10 @@ const Graph = sequelize.define('Graph', {
     graph_url: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    graph_type: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     tableName: 'graphs',

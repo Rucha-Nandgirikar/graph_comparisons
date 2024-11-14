@@ -11,6 +11,10 @@ const MainStudyResponse = sequelize.define('MainStudyResponse', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    graphId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     question: {
         type: DataTypes.STRING(100), // Limit question text length to 100 characters
         allowNull: false
