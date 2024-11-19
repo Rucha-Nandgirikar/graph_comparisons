@@ -1,10 +1,18 @@
 const FileSystem = require("fs");
 const Graph = require('./src/models/Graph');
 const Question = require('./src/models/Question');
+const Sequelize = require('sequelize');
+const GraphQuestionMap = require("./src/models/GraphQuestionMap");
+const Op = Sequelize.Op;
 
 const graphFileName = 'graphPresentationOrder.json';
 const questionFileName = 'questionPresentationOrder.json';
 const MAX_ORDERS = 50;
+
+// Number of questions for each questions type
+const MAX_NUM_GRAPH_QUESTIONS = 2
+const MAX_NUM_DATA_QUESTIONS = 3
+const MAX_NUM_SUBJECTIVE_QUESTIONS = 2
 
 /* https://jsonformatter.org/ */
 
@@ -31,7 +39,8 @@ async function setUpGraphOrder() {
     const content = {"graphOrders": orders};
     
     FileSystem.writeFile(graphFileName, JSON.stringify(content), { flag: 'wx' }, (error) => {
-        if (error) throw error;
+        if (error) console.log("Graph order already exists, preventing data overide");
+        else console.log("Graph order created and written to graphPresentationOrder.json")
     });
 }
 
@@ -47,18 +56,38 @@ async function setUpQuestionOrder() {
         questionOrders[i] = {} // for q-types
 
         // get number of questions for each graph from mappings table
+        const mappings = await GraphQuestionMap.findAll({
+            where: {
+                graph_id: i,
+            }
+        })
+        const questionIds = mappings.map(map => map.question_id)
+
+        const test = await Question.findAll({
+            attributes: ['question_id'], 
+            where: {
+                question_id: {
+                    [Op.in]: questionIds
+                },
+            }
+        })
+
         const graph_questions = await Question.findAll({
             attributes: ['question_id'], 
             where: {
-                graph_id: i,
+                question_id: {
+                    [Op.in]: questionIds
+                },
                 question_type: "graph"
-            }
+            },
         })
 
         const data_questions = await Question.findAll({
             attributes: ['question_id'], 
             where: {
-                graph_id: i,
+                question_id: {
+                    [Op.in]: questionIds
+                },
                 question_type: "data"
             }
         })
@@ -66,15 +95,12 @@ async function setUpQuestionOrder() {
         const subjective_questions = await Question.findAll({
             attributes: ['question_id'], 
             where: {
-                graph_id: i,
+                question_id: {
+                    [Op.in]: questionIds
+                },
                 question_type: "subjective"
             }
-        })
-    
-        // Number of questions for each questions type
-        const MAX_NUM_GRAPH_QUESTIONS = 2
-        const MAX_NUM_DATA_QUESTIONS = 3
-        const MAX_NUM_SUBJECTIVE_QUESTIONS = 2
+        }) 
 
         if(graph_questions) {
             let graph_questions_ids = graph_questions.map(question => question.question_id); 
@@ -86,8 +112,8 @@ async function setUpQuestionOrder() {
                 const remaining_questions = graph_questions_ids.slice(MAX_NUM_GRAPH_QUESTIONS, num_questions)
                 graph_questions_ids = remaining_questions.concat(limited_questions)
                 
-                let order = shuffledCopy(limited_questions); 
-                while(orders.includes(order)) {
+                let order = shuffledCopy(limited_questions);
+                while (orders.some(existingOrder => arraysEqual(existingOrder, order))) {
                     order = shuffledCopy(limited_questions);
                 }
                 
@@ -107,8 +133,8 @@ async function setUpQuestionOrder() {
                 const remaining_questions = data_questions_ids.slice(MAX_NUM_DATA_QUESTIONS, num_questions)
                 data_questions_ids = remaining_questions.concat(limited_questions)
                 
-                let order = shuffledCopy(limited_questions); 
-                while(orders.includes(order)) {
+                let order = shuffledCopy(limited_questions);
+                while (orders.some(existingOrder => arraysEqual(existingOrder, order))) {
                     order = shuffledCopy(limited_questions);
                 }
                 
@@ -128,8 +154,8 @@ async function setUpQuestionOrder() {
                 const remaining_questions = subjective_questions_ids.slice(MAX_NUM_SUBJECTIVE_QUESTIONS, num_questions)
                 subjective_questions_ids = remaining_questions.concat(limited_questions)
                 
-                let order = shuffledCopy(limited_questions); 
-                while(orders.includes(order)) {
+                let order = shuffledCopy(limited_questions);
+                while (orders.some(existingOrder => arraysEqual(existingOrder, order))) {
                     order = shuffledCopy(limited_questions);
                 }
                 
@@ -143,8 +169,10 @@ async function setUpQuestionOrder() {
     // insert orders into presentation orders "questionOrders" into orders.json
     const content = {"questionOrders": questionOrders};
     FileSystem.writeFile(questionFileName, JSON.stringify(content), { flag: 'wx' }, (error) => {
-        if (error) throw error;
+        if (error) console.log("Question order already exists, preventing data overide");
+        else console.log("Question order created and written to questionPresentationOrder.json")
     });
+
 }
 
 function shuffledCopy(org_arr) {
@@ -163,5 +191,10 @@ function shuffledCopy(org_arr) {
     return array;
 }
 
-//setUpGraphOrder()
+function arraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) return false;
+    return arr1.every((value, index) => value === arr2[index]);
+}
+
+setUpGraphOrder()
 setUpQuestionOrder()

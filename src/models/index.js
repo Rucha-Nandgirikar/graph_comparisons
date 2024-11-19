@@ -6,6 +6,7 @@ const PreStudyResponse = require('./PrestudyResponse');
 const MainStudyResponse = require('./MainstudyResponse');
 const Graph = require('./Graph');
 const User = require('./User') 
+const GraphQuestionMap = require('./GraphQuestionMap');
 
 const initDB = async () => {
     try {
@@ -31,5 +32,6 @@ module.exports = {
     MainStudyResponse,
     Graph,
     User,
+    GraphQuestionMap,
     initDB
 };

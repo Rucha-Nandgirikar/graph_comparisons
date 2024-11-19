@@ -4,8 +4,9 @@ const Question = require('./src/models/Question');
 const UserInteraction = require('./src/models/UserInteraction');
 const PreStudyResponse = require('./src/models/PrestudyResponse');
 const MainStudyResponse = require('./src/models/MainstudyResponse');
-const User = require('./src/models/User') 
+const User = require('./src/models/User');
 const Graph = require('./src/models/Graph');
+const GraphQuestionMap = require('./src/models/GraphQuestionMap')
 const questions = require('./questions.json'); 
 require("dotenv").config();
 
@@ -100,7 +101,6 @@ async function insertData() {
               question_text: questionNames
           }
       });
-
       // If no questions exist, insert them
       if (existingQuestions.length === 0) {
           const questionsToInsert = graph_questions.map(question => ({
@@ -118,6 +118,33 @@ async function insertData() {
       } else {
           console.log("Questions already exist, skipping insert.");
       }
+
+      // Check if mappings exist
+      const graph_question_maps = questions["graph_question_maps"];
+      const existingMaps = await GraphQuestionMap.findAll();
+
+      // if no mappings exist, insert them
+      if(existingMaps.length === 0) {
+        // iterate through maps and creat pairings
+        let mappingsToInsert = [];
+
+        for(let graph_id in graph_question_maps) {
+            question_arr = graph_question_maps[graph_id];
+
+            for(let question_idx in question_arr) {
+                mappingsToInsert.push({
+                    graph_id: graph_id,
+                    question_id: question_arr[question_idx]
+                })
+            }
+        }
+
+        await GraphQuestionMap.bulkCreate(mappingsToInsert);
+        console.log("Data inserted into GraphQuestionMaps successfully.");
+      } else {
+        console.log("Mappings already exist, skipping insert.");
+      }
+
   } catch (error) {
       console.error("Error inserting data:", error);
   }
