@@ -11,9 +11,7 @@ const GraphQuestionMap = require('./GraphQuestionMap');
 const initDB = async () => {
     try {
         // Define model relationships
-        Graph.hasMany(Question, { foreignKey: 'graph_id', sourceKey: 'graph_id' });
-        Question.belongsTo(Graph, { foreignKey: 'graph_id', targetKey: 'graph_id' });
-
+        
         // Authenticate and sync the database
         await sequelize.authenticate();
         console.log('Connection established successfully.');

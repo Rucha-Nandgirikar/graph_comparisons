@@ -10,11 +10,18 @@ class UserService {
     async createUser() {
         try {
             const MAX_ORDERS = graphOrdersJSON["graphOrders"].length;
+            let prevId;
 
             const user = await User.findOne({
                 order: [ [ 'createdAt', 'DESC' ]],
             });
-            const prevId = user.testOrderId;
+
+            if (user === null){
+                prevId = 0;
+            } else {
+                prevId = user.testOrderId;
+            }
+
             const nextId = (prevId === null || prevId === undefined) ? 0 : (prevId + 1) % MAX_ORDERS;
 
             const newUser = await User.create({testOrderId: nextId});

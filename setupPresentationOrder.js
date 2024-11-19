@@ -63,15 +63,6 @@ async function setUpQuestionOrder() {
         })
         const questionIds = mappings.map(map => map.question_id)
 
-        const test = await Question.findAll({
-            attributes: ['question_id'], 
-            where: {
-                question_id: {
-                    [Op.in]: questionIds
-                },
-            }
-        })
-
         const graph_questions = await Question.findAll({
             attributes: ['question_id'], 
             where: {

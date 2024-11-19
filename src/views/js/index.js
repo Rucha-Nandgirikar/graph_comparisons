@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mainstudy Variables
   let userId = null;
+  let currentGraphId = null;
   let currentQuestionId = null;
   let currentQuestionIndex = 0; 
   let currentCorrectAnswer = null;
@@ -261,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     await recordPrestudyResponse(userId, currentQuestion, currentAnswer);
-    await recordInteraction(userId, "Submit", false, true, currentQuestionId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Submit", false, true, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
     inputElement.value = "";
   
     if (currentPrestudyQuestionIndex < 6) {
@@ -278,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * 
    */
   async function beginMainStudy() {
-    await recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Begin Main Study", false, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
     hideBeginMainStudyScreen();
     
     // Start Study
@@ -301,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'input[name="answer"]:checked'
     ).value;
     
-    await recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
-    await recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
+    await recordMainStudyResponse(userId, currentGraphId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
+    await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
 
     if (currentQuestionIndex < data2DArray.length) {
       displayNextQuestion()
@@ -382,6 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chartPlaceholder.innerHTML = "";
 
     // Set vars
+    currentGraphId = graphId;
     currentQuestionId = questionId;
 
     // Create iframe element using graphURL and URLParams

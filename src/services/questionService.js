@@ -2,6 +2,9 @@ const Question = require('../models/Question');
 const Graph = require('../models/Graph');
 const User = require('../models/User');
 const graphOrdersJSON = require('../../graphPresentationOrder.json');
+const questionOrdersJSON = require('../../questionPresentationOrder.json')
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 /**
  *  Question Service is in charge of returning main study questions stored in questions database   
@@ -17,25 +20,45 @@ class QuestionService {
                 }
             })
 
-            const order = graphOrdersJSON["graphOrders"][currUser.testOrderId]
+            const graphOrder = graphOrdersJSON["graphOrders"][currUser.testOrderId]
             let questions = []
             
-            for(let i=0; i<order.length; i++) {
-                const currGraphId = order[i];
+            for(let i=0; i<graphOrder.length; i++) {
+                const currGraphId = graphOrder[i];
+                const graphQuestionOrders = questionOrdersJSON["questionOrders"][currGraphId];
+
+                const graphQuestionOrderLength = graphQuestionOrders["graph"].length;
+                const dataQuestionOrderLength = graphQuestionOrders["data"].length;
+                const subjectiveQuestionOrderLength = graphQuestionOrders["subjective"].length;
+
+                const graphQuestionOrder = graphQuestionOrders["graph"][(userId - 1) % graphQuestionOrderLength];
+                const dataQuestionOrder = graphQuestionOrders["data"][(userId - 1) % dataQuestionOrderLength];
+                const subjectiveQuestionOrder = graphQuestionOrders["subjective"][(userId - 1) % subjectiveQuestionOrderLength];
+
+                const questionOrder = [].concat(graphQuestionOrder, dataQuestionOrder, subjectiveQuestionOrder);
             
                 const questionSet = await Question.findAll({
-                    include: [{
-                        model: Graph,
-                        attributes: ['graph_url'] 
-                    }],
                     where: {
-                        graph_id: currGraphId
+                        question_id: {
+                            [Op.in]: questionOrder
+                        }
                     }
                 });
 
-                questions = questions.concat(questionSet);
+                const currGraph = await Graph.findOne({
+                    where: {
+                        graph_id: currGraphId
+                    }
+                })
+                
+                const questionSetWithGraph = questionSet.map(question => ({
+                    ...question.toJSON(),
+                    graph_url: currGraph.graph_url,
+                    graph_id: currGraphId
+                }));
+                
+                questions = questions.concat(questionSetWithGraph);
             }
-    
 
             const formattedQuestions = questions.map(question => {
                 return {
@@ -45,8 +68,8 @@ class QuestionService {
                     correct_ans: question.correct_ans,
                     question_type: question.question_type,
                     answer_type: question.answer_type,
+                    graph_url: question.graph_url,
                     graph_id: question.graph_id,
-                    graph_url: question.Graph.graph_url
                 };
             });
         
