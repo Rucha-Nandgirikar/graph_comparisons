@@ -104,6 +104,7 @@ async function insertData() {
       // If no questions exist, insert them
       if (existingQuestions.length === 0) {
           const questionsToInsert = graph_questions.map(question => ({
+              question_name: question.question_name,
               question_text: question.question_text,
               options: question.options,
               correct_ans: question.correct_ans,
@@ -129,12 +130,19 @@ async function insertData() {
         let mappingsToInsert = [];
 
         for(let graph_id in graph_question_maps) {
-            question_arr = graph_question_maps[graph_id];
+            first_question_arr = graph_question_maps[graph_id]["firstOrder"];
+            second_question_arr = graph_question_maps[graph_id]["secondOrder"];
+
+            question_arr = new Set([
+                ...first_question_arr,
+                ...second_question_arr
+            ]);
+            question_arr = [...question_arr]
 
             for(let question_idx in question_arr) {
                 mappingsToInsert.push({
                     graph_id: graph_id,
-                    question_id: question_arr[question_idx]
+                    question_name: question_arr[question_idx]
                 })
             }
         }

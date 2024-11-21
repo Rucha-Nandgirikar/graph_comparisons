@@ -8,6 +8,10 @@ const Question = sequelize.define('Question', {
         primaryKey: true,
         autoIncrement: true
     },
+    question_name: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     question_text: {
         type: DataTypes.TEXT,
         allowNull: false

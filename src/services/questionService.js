@@ -25,7 +25,9 @@ class QuestionService {
             
             for(let i=0; i<graphOrder.length; i++) {
                 const currGraphId = graphOrder[i];
-                const graphQuestionOrders = questionOrdersJSON["questionOrders"][currGraphId];
+                const graphQuestionOrders = (userId % 2 == 1)? 
+                    questionOrdersJSON["questionOrders"][currGraphId]["firstOrder"] : 
+                    questionOrdersJSON["questionOrders"][currGraphId]["secondOrder"];
 
                 const graphQuestionOrderLength = graphQuestionOrders["graph"].length;
                 const dataQuestionOrderLength = graphQuestionOrders["data"].length;
@@ -63,6 +65,7 @@ class QuestionService {
             const formattedQuestions = questions.map(question => {
                 return {
                     question_id: question.question_id,
+                    question_name: question.question_name,
                     question_text: question.question_text,
                     options: question.options,
                     correct_ans: question.correct_ans,

@@ -4,6 +4,7 @@ const Question = require('./src/models/Question');
 const Sequelize = require('sequelize');
 const GraphQuestionMap = require("./src/models/GraphQuestionMap");
 const Op = Sequelize.Op;
+const questions = require("./questions.json");
 
 const graphFileName = 'graphPresentationOrder.json';
 const questionFileName = 'questionPresentationOrder.json';
@@ -54,106 +55,109 @@ async function setUpQuestionOrder() {
     
     for(const i of ids) {
         questionOrders[i] = {} // for q-types
+        questionOrders[i]["firstOrder"] = {} // for order
+        questionOrders[i]["secondOrder"] = {}
 
         // get number of questions for each graph from mappings table
-        const mappings = await GraphQuestionMap.findAll({
+        /* const mappings = await GraphQuestionMap.findAll({
             where: {
                 graph_id: i,
             }
         })
-        const questionIds = mappings.map(map => map.question_id)
+        const questionNames = mappings.map(map => map.question_id)  */
+                
+        const firstQuestionNames = questions["graph_question_maps"][i]["firstOrder"];
 
-        const graph_questions = await Question.findAll({
+        const firstGraphQuestions = await Question.findAll({
             attributes: ['question_id'], 
             where: {
-                question_id: {
-                    [Op.in]: questionIds
+                question_name: {
+                    [Op.in]: firstQuestionNames
                 },
                 question_type: "graph"
             },
         })
 
-        const data_questions = await Question.findAll({
+        const firstDataQuestions = await Question.findAll({
             attributes: ['question_id'], 
             where: {
-                question_id: {
-                    [Op.in]: questionIds
+                question_name: {
+                    [Op.in]: firstQuestionNames
                 },
                 question_type: "data"
             }
         })
 
-        const subjective_questions = await Question.findAll({
+        const firstSubjectiveQuestions = await Question.findAll({
             attributes: ['question_id'], 
             where: {
-                question_id: {
-                    [Op.in]: questionIds
+                question_name: {
+                    [Op.in]: firstQuestionNames
                 },
                 question_type: "subjective"
             }
         }) 
 
-        if(graph_questions) {
-            let graph_questions_ids = graph_questions.map(question => question.question_id); 
-            const orders = []
-            const num_questions = graph_questions_ids.length
-            
-            for(let j=0; j<num_questions; j++) {
-                const limited_questions = graph_questions_ids.slice(0, MAX_NUM_GRAPH_QUESTIONS);
-                const remaining_questions = graph_questions_ids.slice(MAX_NUM_GRAPH_QUESTIONS, num_questions)
-                graph_questions_ids = remaining_questions.concat(limited_questions)
-                
-                let order = shuffledCopy(limited_questions);
-                while (orders.some(existingOrder => arraysEqual(existingOrder, order))) {
-                    order = shuffledCopy(limited_questions);
-                }
-                
-                orders.push(order)
-            }
-
-            questionOrders[i]['graph'] = orders;
+        if(firstDataQuestions) {
+            const orders = getSortedOrder(firstDataQuestions);
+            questionOrders[i]["firstOrder"]['data'] = orders;
         }
 
-        if(data_questions) {
-            let data_questions_ids = data_questions.map(question => question.question_id); 
-            const orders = []
-            const num_questions = data_questions_ids.length
-            
-            for(let j=0; j<num_questions; j++) {
-                const limited_questions = data_questions_ids.slice(0, MAX_NUM_DATA_QUESTIONS);
-                const remaining_questions = data_questions_ids.slice(MAX_NUM_DATA_QUESTIONS, num_questions)
-                data_questions_ids = remaining_questions.concat(limited_questions)
-                
-                let order = shuffledCopy(limited_questions);
-                while (orders.some(existingOrder => arraysEqual(existingOrder, order))) {
-                    order = shuffledCopy(limited_questions);
-                }
-                
-                orders.push(order)
-            }
-
-            questionOrders[i]['data'] = orders;
+        if(firstSubjectiveQuestions) {
+            const orders = getSortedOrder(firstSubjectiveQuestions);
+            questionOrders[i]["firstOrder"]['subjective'] = orders;
         }
 
-        if(subjective_questions) {
-            let subjective_questions_ids = subjective_questions.map(question => question.question_id); 
-            const orders = []
-            const num_questions = subjective_questions_ids.length
-            
-            for(let j=0; j<num_questions; j++) {
-                const limited_questions = subjective_questions_ids.slice(0, MAX_NUM_SUBJECTIVE_QUESTIONS);
-                const remaining_questions = subjective_questions_ids.slice(MAX_NUM_SUBJECTIVE_QUESTIONS, num_questions)
-                subjective_questions_ids = remaining_questions.concat(limited_questions)
-                
-                let order = shuffledCopy(limited_questions);
-                while (orders.some(existingOrder => arraysEqual(existingOrder, order))) {
-                    order = shuffledCopy(limited_questions);
-                }
-                
-                orders.push(order)
-            }
+        if(firstGraphQuestions) {
+            const orders = getSortedOrder(firstGraphQuestions);
+            questionOrders[i]["firstOrder"]['graph'] = orders;
+        }
 
-            questionOrders[i]['subjective'] = orders;
+        const secondQuestionNames = questions["graph_question_maps"][i]["secondOrder"]
+
+        const secondGraphQuestions = await Question.findAll({
+            attributes: ['question_id'], 
+            where: {
+                question_name: {
+                    [Op.in]: secondQuestionNames
+                },
+                question_type: "graph"
+            },
+        })
+
+        const secondDataQuestions = await Question.findAll({
+            attributes: ['question_id'], 
+            where: {
+                question_name: {
+                    [Op.in]: secondQuestionNames
+                },
+                question_type: "data"
+            }
+        })
+
+        const secondSubjectiveQuestions = await Question.findAll({
+            attributes: ['question_id'], 
+            where: {
+                question_name: {
+                    [Op.in]: secondQuestionNames
+                },
+                question_type: "subjective"
+            }
+        }) 
+
+        if(secondDataQuestions) {
+            const orders = getSortedOrder(secondDataQuestions);
+            questionOrders[i]["secondOrder"]['data'] = orders;
+        }
+
+        if(secondSubjectiveQuestions) {
+            const orders = getSortedOrder(secondSubjectiveQuestions);
+            questionOrders[i]["secondOrder"]['subjective'] = orders;
+        }
+
+        if(secondGraphQuestions) {
+            const orders = getSortedOrder(secondGraphQuestions);
+            questionOrders[i]["secondOrder"]['graph'] = orders;
         }
     }
     
@@ -164,6 +168,27 @@ async function setUpQuestionOrder() {
         else console.log("Question order created and written to questionPresentationOrder.json")
     });
 
+}
+
+function getSortedOrder(questions){
+    let questions_ids = questions.map(question => question.question_id); 
+    const orders = []
+    const num_questions = questions_ids.length
+    
+    for(let j=0; j<num_questions; j++) {
+        const limited_questions = questions_ids.slice(0, MAX_NUM_SUBJECTIVE_QUESTIONS);
+        const remaining_questions = questions_ids.slice(MAX_NUM_SUBJECTIVE_QUESTIONS, num_questions)
+        questions_ids = remaining_questions.concat(limited_questions)
+        
+        let order = shuffledCopy(limited_questions);
+        while (orders.some(existingOrder => arraysEqual(existingOrder, order))) {
+            order = shuffledCopy(limited_questions);
+        }
+        
+        orders.push(order)
+    }
+
+    return orders
 }
 
 function shuffledCopy(org_arr) {
@@ -188,4 +213,4 @@ function arraysEqual(arr1, arr2) {
 }
 
 setUpGraphOrder()
-setUpQuestionOrder()
+setUpQuestionOrder() 

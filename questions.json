@@ -1,1230 +1,254 @@
 {
     "graph_question_maps": {
-        "1": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "2": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "3": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "4": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "5": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "6": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "7": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "8": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "9": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        "10": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        "1": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "2": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "3": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "4": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "5": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "6": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "7": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "8": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "9": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        },
+        "10": {
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
+            "secondOrder": ["EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+        }
     },
     "graph_questions": [
         {
+            "question_name": "EQU-DQ1",
+            "question_text": "How many criminal justice students contributed to the graph?", 
+            "options": [ "10", "12", "15", "19" ], 
+            "correct_ans": "19", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"  
+        },
+        {
+            "question_name": "EQU-DQ2",
+            "question_text": "How many computer engineering students contributed to the graph?", 
+            "options": [ "6", "9", "12", "15" ], 
+            "correct_ans": "9", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"  
+        },
+        {
+            "question_name": "EQU-DQ3",
+            "question_text": "Which major has the largest gap?", 
+            "options": [ "Criminal Justice", "Sociology", "Computer Engineering", "Political Science" ], 
+            "correct_ans": "Criminal Justice", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"  
+        },
+        {
+            "question_name": "EQU-SQ1",
+            "question_text": "Can you provide one interesting insight that this graph provides?", 
+            "options": [ "Done" ], 
+            "correct_ans": null, 
+            "question_type": "subjective", 
+            "answer_type": "free-response"  
+        },
+        {
+            "question_name": "EQU-SQ2",
+            "question_text": "I feel empathetic to the students that this data represents. ", 
+            "options": [ "Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree" ], 
+            "correct_ans": null, 
+            "question_type": "subjective", 
+            "answer_type": "multiple-choice"  
+        },
+        {
+            "question_name": "EQU-GQ1",
             "question_text": "Each grad cap is equal to how many students?", 
             "options": [ "1 student", "100 students", "10 students", "Not specified" ], 
             "correct_ans": "10 students", 
             "question_type": "graph", 
-            "answer_type": "multiple-choice",  
-            "graph_id": 1, 
-            "url_params": {
-                "campus": "Bakersfield", 
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors", 
-                "student_type": "freshmen",
-                 "student_type_name": "Freshmen",
-                "cohort": 2019, 
-                "persistence": 1, 
-                "year1": 4, 
-                "year2": 6, 
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
+            "answer_type": "multiple-choice"  
         },
         {
-          "question_text": "In the provided graph, what does the yellow line signify?",
-          "options": [
-            "Recent First-Generation Rate",
-            "Recent Not First-Generation Rate",
-            "Recent Not Pell Rate",
-            "Recent Not URM Rate"
-          ],
-          "correct_ans": "Recent Not First-Generation Rate",
-          "question_type": "graph",
-          "answer_type": "multiple-choice", 
-          "graph_id": 1,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "School of Arts & Humanities",
-            "major": "*All Majors",
-            "student_type": "freshmen",
-            "student_type_name": "Freshmen",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
-        },
-        {
-          "question_text": "The purple grad caps indicate that the students are first-generation.",
-          "options": ["True", "False"],
-          "correct_ans": "True",
-          "question_type": "graph",
-          "answer_type": "multiple-choice", 
-          "graph_id": 1,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "School of Arts & Humanities",
-            "major": "*All Majors",
-            "student_type": "freshmen",
-            "student_type_name": "Freshmen",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
-        },
-        {
-          "question_text": "How many criminal justice students contributed to the graph?",
-          "options": [10, 12, 15, 19],
-          "correct_ans": 19,
-          "question_type": "data",
-          "answer_type": "multiple-choice", 
-          "graph_id": 1,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "School of Arts & Humanities",
-            "major": "Criminal Justice",
-            "student_type": "all",
-            "student_type_name": "All Students",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
-        },
-        {
-          "question_text": "How many computer engineering students contributed to the graph?",
-          "options": [6, 9, 12, 15],
-          "correct_ans": 9,
-          "question_type": "data",
-          "answer_type": "multiple-choice", 
-          "graph_id": 1,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "Engineering",
-            "major": "Computer Engineering",
-            "student_type": "all",
-            "student_type_name": "All Students",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
-        },
-        {
-          "question_text": "Which major has the largest gap?",
-          "options": ["Criminal Justice", "Sociology", "Computer Engineering", "Political Science"],
-          "correct_ans": "Criminal Justice",
-          "question_type": "data",
-          "answer_type": "multiple-choice", 
-          "graph_id": 1,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "School of Arts & Humanities",
-            "major": "*All Majors",
-            "student_type": "all",
-            "student_type_name": "All Students",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
-        },
-        {
-            "question_text": "Please describe in a few words what the above graph represents",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 1,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2019,
-                "persistence": 1,
-                "year1": 4,
-                "year2": 6,
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
-        },
-        {
-            "question_text": "Can you provide one interesting insight that this graph provides?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 1,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2019,
-                "persistence": 1,
-                "year1": 4,
-                "year2": 6,
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
-        },
-        {
-            "question_text": "Does the animation for closing the gap make it easier to understand",
-            "options": ["Yes", "No"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 1,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2019,
-                "persistence": 1,
-                "year1": 4,
-                "year2": 6,
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
-        },
-        {
-            "question_text": "I feel empathetic to the students that this data represents",
-            "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 1,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2019,
-                "persistence": 1,
-                "year1": 4,
-                "year2": 6,
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
-        },
-        {
-            "question_text": "What does the black figure represent in the graph",
-            "options": ["Enrolled", "Graduated"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "What does the green figure represent in the graph",
-            "options": ["Enrolled", "Graduated"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "What action is suggested at the bottom of the summary",
-            "options": ["Show Equity Summary", "Show Detailed Report", "Enroll Now", "Contact Support"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "The yellow figure represents a student who graduated from a different campus",
-            "options": ["True", "False"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "How many students dropped out in 2021",
-            "options": ["3", "10", "0"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "How many students were enrolled in 2022",
-            "options": ["4", "6", "0"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "What is the total number of units attempted by all graduates in the 2017 Agricultural Biology, Plant Science program, according to the provided summary data?",
-            "options": ["40 units", "57 units", "140 units"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "What is the dropout rate by the end of the 6th year",
-            "options": ["10%", "20%", "30%", "40%"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "Please describe in a few words what the above graph represents?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "What is an interesting insight that this graph provides?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "I feel empathetic to the students that this data represents.",
-            "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 2,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "What does the grey color in the graph represent?",
-            "options": ["Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.", "Pell and Not Pell equity gap Percentage Points of Graduated students."],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "What does the red color in the graph represent?",
-            "options": ["Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.", "Pell and Not Pell equity gap Percentage Points of Graduated students."],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "What does the value inside each figure represent?",
-            "options": ["Done"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "free-response", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "Should the Pell and Not Pell equity gap be reduced to meet its 2025 goal?",
-            "options": ["Yes", "No"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "In which cohort year did Pell students have the lowest graduation rate?",
-            "options": ["2009 - 2015", "2011 - 2017", "2010 - 2016", "2017 - 2023"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "What does the value inside each figure represent?",
-            "options": ["Done"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "free-response", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "What is an interesting insight that this graph provides?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "Please describe in a few words what the above graph represents?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "The graph illustrates the equity gap well.",
-            "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 3,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "School of Arts and Humanity category is represented using which color?",
-            "options": ["Light Green", "Blue", "Pink", "Violet"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What does this graph represent?",
-            "options": ["Percentage of Students graduating in CSU in different majors", "Percentage of Migration of majors to Computer Science in CSU (California State University)"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What does the path from Major at Entry and Graduation Major specify?",
-            "options": ["It tracks the evolution of students majors from entry to graduation", "It specifies percentage of students at different majors"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What percentage of students who graduated in Computer Science had Computer Science as their major upon entry? Please enter the percentage value in the input box ",
-            "options": ["Done"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "free-response", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What entry major has the second-highest percentage of students graduating in Computer Science, according to the graph?",
-            "options": ["Undeclared", "Computer Engineering", "Biology", "Physics", "Information Systems"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "Are values below 1% shown?",
-            "options": ["Yes", "No"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What is an interesting insight that this graph provides?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "Please describe in a few words what the above graph represents?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "The graph represents the students'' journey",
-            "options": ["Strongly Disagree", "Agree", "Neutral", "Agree", "Strongly Agree"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 4,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "Each grad cap is equal to how many students?", 
-            "options": [ "1 student", "100 students", "10 students", "Not specified" ], 
-            "correct_ans": "10 students", 
+            "question_name": "EQU-GQ2",
+            "question_text": "In the provided graph, what does the yellow line signify?", 
+            "options": [ "Recent First-Generation Rate", "Recent Not First-Generation Rate", "Recent Not Pell Rate", "Recent Not URM Rate" ], 
+            "correct_ans": "Recent Not First-Generation Rate", 
             "question_type": "graph", 
-            "answer_type": "multiple-choice",  
-            "graph_id": 6, 
-            "url_params": {
-                "campus": "Bakersfield", 
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors", 
-                "student_type": "freshmen",
-                 "student_type_name": "Freshmen",
-                "cohort": 2019, 
-                "persistence": 1, 
-                "year1": 4, 
-                "year2": 6, 
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
+            "answer_type": "multiple-choice"  
         },
         {
-          "question_text": "In the provided graph, what does the yellow line signify?",
-          "options": [
-            "Recent First-Generation Rate",
-            "Recent Not First-Generation Rate",
-            "Recent Not Pell Rate",
-            "Recent Not URM Rate"
-          ],
-          "correct_ans": "Recent Not First-Generation Rate",
-          "question_type": "graph",
-          "answer_type": "multiple-choice", 
-          "graph_id": 6,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "School of Arts & Humanities",
-            "major": "*All Majors",
-            "student_type": "freshmen",
-            "student_type_name": "Freshmen",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
+            "question_name": "EQU-GQ3",
+            "question_text": "The purple grad caps indicate that the students are first-generation.", 
+            "options": [ "True", "False" ], 
+            "correct_ans": "True", 
+            "question_type": "graph", 
+            "answer_type": "multiple-choice"  
         },
         {
-          "question_text": "The purple grad caps indicate that the students are first-generation.",
-          "options": ["True", "False"],
-          "correct_ans": "True",
-          "question_type": "graph",
-          "answer_type": "multiple-choice", 
-          "graph_id": 6,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "School of Arts & Humanities",
-            "major": "*All Majors",
-            "student_type": "freshmen",
-            "student_type_name": "Freshmen",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
+            "question_name": "STU-DQ1",
+            "question_text": "How many students dropped out in 2021?", 
+            "options": [ "3", "10", "0" ], 
+            "correct_ans": "-1", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"  
         },
         {
-          "question_text": "How many criminal justice students contributed to the graph?",
-          "options": [10, 12, 15, 19],
-          "correct_ans": 19,
-          "question_type": "data",
-          "answer_type": "multiple-choice", 
-          "graph_id": 6,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "School of Arts & Humanities",
-            "major": "Criminal Justice",
-            "student_type": "all",
-            "student_type_name": "All Students",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
+            "question_name": "STU-DQ2",
+            "question_text": "How many students were enrolled in 2022?", 
+            "options": [ "4", "6", "0" ], 
+            "correct_ans": "-1", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"   
         },
         {
-          "question_text": "How many computer engineering students contributed to the graph?",
-          "options": [6, 9, 12, 15],
-          "correct_ans": 9,
-          "question_type": "data",
-          "answer_type": "multiple-choice", 
-          "graph_id": 6,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "Engineering",
-            "major": "Computer Engineering",
-            "student_type": "all",
-            "student_type_name": "All Students",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
+            "question_name": "STU-DQ3",
+            "question_text": "What is the total number of units attempted by all graduates in the 2017 Agricultural Biology, Plant Science program, according to the provided summary data? ", 
+            "options": [ "40 units", "57 units", "140 units" ], 
+            "correct_ans": "140 units", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"   
         },
         {
-          "question_text": "Which major has the largest gap?",
-          "options": ["Criminal Justice", "Sociology", "Computer Engineering", "Political Science"],
-          "correct_ans": "Criminal Justice",
-          "question_type": "data",
-          "answer_type": "multiple-choice", 
-          "graph_id": 6,
-          "url_params": {
-            "campus": "Bakersfield",
-            "college": "School of Arts & Humanities",
-            "major": "*All Majors",
-            "student_type": "all",
-            "student_type_name": "All Students",
-            "cohort": 2019,
-            "persistence": 1,
-            "year1": 4,
-            "year2": 6,
-            "outcome": "6th-Year Graduation",
-            "gap_type": "firstgen"
-          }
+            "question_name": "STU-DQ4",
+            "question_text": "What is the dropout rate by the end of the 6th year?", 
+            "options": [ "10%", "20%", "30%", "40%" ], 
+            "correct_ans": "40%", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "Please describe in a few words what the above graph represents",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 6,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2019,
-                "persistence": 1,
-                "year1": 4,
-                "year2": 6,
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
+            "question_name": "STU-DQ4",
+            "question_text": "What is the dropout rate by the end of the 6th year?", 
+            "options": [ "10%", "20%", "30%", "40%" ], 
+            "correct_ans": "40%", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "Can you provide one interesting insight that this graph provides?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 6,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2019,
-                "persistence": 1,
-                "year1": 4,
-                "year2": 6,
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
+            "question_name": "STU-SQ1",
+            "question_text": "Can you provide one interesting insight that this graph provides?", 
+            "options": [ "Done" ], 
+            "correct_ans": null, 
+            "question_type": "subjective", 
+            "answer_type": "free-response"  
         },
         {
-            "question_text": "Does the animation for closing the gap make it easier to understand",
-            "options": ["Yes", "No"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 6,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2019,
-                "persistence": 1,
-                "year1": 4,
-                "year2": 6,
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
+            "question_name": "STU-SQ2",
+            "question_text": "I feel empathetic to the students that this data represents.", 
+            "options": [ "Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree" ], 
+            "correct_ans": null, 
+            "question_type": "subjective", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "I feel empathetic to the students that this data represents",
-            "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 6,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "*All Majors",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2019,
-                "persistence": 1,
-                "year1": 4,
-                "year2": 6,
-                "outcome": "6th-Year Graduation",
-                "gap_type": "firstgen"
-            }
+            "question_name": "STU-GQ1",
+            "question_text": "What does the black figure represent in the graph?", 
+            "options": [ "Enrolled", "Graduated" ], 
+            "correct_ans": "Enrolled", 
+            "question_type": "graph", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "What does the black figure represent in the graph",
-            "options": ["Enrolled", "Graduated"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "STU-GQ2",
+            "question_text": "What does the green figure represent in the graph?", 
+            "options": [ "Enrolled", "Graduated" ], 
+            "correct_ans": "Graduated", 
+            "question_type": "graph", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "What does the green figure represent in the graph",
-            "options": ["Enrolled", "Graduated"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "STU-GQ3",
+            "question_text": "The yellow figure represents a student who graduated from a different campus.", 
+            "options": [ "True", "False" ], 
+            "correct_ans": "True", 
+            "question_type": "graph", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "What action is suggested at the bottom of the summary",
-            "options": ["Show Equity Summary", "Show Detailed Report", "Enroll Now", "Contact Support"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "GOA-DQ1",
+            "question_text": "Should the Pell and Not Pell equity gap be reduced to meet its 2025 goal?", 
+            "options": [ "Yes", "No" ], 
+            "correct_ans": "Yes", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "The yellow figure represents a student who graduated from a different campus",
-            "options": ["True", "False"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "GOA-DQ2",
+            "question_text": "In which cohort year did Pell students have the lowest graduation rate? ", 
+            "options": [ "2009 - 2015", "2011 - 2017", "2010 - 2016", "2017 - 2023" ], 
+            "correct_ans": "2009 - 2015", 
+            "question_type": "data", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "How many students dropped out in 2021",
-            "options": ["3", "10", "0"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "GOA-DQ3",
+            "question_text": "What was the gap for the year 2012? Please enter the value in the input box.", 
+            "options": [ "Done" ], 
+            "correct_ans": "gap", 
+            "question_type": "graph", 
+            "answer_type": "free-response"  
         },
         {
-            "question_text": "How many students were enrolled in 2022",
-            "options": ["4", "6", "0"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "GOA-SQ1",
+            "question_text": "Provide one interesting insight that this graph provides.", 
+            "options": [ "Done" ], 
+            "correct_ans": null, 
+            "question_type": "subjective", 
+            "answer_type": "free-response"  
         },
         {
-            "question_text": "What is the total number of units attempted by all graduates in the 2017 Agricultural Biology, Plant Science program, according to the provided summary data?",
-            "options": ["40 units", "57 units", "140 units"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "GOA-SQ1",
+            "question_text": "I feel empathetic to the students that this data represents.", 
+            "options": [ "Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree" ], 
+            "correct_ans": null, 
+            "question_type": "subjective", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "What is the dropout rate by the end of the 6th year",
-            "options": ["10%", "20%", "30%", "40%"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "GOA-GQ1",
+            "question_text": "What does the grey color in the graph represent?", 
+            "options": [ "Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.", "Pell and Not Pell equity gap Percentage Points of Graduated students." ], 
+            "correct_ans": "-1", 
+            "question_type": "graph", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "Please describe in a few words what the above graph represents?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
+            "question_name": "GOA-GQ2",
+            "question_text": "What does the red color in the graph represent?", 
+            "options": [ "Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.", "Pell and Not Pell equity gap Percentage Points of Graduated students." ], 
+            "correct_ans": "Pell and Not Pell equity gap Percentage Points of Graduated students.", 
+            "question_type": "graph", 
+            "answer_type": "multiple-choice"  
         },
         {
-            "question_text": "What is an interesting insight that this graph provides?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "I feel empathetic to the students that this data represents.",
-            "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 7,
-            "url_params": {
-                "campus": "Pomona",
-                "college": "School of Agriculture",
-                "major": "First-time Full-time Freshman",
-                "student_type": "all",
-                "student_type_name": "All Students",
-                "cohort": 2017
-            }
-        },
-        {
-            "question_text": "What does the grey color in the graph represent?",
-            "options": ["Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.", "Pell and Not Pell equity gap Percentage Points of Graduated students."],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "What does the red color in the graph represent?",
-            "options": ["Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.", "Pell and Not Pell equity gap Percentage Points of Graduated students."],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "What does the value inside each figure represent?",
-            "options": ["Done"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "Should the Pell and Not Pell equity gap be reduced to meet its 2025 goal?",
-            "options": ["Yes", "No"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "In which cohort year did Pell students have the lowest graduation rate?",
-            "options": ["2009 - 2015", "2011 - 2017", "2010 - 2016", "2017 - 2023"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "What does the value inside each figure represent?",
-            "options": ["Done"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "free-response", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "What is an interesting insight that this graph provides?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "Please describe in a few words what the above graph represents?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "The graph illustrates the equity gap well.",
-            "options": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 8,
-            "url_params": {
-                "campus": "Pomona"
-            }
-        },
-        {
-            "question_text": "School of Arts and Humanity category is represented using which color?",
-            "options": ["Light Green", "Blue", "Pink", "Violet"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What does this graph represent?",
-            "options": ["Percentage of Students graduating in CSU in different majors", "Percentage of Migration of majors to Computer Science in CSU (California State University)"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What does the path from Major at Entry and Graduation Major specify?",
-            "options": ["It tracks the evolution of students majors from entry to graduation", "It specifies percentage of students at different majors"],
-            "correct_ans": "",
-            "question_type": "graph",
-            "answer_type": "multiple-choice", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What percentage of students who graduated in Computer Science had Computer Science as their major upon entry? Please enter the percentage value in the input box ",
-            "options": ["Done"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "free-response", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What entry major has the second-highest percentage of students graduating in Computer Science, according to the graph?",
-            "options": ["Undeclared", "Computer Engineering", "Biology", "Physics", "Information Systems"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "Are values below 1% shown?",
-            "options": ["Yes", "No"],
-            "correct_ans": "",
-            "question_type": "data",
-            "answer_type": "multiple-choice", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "What is an interesting insight that this graph provides?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "Please describe in a few words what the above graph represents?",
-            "options": ["Done"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "free-response", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        },
-        {
-            "question_text": "The graph represents the students'' journey",
-            "options": ["Strongly Disagree", "Agree", "Neutral", "Agree", "Strongly Agree"],
-            "correct_ans": null,
-            "question_type": "subjective",
-            "answer_type": "multiple-choice", 
-            "graph_id": 9,
-            "url_params": {
-                "campus": "Bakersfield",
-                "college": "School of Arts & Humanities",
-                "major": "Art"
-            }
-        }   
+            "question_name": "GOA-GQ3",
+            "question_text": "What does the value inside each figure represent? (free response)", 
+            "options": [ "Done" ], 
+            "correct_ans": null, 
+            "question_type": "graph", 
+            "answer_type": "free-response"  
+        }
     ]
 }

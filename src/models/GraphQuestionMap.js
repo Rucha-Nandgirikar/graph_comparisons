@@ -12,8 +12,8 @@ const GraphQuestionMap = sequelize.define('GraphQuestionMap', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    question_id: {
-        type: DataTypes.INTEGER,
+    question_name: {
+        type: DataTypes.STRING,
         allowNull: false
     }
 }, {
