@@ -7,12 +7,16 @@ const MainStudyResponse = sequelize.define('MainStudyResponse', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    questionNumber: {
+    graphId: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    graphId: {
+    questionOrderIndex: {
         type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    questionName: {
+        type: DataTypes.STRING,
         allowNull: false
     },
     question: {

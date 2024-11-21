@@ -18,7 +18,7 @@ export async function getTableData(userId) {
 }
   
 // TODO: Incorporate frq questions to answer for isCorrect
-export async function recordMainStudyResponse(userId, graphId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer) {
+export async function recordMainStudyResponse(userId, graphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer) {
     try {
       const responseSubmit = await fetch("/api/submit-mainstudy-response", {
         method: "POST",
@@ -29,7 +29,8 @@ export async function recordMainStudyResponse(userId, graphId, currentQuestionId
           userId: userId,
           graphId: graphId,
           userAnswer: currentAnswer.value,
-          questionNumber: currentQuestionId,
+          questionOrderIndex: currentQuestionIndex,
+          questionName: currentQuestionName,
           question: currentQuestion.value.substring(0, 100),
           isCorrect: currentAnswer.value === currentCorrectAnswer,
         }),

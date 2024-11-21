@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let userId = null;
   let currentGraphId = null;
   let currentQuestionId = null;
+  let currentQuestionName = null;
   let currentQuestionIndex = 0; 
   let currentCorrectAnswer = null;
   let testOrderId = null;
@@ -302,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'input[name="answer"]:checked'
     ).value;
     
-    await recordMainStudyResponse(userId, currentGraphId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
+    await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
     await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
 
     if (currentQuestionIndex < data2DArray.length) {
@@ -322,6 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const entry of tableData) {
       const questionObj = {
+        "questionName": entry.question_name,
         "questionText": entry.question_text,
         "graphURL": entry.graph_url,
         "URLParams": entry.url_params,
@@ -376,6 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionType = currentQuestionObj["questionType"];
     const questionText = currentQuestionObj["questionText"];
     const answerType = currentQuestionObj["answerType"];
+    const questionName = currentQuestionObj["questionName"]
 
     // Assign value to the question text
     questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${questionText}`;
@@ -385,6 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set vars
     currentGraphId = graphId;
     currentQuestionId = questionId;
+    currentQuestionName = questionName;
 
     // Create iframe element using graphURL and URLParams
     iframeElement = document.createElement("iframe");
@@ -396,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
     iframeElement.style.marginBottom = "-400px";
     iframeElement.style.border = "none";
     
-    displayGraph(graphId)
+    displayGraph(graphId) // TODO: chagne display only if different from prev.
 
     clearFrqInput();
 
