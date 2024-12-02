@@ -382,10 +382,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Assign value to the question text
     questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${questionText}`;
-    optionsElement.innerHTML = "";
-    chartPlaceholder.innerHTML = "";
 
     // Set vars
+    let prevGraphId = currentGraphId;
     currentGraphId = graphId;
     currentQuestionId = questionId;
     currentQuestionName = questionName;
@@ -400,7 +399,9 @@ document.addEventListener('DOMContentLoaded', () => {
     iframeElement.style.marginBottom = "-400px";
     iframeElement.style.border = "none";
     
-    displayGraph(graphId) // TODO: chagne display only if different from prev.
+    if(prevGraphId !== currentGraphId) {
+      displayGraph(graphId)
+    }
 
     clearFrqInput();
 
@@ -411,6 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Initialize Options
+    optionsElement.innerHTML = "";
     options.forEach((option, index) => {
       const label = document.createElement("label");
       const input = document.createElement("input");
@@ -429,6 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Displays appropriate graph based on graphId
    */
   function displayGraph(graphId) {
+    chartPlaceholder.innerHTML = "";
     if(graphId === 1){
       displayMyEquityGapsMajorGaps(chartPlaceholder);
     } 
