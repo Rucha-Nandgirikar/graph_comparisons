@@ -12,10 +12,11 @@ import {
 } from "./prestudy.js"
 
 import {
-  displayGoalTrajectories,
-  displayMyEquityGapsComparisonData,
   displayMyEquityGapsMajorGaps,
   displayStudentProgressUnits,
+  displayGoalTrajectories,
+  displayWhatPathDoTheyFollow,
+  displayEnrollingAndGraduating,
 } from "./charts.js" 
 
 
@@ -428,6 +429,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } 
     else if(graphId === 2){
       displayStudentProgressUnits(chartPlaceholder);
+    }
+    else if(graphId === 3){
+      displayGoalTrajectories(chartPlaceholder);
+    }
+    else if(graphId === 4){
+      displayWhatPathDoTheyFollow(chartPlaceholder);
+    }
+    else if(graphId === 5){
+      displayEnrollingAndGraduating(chartPlaceholder);
     }
     else {
       chartPlaceholder.appendChild(iframeElement);
