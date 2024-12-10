@@ -499,7 +499,7 @@
         {
             "question_name": "ENR-SQ1",
             "question_text": "Can you provide one interesting insight that this graph provides?",
-            "options": [],
+            "options": ["Done"],
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "free-response"
