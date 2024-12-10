@@ -24,7 +24,6 @@ class UserService {
             }
 
             const localDbId = process.env.LOCAL_DB_ID;
-            console.log(localDbId);
             const nextId = (prevId === null || prevId === undefined) ? 0 : (prevId + 1) % MAX_ORDERS;
 
             const newUser = await User.create({testOrderId: nextId, localDbId: localDbId});
