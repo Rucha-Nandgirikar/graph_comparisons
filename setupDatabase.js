@@ -11,13 +11,20 @@ const questions = require('./questions.json');
 require("dotenv").config();
 
 async function setupDatabase() {
-    const con = await mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD
-    });
+    let con;
 
     try {
+        const localDbId = process.env.LOCAL_DB_ID;
+        if(localDbId === null || localDbId === undefined) {
+            throw "localDbId not specified in env file";
+        }
+
+        con = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD
+        });
+
         console.log("Connected to MySQL server");
 
         const dbExistsSQL = `SHOW DATABASES LIKE ?`;
@@ -42,11 +49,11 @@ async function setupDatabase() {
     } catch (error) {
         console.error("Error during database setup:", error);
     } finally {
-        await con.end();
-        console.log("MySQL connection closed.");
+        if(con) {
+            await con.end();
+            console.log("MySQL connection closed.");
+        }
     }
-
-    
 }
 
 async function syncDatabase() {

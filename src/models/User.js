@@ -10,6 +10,10 @@ User.init({
         autoIncrement: true,     
         allowNull: false
     },
+    localDbId: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
     age: {
         type: DataTypes.INTEGER,
         allowNull: true
