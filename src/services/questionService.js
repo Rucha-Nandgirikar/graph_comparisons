@@ -37,7 +37,7 @@ class QuestionService {
                 const dataQuestionOrder = graphQuestionOrders["data"][(userId - 1) % dataQuestionOrderLength];
                 const subjectiveQuestionOrder = graphQuestionOrders["subjective"][(userId - 1) % subjectiveQuestionOrderLength];
 
-                const questionOrder = [].concat(graphQuestionOrder, dataQuestionOrder, subjectiveQuestionOrder);
+                const questionOrder = [].concat(dataQuestionOrder, subjectiveQuestionOrder, graphQuestionOrder);
             
                 const questionSet = await Question.findAll({
                     where: {
@@ -47,19 +47,25 @@ class QuestionService {
                     }
                 });
 
+                const orderedQuestionSet = questionSet.sort((a, b) => {
+                    return questionOrder.indexOf(a.question_id) - questionOrder.indexOf(b.question_id);
+                });
+
+                console.log(orderedQuestionSet);
+
                 const currGraph = await Graph.findOne({
                     where: {
                         graph_id: currGraphId
                     }
                 })
                 
-                const questionSetWithGraph = questionSet.map(question => ({
+                const orderedQuestionSetWithGraph = orderedQuestionSet.map(question => ({
                     ...question.toJSON(),
                     graph_url: currGraph.graph_url,
                     graph_id: currGraphId
                 }));
                 
-                questions = questions.concat(questionSetWithGraph);
+                questions = questions.concat(orderedQuestionSetWithGraph);
             }
 
             const formattedQuestions = questions.map(question => {
