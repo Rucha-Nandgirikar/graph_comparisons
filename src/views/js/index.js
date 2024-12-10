@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentGraphId = null;
   let currentQuestionId = null;
   let currentQuestionName = null;
-  let currentQuestionIndex = 0; 
+  let currentQuestionIndex = -1;
   let currentCorrectAnswer = null;
   let testOrderId = null;
   let data2DArray = []; //stores all queries from test_questions in database locally
@@ -276,9 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /**
-   * 
-   */
   async function beginMainStudy() {
     await recordInteraction(userId, "Begin Main Study", false, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
     hideBeginMainStudyScreen();
@@ -297,12 +294,20 @@ document.addEventListener('DOMContentLoaded', () => {
       alert("Please select an answer.");
       currentAnswer.value = null;
       return;
-    } 
+    }
+
+    const currentQuestionObj = data2DArray[currentQuestionIndex];
+    const answerType = currentQuestionObj["answerType"];
+    const questionType = currentQuestionObj["questionType"];
     
-    currentAnswer.value = document.querySelector(
-      'input[name="answer"]:checked'
-    ).value;
-    
+    if(answerType === "free-response") {
+      currentAnswer.value = frqInput.value;
+    } else {
+      currentAnswer.value = document.querySelector(
+        'input[name="answer"]:checked'
+      ).value;
+    }
+
     await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
     await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
 
@@ -363,15 +368,16 @@ document.addEventListener('DOMContentLoaded', () => {
    * Display next Question in question array
    */
   function displayNextQuestion() {
+    currentQuestionIndex++;
+
     const currentQuestionObj = data2DArray[currentQuestionIndex];
 
-    currentCorrectAnswer = currentQuestionObj["currentQuestion"];
-    let options =  currentQuestionObj["options"]; 
+    let options =  currentQuestionObj["options"];
     if(typeof options == "string")
-    {
-      options =  JSON.parse( currentQuestionObj["options"]); 
-    }
-   
+      {
+        options =  JSON.parse( currentQuestionObj["options"]);
+      }
+      
     const graphURL = currentQuestionObj["graphURL"];
     const graphId = currentQuestionObj["graphId"];
     const questionId = currentQuestionObj["questionID"];
@@ -379,7 +385,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionText = currentQuestionObj["questionText"];
     const answerType = currentQuestionObj["answerType"];
     const questionName = currentQuestionObj["questionName"]
-
+    const questionAnswer = currentQuestionObj["correctAnswer"];
+      
     // Assign value to the question text
     questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${questionText}`;
 
@@ -388,6 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentGraphId = graphId;
     currentQuestionId = questionId;
     currentQuestionName = questionName;
+    currentCorrectAnswer = questionAnswer;
 
     // Create iframe element using graphURL and URLParams
     iframeElement = document.createElement("iframe");
@@ -423,8 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
       label.appendChild(document.createTextNode(option));
       optionsElement.appendChild(label);
     });
-
-    currentQuestionIndex++;
   }
 
   /**

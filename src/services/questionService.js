@@ -51,8 +51,6 @@ class QuestionService {
                     return questionOrder.indexOf(a.question_id) - questionOrder.indexOf(b.question_id);
                 });
 
-                console.log(orderedQuestionSet);
-
                 const currGraph = await Graph.findOne({
                     where: {
                         graph_id: currGraphId

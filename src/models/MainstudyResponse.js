@@ -25,11 +25,11 @@ const MainStudyResponse = sequelize.define('MainStudyResponse', {
     },
     userAnswer: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     isCorrect: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     }
 }, {
     tableName: 'mainstudy_responses',
