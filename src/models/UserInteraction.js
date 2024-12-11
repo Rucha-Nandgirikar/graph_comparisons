@@ -11,6 +11,10 @@ const UserInteraction = sequelize.define('UserInteraction', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    graphId: {
+        type: DataTypes.INTEGER,
+        allowNull: true // Allow null if not part of the study
+    },
     questionId: {
         type: DataTypes.INTEGER,
         allowNull: true // Allow null if not part of the study
@@ -24,7 +28,7 @@ const UserInteraction = sequelize.define('UserInteraction', {
         allowNull: true
     }
 }, {
-    tableName: 'master_table',
+    tableName: 'user_interactions',
     timestamps: true 
 });
 

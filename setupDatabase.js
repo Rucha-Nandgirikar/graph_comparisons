@@ -4,19 +4,27 @@ const Question = require('./src/models/Question');
 const UserInteraction = require('./src/models/UserInteraction');
 const PreStudyResponse = require('./src/models/PrestudyResponse');
 const MainStudyResponse = require('./src/models/MainstudyResponse');
-const User = require('./src/models/User') 
+const User = require('./src/models/User');
 const Graph = require('./src/models/Graph');
+const GraphQuestionMap = require('./src/models/GraphQuestionMap')
 const questions = require('./questions.json'); 
 require("dotenv").config();
 
 async function setupDatabase() {
-    const con = await mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD
-    });
+    let con;
 
     try {
+        const localDbId = process.env.LOCAL_DB_ID;
+        if(localDbId === null || localDbId === undefined) {
+            throw "localDbId not specified in env file";
+        }
+
+        con = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD
+        });
+
         console.log("Connected to MySQL server");
 
         const dbExistsSQL = `SHOW DATABASES LIKE ?`;
@@ -41,11 +49,11 @@ async function setupDatabase() {
     } catch (error) {
         console.error("Error during database setup:", error);
     } finally {
-        await con.end();
-        console.log("MySQL connection closed.");
+        if(con) {
+            await con.end();
+            console.log("MySQL connection closed.");
+        }
     }
-
-    
 }
 
 async function syncDatabase() {
@@ -75,17 +83,17 @@ async function insertData() {
       // If no graphs exist, insert them
       if (existingGraphs.length === 0) {
           await Graph.bulkCreate([
-              { graph_name: 'my-equity-gap', graph_url: 'https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps' },
-              { graph_name: 'student-progress-units', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/student-progress-units' },
-              { graph_name: 'goal-trajectories', graph_url: 'https://studentresearch.dashboards.calstate.edu/graduation-initiative/goal-trajectories' },
-              { graph_name: 'what-paths-do-they-follow', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/what-paths-do-they-follow' },
-              { graph_name: 'csu-by-the-numbers/enrolling-and-graduating', graph_url: 'https://studentresearch.dashboards.calstate.edu/csu-by-the-numbers/enrolling-and-graduating' },
-              { graph_name: 'my-equity-gap', graph_url: 'https://studentresearch.dashboards.calstate.edu/api/equity-gaps/my-equity-gaps/comparison-data' },
-              { graph_name: 'student-progress-units', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/student-progress-units' },
+              { graph_name: 'my-equity-gap', graph_url: 'https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps', graph_type: 'dashboard' },
+              { graph_name: 'student-progress-units', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/student-progress-units', graph_type: 'dashboard' },
+              { graph_name: 'goal-trajectories', graph_url: 'https://studentresearch.dashboards.calstate.edu/graduation-initiative/goal-trajectories', graph_type: 'dashboard' },
+              { graph_name: 'what-paths-do-they-follow', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/what-paths-do-they-follow', graph_type: 'dashboard' },
+              { graph_name: 'csu-by-the-numbers/enrolling-and-graduating', graph_url: 'https://studentresearch.dashboards.calstate.edu/csu-by-the-numbers/enrolling-and-graduating', graph_type: 'dashboard' },
+              { graph_name: 'my-equity-gap', graph_url: 'https://studentresearch.dashboards.calstate.edu/api/equity-gaps/my-equity-gaps/comparison-data', graph_type: 'alternative' },
+              { graph_name: 'student-progress-units', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/student-progress-units', graph_type: 'alternative' },
             //   still have to confirm graduation-initiative/goal-trajectories endpoint
-              { graph_name: 'goal-trajectories', graph_url: 'https://studentresearch.dashboards.calstate.edu/graduation-initiative/goal-trajectories' },
-              { graph_name: 'what-paths-do-they-follow', graph_url: 'https://studentresearch.dashboards.calstate.edu/api/faculty-dashboard/what-paths-do-they-follow/chart-data' },
-              { graph_name: 'csu-by-the-numbers/enrolling-and-graduating', graph_url: 'https://studentresearch.dashboards.calstate.edu/api/csu-by-the-numbers/enrolling-and-graduating/chart-data' }
+              { graph_name: 'goal-trajectories', graph_url: 'https://studentresearch.dashboards.calstate.edu/graduation-initiative/goal-trajectories', graph_type: 'alternative' },
+              { graph_name: 'what-paths-do-they-follow', graph_url: 'https://studentresearch.dashboards.calstate.edu/api/faculty-dashboard/what-paths-do-they-follow/chart-data', graph_type: 'alternative' },
+              { graph_name: 'csu-by-the-numbers/enrolling-and-graduating', graph_url: 'https://studentresearch.dashboards.calstate.edu/api/csu-by-the-numbers/enrolling-and-graduating/chart-data', graph_type: 'alternative' }
           ]);
           console.log("Data inserted into Graphs successfully.");
       } else {
@@ -100,10 +108,10 @@ async function insertData() {
               question_text: questionNames
           }
       });
-
       // If no questions exist, insert them
       if (existingQuestions.length === 0) {
           const questionsToInsert = graph_questions.map(question => ({
+              question_name: question.question_name,
               question_text: question.question_text,
               options: question.options,
               correct_ans: question.correct_ans,
@@ -118,6 +126,40 @@ async function insertData() {
       } else {
           console.log("Questions already exist, skipping insert.");
       }
+
+      // Check if mappings exist
+      const graph_question_maps = questions["graph_question_maps"];
+      const existingMaps = await GraphQuestionMap.findAll();
+
+      // if no mappings exist, insert them
+      if(existingMaps.length === 0) {
+        // iterate through maps and creat pairings
+        let mappingsToInsert = [];
+
+        for(let graph_id in graph_question_maps) {
+            first_question_arr = graph_question_maps[graph_id]["firstOrder"];
+            second_question_arr = graph_question_maps[graph_id]["secondOrder"];
+
+            question_arr = new Set([
+                ...first_question_arr,
+                ...second_question_arr
+            ]);
+            question_arr = [...question_arr]
+
+            for(let question_idx in question_arr) {
+                mappingsToInsert.push({
+                    graph_id: graph_id,
+                    question_name: question_arr[question_idx]
+                })
+            }
+        }
+
+        await GraphQuestionMap.bulkCreate(mappingsToInsert);
+        console.log("Data inserted into GraphQuestionMaps successfully.");
+      } else {
+        console.log("Mappings already exist, skipping insert.");
+      }
+
   } catch (error) {
       console.error("Error inserting data:", error);
   }

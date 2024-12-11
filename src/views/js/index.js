@@ -46,8 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mainstudy Variables
   let userId = null;
+  let currentGraphId = null;
   let currentQuestionId = null;
-  let currentQuestionIndex = 0; 
+  let currentQuestionName = null;
+  let currentQuestionIndex = -1;
   let currentCorrectAnswer = null;
   let testOrderId = null;
   let data2DArray = []; //stores all queries from test_questions in database locally
@@ -262,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     await recordPrestudyResponse(userId, currentQuestion, currentAnswer);
-    await recordInteraction(userId, "Submit", false, true, currentQuestionId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Submit", false, true, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
     inputElement.value = "";
   
     if (currentPrestudyQuestionIndex < 6) {
@@ -275,11 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /**
-   * 
-   */
   async function beginMainStudy() {
-    await recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Begin Main Study", false, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
     hideBeginMainStudyScreen();
     
     // Start Study
@@ -296,14 +295,22 @@ document.addEventListener('DOMContentLoaded', () => {
       alert("Please select an answer.");
       currentAnswer.value = null;
       return;
-    } 
+    }
+
+    const currentQuestionObj = data2DArray[currentQuestionIndex];
+    const answerType = currentQuestionObj["answerType"];
+    const questionType = currentQuestionObj["questionType"];
     
-    currentAnswer.value = document.querySelector(
-      'input[name="answer"]:checked'
-    ).value;
-    
-    await recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
-    await recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
+    if(answerType === "free-response") {
+      currentAnswer.value = frqInput.value;
+    } else {
+      currentAnswer.value = document.querySelector(
+        'input[name="answer"]:checked'
+      ).value;
+    }
+
+    await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
+    await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
 
     if (currentQuestionIndex < data2DArray.length) {
       displayNextQuestion()
@@ -322,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const entry of tableData) {
       const questionObj = {
+        "questionName": entry.question_name,
         "questionText": entry.question_text,
         "graphURL": entry.graph_url,
         "URLParams": entry.url_params,
@@ -361,29 +369,34 @@ document.addEventListener('DOMContentLoaded', () => {
    * Display next Question in question array
    */
   function displayNextQuestion() {
+    currentQuestionIndex++;
+
     const currentQuestionObj = data2DArray[currentQuestionIndex];
 
-    currentCorrectAnswer = currentQuestionObj["currentQuestion"];
-    let options =  currentQuestionObj["options"]; 
+    let options =  currentQuestionObj["options"];
     if(typeof options == "string")
-    {
-      options =  JSON.parse( currentQuestionObj["options"]); 
-    }
-   
+      {
+        options =  JSON.parse( currentQuestionObj["options"]);
+      }
+      
     const graphURL = currentQuestionObj["graphURL"];
     const graphId = currentQuestionObj["graphId"];
     const questionId = currentQuestionObj["questionID"];
     const questionType = currentQuestionObj["questionType"];
     const questionText = currentQuestionObj["questionText"];
     const answerType = currentQuestionObj["answerType"];
-
+    const questionName = currentQuestionObj["questionName"]
+    const questionAnswer = currentQuestionObj["correctAnswer"];
+      
     // Assign value to the question text
     questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${questionText}`;
-    optionsElement.innerHTML = "";
-    chartPlaceholder.innerHTML = "";
 
     // Set vars
+    let prevGraphId = currentGraphId;
+    currentGraphId = graphId;
     currentQuestionId = questionId;
+    currentQuestionName = questionName;
+    currentCorrectAnswer = questionAnswer;
 
     // Create iframe element using graphURL and URLParams
     iframeElement = document.createElement("iframe");
@@ -395,7 +408,9 @@ document.addEventListener('DOMContentLoaded', () => {
     iframeElement.style.marginBottom = "-400px";
     iframeElement.style.border = "none";
     
-    displayGraph(graphId)
+    if(prevGraphId !== currentGraphId) {
+      displayGraph(graphId)
+    }
 
     clearFrqInput();
 
@@ -406,6 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Initialize Options
+    optionsElement.innerHTML = "";
     options.forEach((option, index) => {
       const label = document.createElement("label");
       const input = document.createElement("input");
@@ -416,14 +432,13 @@ document.addEventListener('DOMContentLoaded', () => {
       label.appendChild(document.createTextNode(option));
       optionsElement.appendChild(label);
     });
-
-    currentQuestionIndex++;
   }
 
   /**
    * Displays appropriate graph based on graphId
    */
   function displayGraph(graphId) {
+    chartPlaceholder.innerHTML = "";
     if(graphId === 1){
       displayMyEquityGapsMajorGaps(chartPlaceholder);
     } 
