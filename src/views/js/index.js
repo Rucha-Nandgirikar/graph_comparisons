@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentGraphId = null;
   let currentQuestionId = null;
   let currentQuestionName = null;
-  let currentQuestionIndex = -1;
+  let currentQuestionIndex = 0;
   let currentCorrectAnswer = null;
   let testOrderId = null;
   let data2DArray = []; //stores all queries from test_questions in database locally
@@ -297,22 +297,23 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const currentQuestionObj = data2DArray[currentQuestionIndex];
-    const answerType = currentQuestionObj["answerType"];
-    const questionType = currentQuestionObj["questionType"];
+    currentQuestionIndex += 1;
     
-    if(answerType === "free-response") {
-      currentAnswer.value = frqInput.value;
-    } else {
-      currentAnswer.value = document.querySelector(
-        'input[name="answer"]:checked'
-      ).value;
-    }
-
-    await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
-    await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
-
     if (currentQuestionIndex < data2DArray.length) {
+      const currentQuestionObj = data2DArray[currentQuestionIndex];
+      const answerType = currentQuestionObj["answerType"];
+      
+      if(answerType === "free-response") {
+        currentAnswer.value = frqInput.value;
+      } else {
+        currentAnswer.value = document.querySelector(
+          'input[name="answer"]:checked'
+        ).value;
+      }
+  
+      await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
+      await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
+
       displayNextQuestion()
     } else {
       hideMainStudyScreen();
@@ -369,8 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
    * Display next Question in question array
    */
   function displayNextQuestion() {
-    currentQuestionIndex++;
-
     const currentQuestionObj = data2DArray[currentQuestionIndex];
 
     let options =  currentQuestionObj["options"];

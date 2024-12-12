@@ -134,9 +134,11 @@ body {
   }
   
   #congrats-cat {
+    display: none;
     position: absolute;
-    top: 30px;
-    left: 200px;
+    top:25%;
+    left:25%;
+    right: 25%;
     margin: 0 auto;
   }
   
