@@ -150,11 +150,11 @@
   
     let iframeElement = document.createElement("iframe");
     iframeElement.src = `https://studentresearch2.dashboards.calstate.edu/faculty-dashboard/student-progress-units`;
-    iframeElement.width = "150%";
-    iframeElement.height = "100%";
-    iframeElement.style.transform = "scale(0.50)";
-    iframeElement.style.transformOrigin = "20% top"
-    iframeElement.style.marginBottom = "-400px";
+    iframeElement.width = "100%";
+    iframeElement.height = "150%";
+    iframeElement.style.transform = "scale(0.70)";
+    iframeElement.style.transformOrigin = "50% top"
+    // iframeElement.style.marginBottom = "-400px";
     iframeElement.style.border = "none";
     chartPlaceholder.appendChild(iframeElement);
   }
@@ -169,6 +169,8 @@
     canvasElement.style.border = "1px solid black";
     canvasElement.style.padding = "10px";
     canvasElement.style.margin = "auto";
+    canvasElement.style.display = "flex";
+    canvasElement.style.flexDirection = "column"; // Arrange title and charts vertically
     canvasElement.style.height = "400px";
     canvasElement.style.width = "600px";
     chartPlaceholder.appendChild(canvasElement);
@@ -284,9 +286,7 @@
   {
     
       const url = "https://studentresearch.dashboards.calstate.edu/api/faculty-dashboard/what-paths-do-they-follow/chart-data?campus=Bakersfield&college=School%20of%20Arts%20%26%20Humanities&major=Art&flowOption=1";
-  
-     
-  
+
       // Append the query string to the URL
        const fullUrl = `${url}`
      
@@ -299,6 +299,8 @@
       canvasElement.style.margin = "auto";
       canvasElement.style.height = "400px";
       canvasElement.style.width = "600px";
+      canvasElement.style.display = "flex";
+    canvasElement.style.flexDirection = "column"; // Arrange title and charts vertically
       // canvasElement.appendChild(h4Element);
       chartPlaceholder.appendChild(canvasElement);
   
@@ -394,17 +396,17 @@
     {
         tooltip_title: "204,020 freshmen applied",
         tooltip_point1: "Up 4.7% from the prior year",
-        region: { x: 97, y: 97, width: 413, height: 151 } // Region 1
+        region: { x: 80, y: 80, width: 345, height: 120 } // Region 1
     },
     {
         tooltip_title: "91% of applicants admitted",
         tooltip_point1: "Down 0.8 percentage points from the prior year (6,794 more)",
-        region: { x: 125, y: 255, width: 363, height: 120 } // Region 2
+        region: { x: 103, y: 210, width: 306, height: 105 } // Region 2
     },
     {
         tooltip_title: "36% of those admitted enrolled",
         tooltip_point1: "Up 0.3 percentage points from the prior year (2,947 more)",
-        region: { x: 165, y: 390, width: 283, height: 98 } // Region 3
+        region: { x: 140, y: 325, width: 235, height: 82 } // Region 3
     }
   ];
   
@@ -414,7 +416,7 @@
     canvas.id = "myEnrollingAndGraduating";
     canvas.style.border = "1px solid black";
     // canvas.style.height = "400px";
-    canvas.style.width = "600px";
+    canvas.style.width = "500px";
     canvas.style.display = "flex"; 
     canvas.style.justifySelf = "center";
     chartPlaceholder.appendChild(canvas);

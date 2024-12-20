@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showMainStudyScreen() {
-    mainStudy.style.display = "block";
+    mainStudy.style.display = "flex";
     submitButton.style.display = "block";
   }
 
@@ -400,11 +400,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create iframe element using graphURL and URLParams
     iframeElement = document.createElement("iframe");
     iframeElement.src = `${graphURL}`;
-    iframeElement.width = "150%";
-    iframeElement.height = "100%";
-    iframeElement.style.transform = "scale(0.50)";
-    iframeElement.style.transformOrigin = "20% top"
-    iframeElement.style.marginBottom = "-400px";
+    iframeElement.width = "100%";
+    iframeElement.height = "150%";
+    iframeElement.style.transform = "scale(0.70)";
+    iframeElement.style.transformOrigin = "50% top"
+    // iframeElement.style.marginBottom = "-400px";
     iframeElement.style.border = "none";
     
     if(prevGraphId !== currentGraphId) {
