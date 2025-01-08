@@ -84,17 +84,17 @@ async function insertData() {
       if (existingGraphs.length === 0) {
           await Graph.bulkCreate([
               { graph_name: 'my-equity-gap', graph_url: 'https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps', graph_type: 'dashboard' },
-              { graph_name: 'student-progress-units', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/student-progress-units', graph_type: 'dashboard' },
+              { graph_name: 'student-progress-units', graph_url: 'https://studentresearch.dashboards.calstate.edu/departments-dashboard/student-progress-units', graph_type: 'dashboard' },
               { graph_name: 'goal-trajectories', graph_url: 'https://studentresearch.dashboards.calstate.edu/graduation-initiative/goal-trajectories', graph_type: 'dashboard' },
-              { graph_name: 'what-paths-do-they-follow', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/what-paths-do-they-follow', graph_type: 'dashboard' },
+              { graph_name: 'what-paths-do-they-follow', graph_url: 'https://studentresearch.dashboards.calstate.edu/departments-dashboard/what-paths-do-they-follow', graph_type: 'dashboard' },
               { graph_name: 'csu-by-the-numbers/enrolling-and-graduating', graph_url: 'https://studentresearch.dashboards.calstate.edu/csu-by-the-numbers/enrolling-and-graduating', graph_type: 'dashboard' },
               
-            //   { graph_name: 'my-equity-gap', graph_url: 'https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps', graph_type: 'alternative' },
-            //   { graph_name: 'student-progress-units', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/student-progress-units', graph_type: 'alternative' },
-            // //   still have to confirm graduation-initiative/goal-trajectories endpoint
-            //   { graph_name: 'goal-trajectories', graph_url: 'https://studentresearch.dashboards.calstate.edu/graduation-initiative/goal-trajectories', graph_type: 'alternative' },
-            //   { graph_name: 'what-paths-do-they-follow', graph_url: 'https://studentresearch.dashboards.calstate.edu/faculty-dashboard/what-paths-do-they-follow', graph_type: 'alternative' },
-            //   { graph_name: 'csu-by-the-numbers/enrolling-and-graduating', graph_url: 'https://studentresearch.dashboards.calstate.edu/csu-by-the-numbers/enrolling-and-graduating', graph_type: 'alternative' }
+              { graph_name: 'my-equity-gap', graph_url: 'https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps', graph_type: 'alternative' },
+              { graph_name: 'student-progress-units', graph_url: 'https://studentresearch.dashboards.calstate.edu/departments-dashboard/student-progress-units', graph_type: 'alternative' },
+            //   still have to confirm graduation-initiative/goal-trajectories endpoint
+              { graph_name: 'goal-trajectories', graph_url: 'https://studentresearch.dashboards.calstate.edu/graduation-initiative/goal-trajectories', graph_type: 'alternative' },
+              { graph_name: 'what-paths-do-they-follow', graph_url: 'https://studentresearch.dashboards.calstate.edu/departments-dashboard/what-paths-do-they-follow', graph_type: 'alternative' },
+              { graph_name: 'csu-by-the-numbers/enrolling-and-graduating', graph_url: 'https://studentresearch.dashboards.calstate.edu/csu-by-the-numbers/enrolling-and-graduating', graph_type: 'alternative' }
           ]);
           console.log("Data inserted into Graphs successfully.");
       } else {
