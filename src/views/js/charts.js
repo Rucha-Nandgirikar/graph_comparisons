@@ -145,11 +145,11 @@
   export function displayStudentProgressUnits(chartPlaceholder)
   {
     // let h4Element = document.createElement("h4");
-    // h4Element.innerText = "Cannot embed alternative graph(faculty-dashboard/student-progress-units) iframe due to security issues"; // or use h4Element.textContent
+    // h4Element.innerText = "Cannot embed alternative graph(departments-dashboard/student-progress-units) iframe due to security issues"; // or use h4Element.textContent
     // chartPlaceholder.appendChild(h4Element);
   
     let iframeElement = document.createElement("iframe");
-    iframeElement.src = `https://studentresearch2.dashboards.calstate.edu/faculty-dashboard/student-progress-units`;
+    iframeElement.src = `https://studentresearch2.dashboards.calstate.edu/departments-dashboard/student-progress-units`;
     iframeElement.width = "100%";
     iframeElement.height = "150%";
     iframeElement.style.transform = "scale(0.70)";
@@ -285,7 +285,7 @@
   export function displayWhatPathDoTheyFollow(chartPlaceholder)
   {
     
-      const url = "https://studentresearch.dashboards.calstate.edu/api/faculty-dashboard/what-paths-do-they-follow/chart-data?campus=Bakersfield&college=School%20of%20Arts%20%26%20Humanities&major=Art&flowOption=1";
+      const url = "https://studentresearch.dashboards.calstate.edu/api/departments-dashboard/what-paths-do-they-follow/chart-data?campus=Bakersfield&college=School%20of%20Arts%20%26%20Humanities&major=Art%20Education&flowOption=1&years=2022%20to%202024";
 
       // Append the query string to the URL
        const fullUrl = `${url}`
