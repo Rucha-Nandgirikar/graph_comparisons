@@ -1,6 +1,6 @@
 // models/Graph.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const sequelize = require('../../config/db');
 
 const Graph = sequelize.define('Graph', {
     graph_id: {

@@ -1,6 +1,6 @@
 // models/MainStudyResponse.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db'); // Your database configuration
+const sequelize = require('../../config/db'); // Your database configuration
 
 const MainStudyResponse = sequelize.define('MainStudyResponse', {
     userId: {

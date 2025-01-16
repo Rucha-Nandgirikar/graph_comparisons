@@ -1,6 +1,6 @@
-const PreStudyResponse = require('../models/PrestudyResponse');
-const MainStudyResponse = require('../models/MainstudyResponse');
-const UserInteraction = require('../models/UserInteraction');
+const PreStudyResponse = require('../../models/standardAndNonStandardGraphComparisonModels/PrestudyResponse');
+const MainStudyResponse = require('../../models/standardAndNonStandardGraphComparisonModels/MainstudyResponse');
+const UserInteraction = require('../../models/standardAndNonStandardGraphComparisonModels/UserInteraction');
 
 /**
  *  Response Service is in charge of recording main study and prestudy responses, as well as user interactions  

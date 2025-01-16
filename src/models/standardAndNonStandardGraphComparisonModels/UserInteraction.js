@@ -1,6 +1,6 @@
 // models/UserInteraction.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db'); // Your database configuration
+const sequelize = require('../../config/db'); // Your database configuration
 
 const UserInteraction = sequelize.define('UserInteraction', {
     userId: {

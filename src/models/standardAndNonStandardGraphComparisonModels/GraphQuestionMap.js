@@ -1,6 +1,6 @@
 // models/GraphQuestionMap.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const sequelize = require('../../config/db');
 
 const GraphQuestionMap = sequelize.define('GraphQuestionMap', {
     id: {

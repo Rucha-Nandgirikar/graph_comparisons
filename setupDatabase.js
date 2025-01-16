@@ -1,12 +1,8 @@
 const mysql = require("mysql2/promise"); // Use promise-based MySQL library
 const sequelize = require('./src/config/db'); // Your sequelize instance
-const Question = require('./src/models/Question');
-const UserInteraction = require('./src/models/UserInteraction');
-const PreStudyResponse = require('./src/models/PrestudyResponse');
-const MainStudyResponse = require('./src/models/MainstudyResponse');
-const User = require('./src/models/User');
-const Graph = require('./src/models/Graph');
-const GraphQuestionMap = require('./src/models/GraphQuestionMap')
+const Question = require('./src/models/standardAndNonStandardGraphComparisonModels/Question');
+const Graph = require('./src/models/standardAndNonStandardGraphComparisonModels/Graph');
+const GraphQuestionMap = require('./src/models/standardAndNonStandardGraphComparisonModels/GraphQuestionMap')
 const questions = require('./questions.json'); 
 require("dotenv").config();
 

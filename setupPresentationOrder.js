@@ -1,8 +1,8 @@
 const FileSystem = require("fs");
-const Graph = require('./src/models/Graph');
-const Question = require('./src/models/Question');
+const Graph = require('./src/models/standardAndNonStandardGraphComparisonModels/Graph');
+const Question = require('./src/models/standardAndNonStandardGraphComparisonModels/Question');
 const Sequelize = require('sequelize');
-const GraphQuestionMap = require("./src/models/GraphQuestionMap");
+const GraphQuestionMap = require("./src/models/standardAndNonStandardGraphComparisonModels/GraphQuestionMap");
 const Op = Sequelize.Op;
 const questions = require("./questions.json");
 
