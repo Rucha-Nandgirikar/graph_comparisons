@@ -1,6 +1,6 @@
-const questionService = require('../services/questionService'); 
-const userService = require('../services/userService');
-const responseService = require('../services/standardAndNonStandardGraphComparisonService');
+const questionService = require('../../services/standardAndNonStandardGraphComparisonServices/questionService'); 
+const userService = require('../../services/standardAndNonStandardGraphComparisonServices/userService');
+const responseService = require('../../services/standardAndNonStandardGraphComparisonServices/standardAndNonStandardGraphComparisonService');
 
 /**
  * GraphController handles all requests including user management, retrieving main study questions, and handling user response recording

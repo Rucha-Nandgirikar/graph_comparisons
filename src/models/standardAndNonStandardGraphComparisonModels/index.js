@@ -1,5 +1,5 @@
 // models/index.js
-const sequelize = require('../config/db');
+const sequelize = require('../../config/db');
 const Question = require('./Question');
 const UserInteraction = require('./UserInteraction');
 const PreStudyResponse = require('./PrestudyResponse');

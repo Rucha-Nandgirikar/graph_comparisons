@@ -2,7 +2,7 @@ const app = require('./src/app');
 
 const PORT = process.env.PORT || 3000;
 
-const { initDB } = require('./src/models'); 
+const { initDB } = require('./src/models/standardAndNonStandardGraphComparisonModels'); 
 
 (async () => {
     await initDB(); // Initialize the database

@@ -1,6 +1,6 @@
 // src/services/userService.js
-const User = require('../models/User'); // Adjust the path as necessary
-const graphOrdersJSON = require('../../graphPresentationOrder.json');
+const User = require('../../models/standardAndNonStandardGraphComparisonModels/User'); // Adjust the path as necessary
+const graphOrdersJSON = require('../../../graphPresentationOrder.json');
 require("dotenv").config();
 
 /**

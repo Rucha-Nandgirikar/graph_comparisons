@@ -1,8 +1,8 @@
-const Question = require('../models/Question');
-const Graph = require('../models/Graph');
-const User = require('../models/User');
-const graphOrdersJSON = require('../../graphPresentationOrder.json');
-const questionOrdersJSON = require('../../questionPresentationOrder.json')
+const Question = require('../../models/standardAndNonStandardGraphComparisonModels/Question');
+const Graph = require('../../models/standardAndNonStandardGraphComparisonModels/Graph');
+const User = require('../../models/standardAndNonStandardGraphComparisonModels/User');
+const graphOrdersJSON = require('../../../graphPresentationOrder.json');
+const questionOrdersJSON = require('../../../questionPresentationOrder.json')
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 

@@ -1,6 +1,6 @@
 // models/Question.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db'); 
+const sequelize = require('../../config/db'); 
 
 const Question = sequelize.define('Question', {
     question_id: {
