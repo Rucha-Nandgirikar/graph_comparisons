@@ -92,8 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
   beginPrestudyButton.addEventListener('click', async () => {
     hideHomeScreen();
     
-    //showPrestudyScreen();
-    //displayNextPrestudyQuestion();  
+    // pre-study
+    // showPrestudyScreen();
+    // displayNextPrestudyQuestion();  
 
     // uncomment for main study
 
@@ -290,20 +291,51 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    *  Handles logic for submitting mainstudy Questions
    */
+  // async function handleMainstudyQuestionSubmit() {
+  //   if (!document.querySelector('input[name="answer"]:checked')) {
+  //     alert("Please select an answer.");
+  //     currentAnswer.value = null;
+  //     return;
+  //   }
+
+  //   currentQuestionIndex += 1;
+    
+  //   if (currentQuestionIndex < data2DArray.length) {
+  //     const currentQuestionObj = data2DArray[currentQuestionIndex];
+  //     const answerType = currentQuestionObj["answerType"];
+      
+  //     if(answerType === "free-response") {
+  //       currentAnswer.value = frqInput.value;
+  //     } else {
+  //       currentAnswer.value = document.querySelector(
+  //         'input[name="answer"]:checked'
+  //       ).value;
+  //     }
+  
+  //     await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
+  //     await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
+
+  //     displayNextQuestion()
+  //   } else {
+  //     hideMainStudyScreen();
+  //     showPostStudyCongrats();
+  //   }
+  // }
+
   async function handleMainstudyQuestionSubmit() {
     if (!document.querySelector('input[name="answer"]:checked')) {
       alert("Please select an answer.");
       currentAnswer.value = null;
       return;
     }
-
+  
     currentQuestionIndex += 1;
-    
+  
     if (currentQuestionIndex < data2DArray.length) {
       const currentQuestionObj = data2DArray[currentQuestionIndex];
       const answerType = currentQuestionObj["answerType"];
-      
-      if(answerType === "free-response") {
+  
+      if (answerType === "free-response") {
         currentAnswer.value = frqInput.value;
       } else {
         currentAnswer.value = document.querySelector(
@@ -311,15 +343,59 @@ document.addEventListener('DOMContentLoaded', () => {
         ).value;
       }
   
-      await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
-      await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
-
-      displayNextQuestion()
+      await recordMainStudyResponse(
+        userId,
+        currentGraphId,
+        currentQuestionIndex,
+        currentQuestionName,
+        currentQuestion,
+        currentCorrectAnswer,
+        currentAnswer
+      );
+  
+      await recordInteraction(
+        userId,
+        "Submit",
+        true,
+        false,
+        currentGraphId,
+        currentQuestionId,
+        currentQuestion,
+        currentAnswer
+      );
+  
+      displayNextQuestion();
     } else {
+      // **Make sure the last question's response is recorded before hiding the screen**
+      await recordMainStudyResponse(
+        userId,
+        currentGraphId,
+        currentQuestionIndex,
+        currentQuestionName,
+        currentQuestion,
+        currentCorrectAnswer,
+        currentAnswer
+      );
+  
+      await recordInteraction(
+        userId,
+        "Submit",
+        true,
+        false,
+        currentGraphId,
+        currentQuestionId,
+        currentQuestion,
+        currentAnswer
+      );
+  
+      // **Ensure persistence before proceeding**
+      console.log("Final response recorded, proceeding to hide the study screen.");
+  
       hideMainStudyScreen();
       showPostStudyCongrats();
     }
   }
+  
 
   /**
    * Retrieve/store questions and begin Main Study
