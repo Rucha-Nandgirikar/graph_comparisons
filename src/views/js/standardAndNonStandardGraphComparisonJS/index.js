@@ -328,11 +328,11 @@ document.addEventListener('DOMContentLoaded', () => {
       currentAnswer.value = null;
       return;
     }
-  
-    currentQuestionIndex += 1;
+   
   
     if (currentQuestionIndex < data2DArray.length) {
       const currentQuestionObj = data2DArray[currentQuestionIndex];
+
       const answerType = currentQuestionObj["answerType"];
   
       if (answerType === "free-response") {
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'input[name="answer"]:checked'
         ).value;
       }
-  
+      
       await recordMainStudyResponse(
         userId,
         currentGraphId,
@@ -363,34 +363,21 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuestion,
         currentAnswer
       );
-  
-      displayNextQuestion();
+      
+      if (currentQuestionIndex != data2DArray.length - 1)
+      {
+        currentQuestionIndex += 1;
+        displayNextQuestion();
+      }
+      else {
+        // **Ensure persistence before proceeding**
+        console.log("Final response recorded, proceeding to hide the study screen.");
+        hideMainStudyScreen();
+        showPostStudyCongrats();
+      }
     } else {
-      // **Make sure the last question's response is recorded before hiding the screen**
-      await recordMainStudyResponse(
-        userId,
-        currentGraphId,
-        currentQuestionIndex,
-        currentQuestionName,
-        currentQuestion,
-        currentCorrectAnswer,
-        currentAnswer
-      );
-  
-      await recordInteraction(
-        userId,
-        "Submit",
-        true,
-        false,
-        currentGraphId,
-        currentQuestionId,
-        currentQuestion,
-        currentAnswer
-      );
-  
       // **Ensure persistence before proceeding**
       console.log("Final response recorded, proceeding to hide the study screen.");
-  
       hideMainStudyScreen();
       showPostStudyCongrats();
     }
@@ -446,6 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Display next Question in question array
    */
   function displayNextQuestion() {
+    // currentQuestionIndex += 1;
     const currentQuestionObj = data2DArray[currentQuestionIndex];
 
     let options =  currentQuestionObj["options"];

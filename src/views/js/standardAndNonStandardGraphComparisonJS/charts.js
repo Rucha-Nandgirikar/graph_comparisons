@@ -354,7 +354,7 @@
                        title: {
                         display: true,
                         text: [
-                          'CSU Major Migration for all First-time Full-time Freshmen who Graduated in 2021, 2022, or 2023',
+                          'CSU Major Migration for all First-time Full-time Freshmen who Graduated in (2022 to 2024)',
                           `School of Arts and Humanities: ${totalStudents} students`
                       ]
                       },

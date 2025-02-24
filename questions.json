@@ -185,7 +185,7 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice"
-        },
+        } ,
         {
             "question_name": "STU-GQ1",
             "question_text": "What does it mean when a green figure is higher up (vertically)?",

@@ -30,8 +30,10 @@ class ResponseService {
 
     // Add a User Interaction
     async insertUserInteraction(data) {
+        console.log(data);
         try {
             const interaction = await UserInteraction.create(data);
+            // alert("Added record!!");
             return interaction;
         } catch (error) {
             console.error("Error adding user interaction:", error);

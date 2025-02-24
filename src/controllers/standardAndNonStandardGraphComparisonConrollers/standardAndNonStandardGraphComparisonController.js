@@ -62,7 +62,9 @@ class StandardAndNonStandardGraphComparisonController {
 
     // Method to add a main study response
     async postMainStudyResponse(req, res) {
+        debugger;
         const responseData = req.body; // Assuming response data is sent in the request body
+        console.log(req.body);
         try {
             const response = await responseService.insertMainstudyResponse(responseData);
             return res.status(201).json(response);
