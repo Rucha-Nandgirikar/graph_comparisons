@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let iframeElement;
 
   // Post study elements
-  const postStudyCongrats = document.getElementById('congrats-cat')
+  const postStudyCongrats = document.getElementById('congrats-cat');
+  const navigate = document.getElementById('bar_chart_navigation');
   
 
   /** 
@@ -210,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showPostStudyCongrats() {
     postStudyCongrats.style.display = "block";
-    questionElement.textContent = "Study complete. Thank you for participating!";
+    navigate.style.display = "flex";
   }
 
   function triggerCalibration() {

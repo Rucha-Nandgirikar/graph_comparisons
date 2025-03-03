@@ -189,6 +189,11 @@ body {
     display: block; 
 }
 
+.study-complete {
+  justify-content: center;
+  margin-top: 10%;
+}
+
 #myChart {
   aspect-ratio: 600 / 1000; /* Sets the aspect ratio to 600:1000 */
   width: 100%; /* You can control the width and height as needed */
