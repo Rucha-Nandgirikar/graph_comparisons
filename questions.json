@@ -1,24 +1,24 @@
 {
     "graph_question_maps": {
         "1": {
-            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"],
-            "secondOrder": ["EQU-DQ4", "EQU-DQ5", "EQU-DQ6", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2", "EQU-GQ3"]
+            "firstOrder": ["EQU-DQ1", "EQU-DQ2", "EQU-DQ3", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2"],
+            "secondOrder": ["EQU-DQ4", "EQU-DQ5", "EQU-DQ6", "EQU-SQ1", "EQU-SQ2", "EQU-GQ1", "EQU-GQ2"]
         },
         "2": {
-            "firstOrder": ["STU-DQ1", "STU-DQ2", "STU-DQ3", "STU-SQ1", "STU-SQ2", "STU-GQ1", "STU-GQ2", "STU-GQ3"],
-            "secondOrder": ["STU-DQ4", "STU-DQ5", "STU-DQ6", "STU-SQ1", "STU-SQ2", "STU-GQ1", "STU-GQ2", "STU-GQ3"]
+            "firstOrder": ["STU-DQ1", "STU-DQ2", "STU-DQ3", "STU-SQ1", "STU-SQ2", "STU-GQ1", "STU-GQ2"],
+            "secondOrder": ["STU-DQ4", "STU-DQ5", "STU-DQ6", "STU-SQ1", "STU-SQ2", "STU-GQ1", "STU-GQ2"]
         },
         "3": {
-            "firstOrder": ["GOA-DQ1", "GOA-DQ2", "GOA-DQ3", "GOA-SQ1", "GOA-SQ2", "GOA-GQ1", "GOA-GQ2", "GOA-GQ3"],
-            "secondOrder": ["GOA-DQ4", "GOA-DQ5", "GOA-DQ6", "GOA-SQ1", "GOA-SQ2", "GOA-GQ1", "GOA-GQ2", "GOA-GQ3"]
+            "firstOrder": ["GOA-DQ1", "GOA-DQ2", "GOA-DQ3", "GOA-SQ1", "GOA-SQ2", "GOA-GQ1", "GOA-GQ2"],
+            "secondOrder": ["GOA-DQ4", "GOA-DQ5", "GOA-DQ6", "GOA-SQ1", "GOA-SQ2", "GOA-GQ1", "GOA-GQ2"]
         },
         "4": {
-            "firstOrder": ["PAT-DQ1", "PAT-DQ2", "PAT-DQ3", "PAT-SQ1", "PAT-SQ2", "PAT-GQ1", "PAT-GQ2", "PAT-GQ3"],
-            "secondOrder": ["PAT-DQ4", "PAT-DQ5", "PAT-DQ6", "PAT-SQ1", "PAT-SQ2", "PAT-GQ1", "PAT-GQ2", "PAT-GQ3"]
+            "firstOrder": ["PAT-DQ1", "PAT-DQ2", "PAT-DQ3", "PAT-SQ1", "PAT-SQ2", "PAT-GQ1", "PAT-GQ2"],
+            "secondOrder": ["PAT-DQ4", "PAT-DQ5", "PAT-DQ6", "PAT-SQ1", "PAT-SQ2", "PAT-GQ1", "PAT-GQ2"]
         },
         "5": {
-            "firstOrder": ["ENR-DQ1", "ENR-DQ2", "ENR-DQ3", "ENR-SQ1", "ENR-SQ2", "ENR-GQ1", "ENR-GQ2", "ENR-GQ3"],
-            "secondOrder": ["ENR-DQ4", "ENR-DQ5", "ENR-DQ6", "ENR-SQ1", "ENR-SQ2", "ENR-GQ1", "ENR-GQ2", "ENR-GQ3"]
+            "firstOrder": ["ENR-DQ1", "ENR-DQ2", "ENR-DQ3", "ENR-SQ1", "ENR-SQ2", "ENR-GQ1", "ENR-GQ2"],
+            "secondOrder": ["ENR-DQ4", "ENR-DQ5", "ENR-DQ6", "ENR-SQ1", "ENR-SQ2", "ENR-GQ1", "ENR-GQ2"]
         },
         "6": {
             "firstOrder": ["EQU-DQ4", "EQU-DQ5", "EQU-DQ6", "EQU-SQ1", "EQU-SQ2"],
@@ -44,49 +44,49 @@
     "graph_questions": [
         {
             "question_name": "EQU-DQ1",
-            "question_text": "How many Architecture students are represented in the graph for 'Major at Entry'?",
-            "options": ["13", "7", "6", "5"],
-            "correct_ans": "6",
+            "question_text": "The equity gap for 'Liberal Studies' is more than twice as big as 'Plant Science' for 'Major at Entry'.",
+            "options": ["True", "False"],
+            "correct_ans": "True",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "EQU-DQ2",
-            "question_text": "How many Kinesiology students are represented in the graph for 'By Major Last Held'?",
-            "options": ["9", "5", "4", "6"],
-            "correct_ans": "5",
+            "question_text": "Which major has the smallest gap for 'Major at Entry'?",
+            "options": ["Liberal Studies", "Undeclared", "Architecture", "Plant Science", "Kinesiology"],
+            "correct_ans": "Kinesiology",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "EQU-DQ3",
-            "question_text": "Which major has the largest gap for 'Major at Entry'?",
+            "question_text": "How many Kinesiology students are represented in the graph for 'Major at Entry'?",
+            "options": ["5","6","7","8"],
+            "correct_ans": "5",
+            "question_type": "data",
+            "answer_type": "multiple-choice"
+        },
+        {
+            "question_name": "EQU-DQ4",
+            "question_text": "The equity gap for 'Architecture' and 'Plant Science' is the same for 'Major at Entry'.",
+            "options": ["True", "False"],
+            "correct_ans": "True",
+            "question_type": "data",
+            "answer_type": "multiple-choice"
+        },
+        {
+            "question_name": "EQU-DQ5",
+            "question_text": "Which major has the biggest gap for 'Major at Entry'?",
             "options": ["Liberal Studies", "Undeclared", "Architecture", "Plant Science", "Kinesiology"],
             "correct_ans": "Liberal Studies",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
-            "question_name": "EQU-DQ4",
-            "question_text": "What is the total number of students needed to close the equity gap by Major at Entry?",
-            "options": ["26", "37", "94", "36"],
-            "correct_ans": "37",
-            "question_type": "data",
-            "answer_type": "multiple-choice"
-        },
-        {
-            "question_name": "EQU-DQ5",
-            "question_text": "To close the gap, are Kinesiology students represented in both the 'Major at Entry' and 'By Major Last Held' graphs?",
-            "options": ["Yes", "No"],
-            "correct_ans": "Yes",
-            "question_type": "data",
-            "answer_type": "multiple-choice"
-        },
-        {
             "question_name": "EQU-DQ6",
-            "question_text": "To close the gap, are English Education students represented in both the 'Major at Entry' and 'By Major Last Held' graphs?",
-            "options": ["Yes", "No"],
-            "correct_ans": "No",
+            "question_text": "How many Architecture students are represented in the graph for 'Major at Entry'?",
+            "options": ["5","6","7","8"],
+            "correct_ans": "6",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
@@ -110,79 +110,63 @@
             "question_name": "EQU-GQ1",
             "question_text": "Each grad cap is equal to how many students?",
             "options": ["1 student", "100 students", "10 students", "Not specified"],
-            "correct_ans": "10 students",
+            "correct_ans": "1 student",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "EQU-GQ2",
-            "question_text": "What does the chart represent?",
-            "options": ["closing the equity gaps", "creating the equity gaps"],
-            "correct_ans": "closing the equity gaps",
-            "question_type": "graph",
-            "answer_type": "multiple-choice"
-        },
-        {
-            "question_name": "EQU-GQ3",
-            "question_text": "What is represented on the X-axis of the graph titled 'Close the Gaps'?",
-            "options": ["Number of Students", "Majors"],
-            "correct_ans": "Majors",
+            "question_text": "The purple grad caps indicate that the students are first-generation.",
+            "options": ["True","False"],
+            "correct_ans": "True",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "STU-DQ1",
-            "question_text": "How many student(s) from the Agricultural Biology and Plant Science program, who enrolled in 2020, dropped out in their 1st year?",
-            "options": ["3", "10", "0"],
+            "question_text": "How many student(s) from the Plant Science program, who enrolled in 2020, dropped out in year 1?",
+            "options": ["1", "2", "3", "4"],
             "correct_ans": "3",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "STU-DQ2",
-            "question_text": "How many student(s) from the Agricultural Biology and Plant Science program, who enrolled in 2020, enrolled to a different major?",
-            "options": ["1", "2", "3", "4"],
-            "correct_ans": "2",
+            "question_text": "More students graduated in year 4 than in year 5.",
+            "options": ["True", "False"],
+            "correct_ans": "True",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "STU-DQ3",
-            "question_text": "What is the total number of units attempted by students in their 3rd year before dropping out?",
-            "options": ["61 units", "26 units", "48 units", "83 units"],
-            "correct_ans": "61 units",
+            "question_text": "How many students were still enrolled in year 4?",
+            "options": ["3", "5", "7"],
+            "correct_ans": "3",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "STU-DQ4",
-            "question_text": "How many student(s) from the Agricultural Biology and Plant Science program, who enrolled in 2020, dropped out in their 3rd year?",
-            "options": ["1", "2", "3", "4"],
-            "correct_ans": "1",
-            "question_type": "data",
-            "answer_type": "multiple-choice"
-        },
-        {
-            "question_name": "STU-DQ4",
-            "question_text": "How many student(s) from the Agricultural Biology and Plant Science program, who enrolled in 2020, dropped out in their 3rd year?",
-            "options": ["1", "2", "3", "4"],
+            "question_text": "How many student(s) from the Plant Science program, who enrolled in 2020, dropped out in year 3?",
+            "options": ["1", "3", "5"],
             "correct_ans": "1",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "STU-DQ5",
-            "question_text": "What is the dropout rate for students enrolled in the Agricultural Biology and Plant Science program in 2020?",
-            "options": ["20%", "30%", "40%", "50%"],
-            "correct_ans": "50%",
+            "question_text": "More students dropped out in year 3 than in year 1.",
+            "options": ["True", "False"],
+            "correct_ans": "False",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "STU-DQ6",
-            "question_text": "What is the total number of students enrolled in the Agricultural Biology and Plant Science program in 2020?",
-            "options": ["7", "8", "9", "10"],
-            "correct_ans": "8",
+            "question_text": "50% students dropped out in year 4",
+            "options": ["True", "False"],
+            "correct_ans": "True",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
@@ -201,36 +185,28 @@
             "correct_ans": null,
             "question_type": "subjective",
             "answer_type": "multiple-choice"
-        },
+        } ,
         {
             "question_name": "STU-GQ1",
-            "question_text": "What does the black figure represent in the graph?",
-            "options": ["Enrolled Students", "Graduated Students"],
-            "correct_ans": "Enrolled Students",
+            "question_text": "What does it mean when a green figure is higher up (vertically)?",
+            "options": ["Nothing","Higher grades","Graduated and More units attempted"],
+            "correct_ans": "Graduated and More units attempted",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "STU-GQ2",
-            "question_text": "What does the green figure represent in the graph?",
-            "options": ["Enrolled Students", "Graduated Students"],
-            "correct_ans": "Graduated Students",
+            "question_text": "What year did the students in the graph enroll?",
+            "options": ["2017","2020","2023","different years"],
+            "correct_ans": "2020",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
-            "question_name": "STU-GQ3",
-            "question_text": "The yellow figure represents a student who graduated from a different campus.",
-            "options": ["True", "False"],
-            "correct_ans": "True",
-            "question_type": "graph",
-            "answer_type": "true-false"
-        },
-        {
             "question_name": "GOA-DQ1",
-            "question_text": "Should the Pell and Not Pell equity gap be reduced to meet its 2025 goal?",
-            "options": ["Yes", "No"],
-            "correct_ans": "Yes",
+            "question_text": "What was the Pell Gap for the 2017-2023 cohort?",
+            "options": ["9.2", "10.3", "10.2", "12.3"],
+            "correct_ans": "12.3",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
@@ -244,9 +220,9 @@
         },
         {
             "question_name": "GOA-DQ3",
-            "question_text": "Which cohort had the lowest Pell Gap Difference?",
-            "options": ["2014-2020", "2017-2023", "2011-2017", "2009-2015"],
-            "correct_ans": "2009-2015",
+            "question_text": "What is the graduation rate for Pell students for the 2016-2022 cohort?",
+            "options": ["More than 60%", "Fewer than 60%"],
+            "correct_ans": "More than 60%",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
@@ -260,17 +236,17 @@
         },
         {
             "question_name": "GOA-DQ5",
-            "question_text": "Which cohort had a Pell Gap of 11.3?",
-            "options": ["2018-2024", "2017-2023", "2011-2017", "2009-2015"],
-            "correct_ans": "2018-2024",
+            "question_text": "Which cohort had the lowest Pell Gap Difference?",
+            "options": ["2014-2020", "2017-2023", "2011-2017", "2009-2015"],
+            "correct_ans": "2009-2015",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "GOA-DQ6",
-            "question_text": "What is the approximate Non-Pell percentage for the 2018-2024 cohort?",
-            "options": ["Above 60%", "Below 60%"],
-            "correct_ans": "Above 60%",
+            "question_text": "What is the graduation rate for Non-Pell students for the 2016-2022 cohort?",
+            "options": ["More than 60%", "Fewer than 60%"],
+            "correct_ans": "More than 60%",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
@@ -292,43 +268,33 @@
         },
         {
             "question_name": "GOA-GQ1",
-            "question_text": "What does the dark grey column represent in the Pell & Not Pell Equity Gap Goal graph?",
+            "question_text": "What does the dark grey background color represent in the Pell & Not Pell Equity Gap Goal graph?",
             "options": [
-                "Pell and Not Pell equity gap Percentage of Currently Enrolled students.",
-                "Pell and Not Pell equity gap Percentage of Graduated students."
+                "Equity gap percentage of currently enrolled students.",
+                "Equity gap percentage of graduated students."
             ],
-            "correct_ans": "Pell and Not Pell equity gap Percentage of Graduated students.",
+            "correct_ans": "Equity gap percentage of graduated students.",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "GOA-GQ2",
-            "question_text": "What does the red column represent in the Pell & Not Pell Equity Gap Goal graph?",
+            "question_text": "What progress has the CSU System made toward its 2025 goal of closing the 6-year graduation gap between Pell and Non-Pell students, and what color represents it in the graph?",
             "options": [
-                "Pell and Not Pell equity gap Percentage Points of Currently Enrolled students.",
-                "Pell and Not Pell equity gap Percentage Points of Graduated students."
+                "Green, Significant progress has been made",
+                "Yellow, Moderate progress has been made",
+                "Red, Limited progress has been made",
+                "Blue, No progress has been made"
             ],
-            "correct_ans": "Pell and Not Pell equity gap Percentage Points of Currently enrolled Students.",
-            "question_type": "graph",
-            "answer_type": "multiple-choice"
-        },
-        {
-            "question_name": "GOA-GQ3",
-            "question_text": "What does the chart display regarding Pell Equity Gaps?",
-            "options": [
-                "Percentage of Graduated Students",
-                "Percentage of Currently Enrolled Students",
-                "Both"
-            ],
-            "correct_ans": "Both",
+            "correct_ans": "Red, Limited progress has been made",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "PAT-DQ1",
-            "question_text": "What percentage of students who graduated in School of Arts and Humanities began as a student in School of Natural Sciences, Mathematics & Engineering?",
-            "options": ["53%", "21%", "11%", "10%"],
-            "correct_ans": "21%",
+            "question_text": "What percentage of students who graduated in School of Arts and Humanities began in the School of Arts and Humanities?",
+            "options": ["More than half", "Less than half", "Exactly half"],
+            "correct_ans": "More than half",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
@@ -348,21 +314,23 @@
         },
         {
             "question_name": "PAT-DQ3",
-            "question_text": "What entry major has the highest percentage of students graduating in School of Arts and Humanities, according to the graph?",
-            "options": [
-                "School of Arts & Humanities",
-                "School of Natural Sciences, Mathematics & Engineering",
-                "Undergraduate, General & Interdisciplinary Studies",
-                "School of Social Sciences & Education",
-                "School of Business & Public Administration"
-            ],
-            "correct_ans": "School of Arts & Humanities",
+            "question_text": "The majority (more than 50%) of students graduating in School of Arts and Humanities began in another college.",
+            "options": ["True", "False"],
+            "correct_ans": "False",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "PAT-DQ4",
-            "question_text": "According to the above graph, which major did students graduate from if they began in Undergraduate, General, and Interdisciplinary Studies?",
+            "question_text": "What percentage of students who graduated in School of Arts and Humanities began in the School of Social Sciences?",
+            "options": ["About a quarter", "More than a quarter", "Less than a quarter"],
+            "correct_ans": "Less than a quarter",
+            "question_type": "data",
+            "answer_type": "multiple-choice"
+        },
+        {
+            "question_name": "PAT-DQ5",
+            "question_text": "What entry major has the highest percentage of students graduating in School of Arts and Humanities?",
             "options": [
                 "School of Arts & Humanities",
                 "School of Natural Sciences, Mathematics & Engineering",
@@ -375,18 +343,10 @@
             "answer_type": "multiple-choice"
         },
         {
-            "question_name": "PAT-DQ5",
-            "question_text": "What is the total number of students who graduated from the School of Arts and Humanities across all majors?",
-            "options": ["737", "295", "1388", "158"],
-            "correct_ans": "1388",
-            "question_type": "data",
-            "answer_type": "multiple-choice"
-        },
-        {
             "question_name": "PAT-DQ6",
-            "question_text": "What is the total number of students who graduated from the School of Arts and Humanities but began as students of School of Social Sciences and Education?",
-            "options": ["737", "59", "139", "158"],
-            "correct_ans": "139",
+            "question_text": "Out of the students who graduated in School of Arts and Humanities, more students started in School of Natural Sciences, Mathematics & Engineering than in School of Social Sciences and Education.",
+            "options": ["True", "False"],
+            "correct_ans": "True",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
@@ -408,91 +368,65 @@
         },
         {
             "question_name": "PAT-GQ1",
-            "question_text": "School of Arts and Humanity category is represented using which color?",
-            "options": ["Light Green", "Blue", "Pink", "Violet"],
-            "correct_ans": "Blue",
+            "question_text": "What does the left side of the graph represent?",
+            "options": ["College where students graduated from", "College where students entered"],
+            "correct_ans": "College where students entered",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "PAT-GQ2",
-            "question_text": "What does this graph represent?",
-            "options": [
-                "Percentage of Students graduating in CSU in different majors",
-                "Percentage of Migration of majors to Computer Science in CSU (California State University)"
-            ],
-            "correct_ans": "Percentage of Migration of majors to Computer Science in CSU (California State University)",
-            "question_type": "graph",
-            "answer_type": "multiple-choice"
-        },
-        {
-            "question_name": "PAT-GQ3",
-            "question_text": "What does the path from Major at Entry and Graduation Major specify?",
-            "options": [
-                "It tracks the evolution of students majors from entry to graduation",
-                "It specifies percentage of students at different majors"
-            ],
-            "correct_ans": "It tracks the evolution of students majors from entry to graduation",
+            "question_text": "What does the grey block represent?",
+            "options": ["College where students graduated from", "College where students entered"],
+            "correct_ans": "College where students graduated from",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "ENR-DQ1",
-            "question_text": "How many Freshmen applied to CSU System in 2023?",
-            "options": ["204,020 Applied", "185,911 Admitted", "66,050 Enrolled"],
-            "correct_ans": "204,020 Applied",
+            "question_text": "The majority of students who applied were admitted.",
+            "options": ["True", "False"],
+            "correct_ans": "True",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "ENR-DQ2",
-            "question_text": "How many Freshmen were admitted to CSU System in 2023?",
-            "options": ["204,020 Applied", "185,911 Admitted", "66,050 Enrolled"],
-            "correct_ans": "185,911 Admitted",
+            "question_text": "Around half of admitted students enrolled.",
+            "options": ["True", "False"],
+            "correct_ans": "False",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "ENR-DQ3",
-            "question_text": "How many Freshmen were enrolled to CSU System in 2023?",
-            "options": ["204,020 Applied", "185,911 Admitted", "66,050 Enrolled"],
-            "correct_ans": "66,050 Enrolled",
+            "question_text": "How many students were admitted?",
+            "options": ["185,919", "251,969", "66,050"],
+            "correct_ans": "185,919",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "ENR-DQ4",
-            "question_text": "What was the application percentage of Freshmen at CSU in 2023 compared to the prior year?",
-            "options": [
-                "Up 4.7% from the prior year",
-                "Down 0.8 percentage points from the prior year (6,794 more)",
-                "Up 0.3 percentage points from the prior year (2,947 more)"
-            ],
-            "correct_ans": "Up 4.7% from the prior year",
+            "question_text": "The majority of admitted students enrolled.",
+            "options": ["True", "False"],
+            "correct_ans": "False",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "ENR-DQ5",
-            "question_text": "What was the admission percentage of Freshmen at CSU in 2023 compared to the prior year?",
-            "options": [
-                "Up 4.7% from the prior year",
-                "Down 0.8 percentage points from the prior year (6,794 more)",
-                "Up 0.3 percentage points from the prior year (2,947 more)"
-            ],
-            "correct_ans": "Down 0.8 percentage points from the prior year (6,794 more)",
+            "question_text": "The majority of students who applied enrolled.",
+            "options": ["True", "False"],
+            "correct_ans": "False",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
         {
             "question_name": "ENR-DQ6",
-            "question_text": "What was the enrollment percentage of Freshmen at CSU in 2023 compared to the prior year?",
-            "options": [
-                "Up 4.7% from the prior year",
-                "Down 0.8 percentage points from the prior year (6,794 more)",
-                "Up 0.3 percentage points from the prior year (2,947 more)"
-            ],
-            "correct_ans": "Up 0.3 percentage points from the prior year (2,947 more)",
+            "question_text": "How many students enrolled?",
+            "options": ["185,919", "251,969", "66,050"],
+            "correct_ans": "66,050",
             "question_type": "data",
             "answer_type": "multiple-choice"
         },
@@ -514,23 +448,15 @@
         },
         {
             "question_name": "ENR-GQ1",
-            "question_text": "Which shape does the above chart represent?",
-            "options": ["Pyramid Chart", "Funnel Chart", "Stacked Bar Chart"],
-            "correct_ans": "Funnel Chart",
-            "question_type": "graph",
-            "answer_type": "multiple-choice"
-        },
-        {
-            "question_name": "ENR-GQ2",
-            "question_text": "Which color in the chart represents applied students?",
-            "options": ["Blue", "Purple", "Pink", "Green"],
+            "question_text": "Which color in the chart represents the total number of students who applied?",
+            "options": ["Purple", "Green", "All colors combined"],
             "correct_ans": "Green",
             "question_type": "graph",
             "answer_type": "multiple-choice"
         },
         {
-            "question_name": "ENR-GQ3",
-            "question_text": "Based on the graph, are enrolled students included within the category of applied students?",
+            "question_name": "ENR-GQ2",
+            "question_text": "Are enrolled students included within the category of applied students?",
             "options": ["Yes", "No"],
             "correct_ans": "Yes",
             "question_type": "graph",

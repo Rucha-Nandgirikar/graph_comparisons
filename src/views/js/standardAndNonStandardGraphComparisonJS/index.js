@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let iframeElement;
 
   // Post study elements
-  const postStudyCongrats = document.getElementById('congrats-cat')
+  const postStudyCongrats = document.getElementById('congrats-cat');
+  const navigate = document.getElementById('bar_chart_navigation');
   
 
   /** 
@@ -92,8 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
   beginPrestudyButton.addEventListener('click', async () => {
     hideHomeScreen();
     
-    //showPrestudyScreen();
-    //displayNextPrestudyQuestion();  
+    // pre-study
+    // showPrestudyScreen();
+    // displayNextPrestudyQuestion();  
 
     // uncomment for main study
 
@@ -209,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showPostStudyCongrats() {
     postStudyCongrats.style.display = "block";
-    questionElement.textContent = "Study complete. Thank you for participating!";
+    navigate.style.display = "flex";
   }
 
   function triggerCalibration() {
@@ -290,36 +292,98 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    *  Handles logic for submitting mainstudy Questions
    */
+  // async function handleMainstudyQuestionSubmit() {
+  //   if (!document.querySelector('input[name="answer"]:checked')) {
+  //     alert("Please select an answer.");
+  //     currentAnswer.value = null;
+  //     return;
+  //   }
+
+  //   currentQuestionIndex += 1;
+    
+  //   if (currentQuestionIndex < data2DArray.length) {
+  //     const currentQuestionObj = data2DArray[currentQuestionIndex];
+  //     const answerType = currentQuestionObj["answerType"];
+      
+  //     if(answerType === "free-response") {
+  //       currentAnswer.value = frqInput.value;
+  //     } else {
+  //       currentAnswer.value = document.querySelector(
+  //         'input[name="answer"]:checked'
+  //       ).value;
+  //     }
+  
+  //     await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
+  //     await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
+
+  //     displayNextQuestion()
+  //   } else {
+  //     hideMainStudyScreen();
+  //     showPostStudyCongrats();
+  //   }
+  // }
+
   async function handleMainstudyQuestionSubmit() {
     if (!document.querySelector('input[name="answer"]:checked')) {
       alert("Please select an answer.");
       currentAnswer.value = null;
       return;
     }
-
-    currentQuestionIndex += 1;
-    
+   
+  
     if (currentQuestionIndex < data2DArray.length) {
       const currentQuestionObj = data2DArray[currentQuestionIndex];
+
       const answerType = currentQuestionObj["answerType"];
-      
-      if(answerType === "free-response") {
+  
+      if (answerType === "free-response") {
         currentAnswer.value = frqInput.value;
       } else {
         currentAnswer.value = document.querySelector(
           'input[name="answer"]:checked'
         ).value;
       }
+      
+      await recordMainStudyResponse(
+        userId,
+        currentGraphId,
+        currentQuestionIndex,
+        currentQuestionName,
+        currentQuestion,
+        currentCorrectAnswer,
+        currentAnswer
+      );
   
-      await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
-      await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
-
-      displayNextQuestion()
+      await recordInteraction(
+        userId,
+        "Submit",
+        true,
+        false,
+        currentGraphId,
+        currentQuestionId,
+        currentQuestion,
+        currentAnswer
+      );
+      
+      if (currentQuestionIndex != data2DArray.length - 1)
+      {
+        currentQuestionIndex += 1;
+        displayNextQuestion();
+      }
+      else {
+        // **Ensure persistence before proceeding**
+        console.log("Final response recorded, proceeding to hide the study screen.");
+        hideMainStudyScreen();
+        showPostStudyCongrats();
+      }
     } else {
+      // **Ensure persistence before proceeding**
+      console.log("Final response recorded, proceeding to hide the study screen.");
       hideMainStudyScreen();
       showPostStudyCongrats();
     }
   }
+  
 
   /**
    * Retrieve/store questions and begin Main Study
@@ -370,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Display next Question in question array
    */
   function displayNextQuestion() {
+    // currentQuestionIndex += 1;
     const currentQuestionObj = data2DArray[currentQuestionIndex];
 
     let options =  currentQuestionObj["options"];

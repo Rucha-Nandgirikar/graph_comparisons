@@ -44,7 +44,7 @@ export async function recordPrestudyResponse(userId, currentQuestion, currentAns
       });
   
       const dataSubmit = await response.json();
-      console.log("Server response:", dataSubmit);
+      // console.log("Server response:", dataSubmit);
   
     } catch (error) {
       console.error("Error submitting response:", error);
@@ -93,7 +93,7 @@ export async function recordInteraction(userId, buttonName, isMainStudy, isPrest
 
     const dataSubmit = await responseSubmit.json();
 
-    console.log("Server response:", dataSubmit);
+    // console.log("Server response:", dataSubmit);
   } catch (error) {
     console.error("Error submitting response:", error);
   }
