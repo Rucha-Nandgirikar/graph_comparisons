@@ -106,7 +106,7 @@ body {
   }
   
   .questionnaire{
-    display: flex;flex-direction: column;width: 80%;margin: auto;
+    display: flex;flex-direction: column;width: 50%;margin: auto;
   }
   .submit-button-style{
     display: flex;flex-direction: row;
