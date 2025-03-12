@@ -94,14 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
     hideHomeScreen();
     
     // pre-study
-    // showPrestudyScreen();
-    // displayNextPrestudyQuestion();  
+    showPrestudyScreen();
+    displayNextPrestudyQuestion();  
 
     // uncomment for main study
 
-    await loadStudyQuestions(); 
-    showMainStudyScreen();
-    displayNextQuestion();   
+    // await loadStudyQuestions(); 
+    // showMainStudyScreen();
+    // displayNextQuestion();   
    
   });
 
