@@ -1,6 +1,6 @@
 // models/Graph.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const sequelize = require('../../config/db');
 
 const Graph = sequelize.define('Graph', {
     graph_id: {
@@ -13,6 +13,10 @@ const Graph = sequelize.define('Graph', {
         allowNull: true
     },
     graph_url: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    graph_type: {
         type: DataTypes.STRING,
         allowNull: false
     }

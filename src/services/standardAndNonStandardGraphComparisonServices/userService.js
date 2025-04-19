@@ -1,6 +1,7 @@
 // src/services/userService.js
-const User = require('../models/User'); // Adjust the path as necessary
-const graphOrdersJSON = require('../../graphPresentationOrder.json'); 
+const User = require('../../models/standardAndNonStandardGraphComparisonModels/User'); // Adjust the path as necessary
+const graphOrdersJSON = require('../../../graphPresentationOrder.json');
+require("dotenv").config();
 
 /**
  * User Service is in charge of creating new users and updating user data (age, major)
@@ -10,14 +11,22 @@ class UserService {
     async createUser() {
         try {
             const MAX_ORDERS = graphOrdersJSON["graphOrders"].length;
+            let prevId;
 
             const user = await User.findOne({
                 order: [ [ 'createdAt', 'DESC' ]],
             });
-            const prevId = user.testOrderId;
+
+            if (user === null){
+                prevId = 0;
+            } else {
+                prevId = user.testOrderId;
+            }
+
+            const localDbId = process.env.LOCAL_DB_ID;
             const nextId = (prevId === null || prevId === undefined) ? 0 : (prevId + 1) % MAX_ORDERS;
 
-            const newUser = await User.create({testOrderId: nextId});
+            const newUser = await User.create({testOrderId: nextId, localDbId: localDbId});
             return newUser;
         } catch (error) {
             console.error("Error creating user:", error);

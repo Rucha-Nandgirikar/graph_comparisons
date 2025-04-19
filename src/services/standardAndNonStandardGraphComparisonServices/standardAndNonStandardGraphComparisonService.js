@@ -1,6 +1,6 @@
-const PreStudyResponse = require('../models/PrestudyResponse');
-const MainStudyResponse = require('../models/MainstudyResponse');
-const UserInteraction = require('../models/UserInteraction');
+const PreStudyResponse = require('../../models/standardAndNonStandardGraphComparisonModels/PrestudyResponse');
+const MainStudyResponse = require('../../models/standardAndNonStandardGraphComparisonModels/MainstudyResponse');
+const UserInteraction = require('../../models/standardAndNonStandardGraphComparisonModels/UserInteraction');
 
 /**
  *  Response Service is in charge of recording main study and prestudy responses, as well as user interactions  
@@ -30,8 +30,10 @@ class ResponseService {
 
     // Add a User Interaction
     async insertUserInteraction(data) {
+        console.log(data);
         try {
             const interaction = await UserInteraction.create(data);
+            // alert("Added record!!");
             return interaction;
         } catch (error) {
             console.error("Error adding user interaction:", error);

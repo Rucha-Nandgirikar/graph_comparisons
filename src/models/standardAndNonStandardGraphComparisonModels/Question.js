@@ -1,12 +1,16 @@
 // models/Question.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db'); 
+const sequelize = require('../../config/db'); 
 
 const Question = sequelize.define('Question', {
     question_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
+    },
+    question_name: {
+        type: DataTypes.TEXT,
+        allowNull: false
     },
     question_text: {
         type: DataTypes.TEXT,
@@ -27,18 +31,6 @@ const Question = sequelize.define('Question', {
     answer_type: {
         type: DataTypes.STRING,
         allowNull: true
-    },
-    graph_type: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    graph_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'graphs',  
-            key: 'graph_id'   
-        }
     },
     url_params: {
         type: DataTypes.TEXT, // Use TEXT to store the JSON string

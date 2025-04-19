@@ -23,8 +23,8 @@ app.use(session({
 
 
 // API and other routes
-const apiRoutes = require('./routes/apiRoutes/api');
-const htmlRoutes = require('./routes/htmlRoutes/web');
+const apiRoutes = require('./routes/standardAndNonStandardGraphComparisonRoutes/apiRoutes/api');
+const htmlRoutes = require('./routes/standardAndNonStandardGraphComparisonRoutes/htmlRoutes/web');
 
 // API Routes
 app.use("/api", apiRoutes);

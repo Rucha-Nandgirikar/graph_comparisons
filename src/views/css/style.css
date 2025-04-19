@@ -1,6 +1,8 @@
 body {
     margin: 0 auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100%;
+    overflow: hidden;
   }
 
   .begin-alignment{
@@ -13,14 +15,17 @@ body {
     display: none;flex-direction: column;justify-content: center;align-items: flex-start;height: 100vh;max-width: 60%;
   }
   .prestudy-question-alignment{
-    display: none; flex-direction: column; margin-bottom: 20px;
+    display: none; flex-direction: column; 
+    margin-bottom: 20px;
   }
   .begin-main-study-alignment{
     display: none;justify-content: center;align-items: center;text-align: center;  height: 100vh;
   }
 
   .main-study {
-    display: none;justify-content: center;align-items: center;text-align: center;  height: 100vh;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
   }
 
   #home-content {
@@ -81,27 +86,38 @@ body {
   
  
   #question {
-    position: relative;
-    /* top: 600px;
-    left: 20px; */
+    /* margin: 10px 150px 10px 150px; */
   }
 
   #reload-button {
-    margin-top: 20px;
+    align-self: center; margin-bottom: 1em;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    padding: 8px 16px;
   }
   
   #chart {
-    top: 10px;
-    left: 20px;
+    width: 100%;
+  }
+  .options-div{
+    height:16vh;
   }
   
+  .questionnaire{
+    display: flex;flex-direction: column;width: 50%;margin: auto;
+  }
+  .submit-button-style{
+    display: flex;flex-direction: row;
+  }
+
   #frq-answer {
-    margin: auto;
-    width: 30%;
+    width: 50%; 
   }
 
   #options {
-    margin: auto;
+    /* margin: auto; */
     width: fit-content;
   }
   
@@ -116,19 +132,30 @@ body {
   #options input[type="checkbox"] {
   }
 
+  #input {
+    /* min-height: 130px; */
+  }
+
   #submit-button {
     margin-top: 10px;
   }
-  
+
+  #study-content {
+    /* min-height: 55%; */
+    display: flex; width: 100%; height: 60vh;margin-bottom: 20px;margin-top: 20px;
+  }
+
   #study-content button:hover {
     background-image: linear-gradient(to bottom right, salmon, darkred);
     color: grey;
   }
   
   #congrats-cat {
+    display: none;
     position: absolute;
-    top: 30px;
-    left: 200px;
+    top:25%;
+    left:25%;
+    right: 25%;
     margin: 0 auto;
   }
   
@@ -160,6 +187,11 @@ body {
   
   #chartPlaceholder {
     display: block; 
+}
+
+.study-complete {
+  justify-content: center;
+  margin-top: 10%;
 }
 
 #myChart {

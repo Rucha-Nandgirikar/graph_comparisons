@@ -13,50 +13,6 @@
 </head>
 <body>
   
-<!-- <div class="container">
-   
-    <div class="text-section">
-        <h2>Question No. 1</h2>
-            <p>Faculty Dashboard and it's Academic outcomes</p>
-    </div>
-    <div class="col-sm-12">
-        <iframe id="websiteFrame" src="" width="800" height="600" frameborder="0"></iframe>
-
-        <script>
-            var websiteUrl = "https://studentresearch.dashboards.calstate.edu/faculty-dashboard/academic-outcomes";
-            document.getElementById("websiteFrame").src = websiteUrl;
-        </script>
-    </div>
-   
-    <div class="text-section">
-        <h2>Question goes here</h2>
-            <p>Answer 1</p>
-            <p>Answer 2</p>
-            <p>Answer 3</p>
-            <p>Answer 4</p>
-    </div>
-
-    <div class="text-section">
-        <h2>Question No. 2</h2>
-            <p>Equity gaps</p>
-    </div>
-    <div class="col-sm-12">
-        <iframe id="websiteFrame1" src="" width="800" height="600" frameborder="0"></iframe>
-
-        <script>
-            var websiteUrl = "https://studentresearch.dashboards.calstate.edu/equity-gaps/my-equity-gaps";
-            document.getElementById("websiteFrame1").src = websiteUrl;
-        </script>
-    </div>    
-    <div class="text-section">
-        <h2>Question goes here</h2>
-            <p>Answer 1</p>
-            <p>Answer 2</p>
-            <p>Answer 3</p>
-            <p>Answer 4</p>
-    </div>    
-</div> -->
-
 
 <div id="begin" class="begin-alignment">
     <button id="begin-study-button" class="study-button">BEGIN</button>
@@ -100,21 +56,32 @@
     <button id="begin-main-study-button" class="study-button">BEGIN MAIN STUDY</button>
 </div>
 
+
 <div id="main-study" class="main-study">
-    <div id="study-content" style="width: auto;">
-        <button id="reload-button" class="study-button">Reload Chart</button>
+    <button id="reload-button" class="study-button">Reload Chart</button>
+    <div id="study-content">
         <div id="chart"></div>
-        <p id="question"></p>
-        <input type="text" id="frq-answer" class="" style="display: none;">
-        <div id="options"></div>
-        <button id="submit-button" class="study-button">SUBMIT</button>
     </div>
+    <div class="questionnaire">
+        <p id="question"></p>
+        <div id="input">
+            <div class="options-div">
+                <input type="text" id="frq-answer" style="display: none;">
+                <div id="options"></div>
+            </div>
+            <div class="submit-button-style">
+                <button id="submit-button" class="study-button">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+    
 </div>
 
-<img id="congrats-cat" src="img/happy-cat.png" style="display: none"></img>
+<img id="congrats-cat" src="img/happy-cat.png"></img>
+<p id="bar_chart_navigation" class="study-complete" style="display: none;">Study complete. Thank you for participating!<a href="http://127.0.0.1:5500/_03_BC/index.html" target="_blank"> Please click here to navigate to Bar Chart Test</a> </p>
 
 
-<script type="module" src="./js/index.js"></script>
+<script type="module" src="./js/standardAndNonStandardGraphComparisonJS/index.js"></script>
 
 </body>
 </html>

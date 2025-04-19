@@ -44,7 +44,7 @@ export async function recordPrestudyResponse(userId, currentQuestion, currentAns
       });
   
       const dataSubmit = await response.json();
-      console.log("Server response:", dataSubmit);
+      // console.log("Server response:", dataSubmit);
   
     } catch (error) {
       console.error("Error submitting response:", error);
@@ -52,21 +52,25 @@ export async function recordPrestudyResponse(userId, currentQuestion, currentAns
 
   }
   
-export async function recordInteraction(userId, buttonName, isMainStudy, isPrestudy, currentQuestionId, currentQuestion, currentAnswer) {
+export async function recordInteraction(userId, buttonName, isMainStudy, isPrestudy, currentGraphId, currentQuestionId, currentQuestion, currentAnswer) {
+  let localGraphId = null;
   let localQuestionId = null;
   let localQuestion = null;
   let localUserAnswer = null;
 
   if (!isMainStudy && !isPrestudy) {
+    localGraphId = null;
     localQuestionId = null;
     localQuestion = null;
     localUserAnswer = null;
   } else if (isPrestudy && !isMainStudy) {
+    localGraphId = null;
     localQuestionId = null;
     localQuestion = currentQuestion.value.substring(0, 80);
     localUserAnswer = currentAnswer.value;
   } else if (isMainStudy && !isPrestudy) {
-    localQuestionId = currentQuestionId + 1;
+    localGraphId = currentGraphId;
+    localQuestionId = currentQuestionId;
     localQuestion = currentQuestion.value.substring(0, 80);
     localUserAnswer = currentAnswer.value;
   }
@@ -79,7 +83,8 @@ export async function recordInteraction(userId, buttonName, isMainStudy, isPrest
       },
       body: JSON.stringify({
         userId: userId,
-        buttonName,
+        buttonName: buttonName,
+        graphId: localGraphId,
         questionId: localQuestionId,
         question: localQuestion,
         userAnswer: localUserAnswer,
@@ -88,7 +93,7 @@ export async function recordInteraction(userId, buttonName, isMainStudy, isPrest
 
     const dataSubmit = await responseSubmit.json();
 
-    console.log("Server response:", dataSubmit);
+    // console.log("Server response:", dataSubmit);
   } catch (error) {
     console.error("Error submitting response:", error);
   }

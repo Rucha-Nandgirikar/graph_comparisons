@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/db'); // Adjust the path as necessary
+const sequelize = require('../../config/db'); // Adjust the path as necessary
 
 class User extends Model {}
 
@@ -9,6 +9,10 @@ User.init({
         primaryKey: true,       
         autoIncrement: true,     
         allowNull: false
+    },
+    localDbId: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     },
     age: {
         type: DataTypes.INTEGER,

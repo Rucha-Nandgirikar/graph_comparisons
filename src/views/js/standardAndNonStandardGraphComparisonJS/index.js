@@ -12,10 +12,11 @@ import {
 } from "./prestudy.js"
 
 import {
-  displayGoalTrajectories,
-  displayMyEquityGapsComparisonData,
   displayMyEquityGapsMajorGaps,
   displayStudentProgressUnits,
+  displayGoalTrajectories,
+  displayWhatPathDoTheyFollow,
+  displayEnrollingAndGraduating,
 } from "./charts.js" 
 
 
@@ -45,8 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mainstudy Variables
   let userId = null;
+  let currentGraphId = null;
   let currentQuestionId = null;
-  let currentQuestionIndex = 0; 
+  let currentQuestionName = null;
+  let currentQuestionIndex = 0;
   let currentCorrectAnswer = null;
   let testOrderId = null;
   let data2DArray = []; //stores all queries from test_questions in database locally
@@ -66,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let iframeElement;
 
   // Post study elements
-  const postStudyCongrats = document.getElementById('congrats-cat')
+  const postStudyCongrats = document.getElementById('congrats-cat');
+  const navigate = document.getElementById('bar_chart_navigation');
   
 
   /** 
@@ -89,14 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
   beginPrestudyButton.addEventListener('click', async () => {
     hideHomeScreen();
     
-    //showPrestudyScreen();
-    //displayNextPrestudyQuestion();  
+    // pre-study
+    showPrestudyScreen();
+    displayNextPrestudyQuestion();  
 
     // uncomment for main study
 
-    await loadStudyQuestions(); 
-    showMainStudyScreen();
-    displayNextQuestion();   
+    // await loadStudyQuestions(); 
+    // showMainStudyScreen();
+    // displayNextQuestion();   
    
   });
 
@@ -181,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showMainStudyScreen() {
-    mainStudy.style.display = "block";
+    mainStudy.style.display = "flex";
     submitButton.style.display = "block";
   }
 
@@ -206,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showPostStudyCongrats() {
     postStudyCongrats.style.display = "block";
-    questionElement.textContent = "Study complete. Thank you for participating!";
+    navigate.style.display = "flex";
   }
 
   function triggerCalibration() {
@@ -261,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     await recordPrestudyResponse(userId, currentQuestion, currentAnswer);
-    await recordInteraction(userId, "Submit", false, true, currentQuestionId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Submit", false, true, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
     inputElement.value = "";
   
     if (currentPrestudyQuestionIndex < 6) {
@@ -274,11 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /**
-   * 
-   */
   async function beginMainStudy() {
-    await recordInteraction(userId, "Begin Main Study", false, false, currentQuestionId, currentQuestion, currentAnswer);
+    await recordInteraction(userId, "Begin Main Study", false, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
     hideBeginMainStudyScreen();
     
     // Start Study
@@ -290,27 +292,98 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    *  Handles logic for submitting mainstudy Questions
    */
+  // async function handleMainstudyQuestionSubmit() {
+  //   if (!document.querySelector('input[name="answer"]:checked')) {
+  //     alert("Please select an answer.");
+  //     currentAnswer.value = null;
+  //     return;
+  //   }
+
+  //   currentQuestionIndex += 1;
+    
+  //   if (currentQuestionIndex < data2DArray.length) {
+  //     const currentQuestionObj = data2DArray[currentQuestionIndex];
+  //     const answerType = currentQuestionObj["answerType"];
+      
+  //     if(answerType === "free-response") {
+  //       currentAnswer.value = frqInput.value;
+  //     } else {
+  //       currentAnswer.value = document.querySelector(
+  //         'input[name="answer"]:checked'
+  //       ).value;
+  //     }
+  
+  //     await recordMainStudyResponse(userId, currentGraphId, currentQuestionIndex, currentQuestionName, currentQuestion, currentCorrectAnswer, currentAnswer);
+  //     await recordInteraction(userId, "Submit", true, false, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
+
+  //     displayNextQuestion()
+  //   } else {
+  //     hideMainStudyScreen();
+  //     showPostStudyCongrats();
+  //   }
+  // }
+
   async function handleMainstudyQuestionSubmit() {
     if (!document.querySelector('input[name="answer"]:checked')) {
       alert("Please select an answer.");
       currentAnswer.value = null;
       return;
-    } 
-    
-    currentAnswer.value = document.querySelector(
-      'input[name="answer"]:checked'
-    ).value;
-    
-    await recordMainStudyResponse(userId, currentQuestionId, currentQuestion, currentCorrectAnswer, currentAnswer);
-    await recordInteraction(userId, "Submit", true, false, currentQuestionId, currentQuestion, currentAnswer);
-
+    }
+   
+  
     if (currentQuestionIndex < data2DArray.length) {
-      displayNextQuestion()
+      const currentQuestionObj = data2DArray[currentQuestionIndex];
+
+      const answerType = currentQuestionObj["answerType"];
+  
+      if (answerType === "free-response") {
+        currentAnswer.value = frqInput.value;
+      } else {
+        currentAnswer.value = document.querySelector(
+          'input[name="answer"]:checked'
+        ).value;
+      }
+      
+      await recordMainStudyResponse(
+        userId,
+        currentGraphId,
+        currentQuestionIndex,
+        currentQuestionName,
+        currentQuestion,
+        currentCorrectAnswer,
+        currentAnswer
+      );
+  
+      await recordInteraction(
+        userId,
+        "Submit",
+        true,
+        false,
+        currentGraphId,
+        currentQuestionId,
+        currentQuestion,
+        currentAnswer
+      );
+      
+      if (currentQuestionIndex != data2DArray.length - 1)
+      {
+        currentQuestionIndex += 1;
+        displayNextQuestion();
+      }
+      else {
+        // **Ensure persistence before proceeding**
+        console.log("Final response recorded, proceeding to hide the study screen.");
+        hideMainStudyScreen();
+        showPostStudyCongrats();
+      }
     } else {
+      // **Ensure persistence before proceeding**
+      console.log("Final response recorded, proceeding to hide the study screen.");
       hideMainStudyScreen();
       showPostStudyCongrats();
     }
   }
+  
 
   /**
    * Retrieve/store questions and begin Main Study
@@ -321,6 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const entry of tableData) {
       const questionObj = {
+        "questionName": entry.question_name,
         "questionText": entry.question_text,
         "graphURL": entry.graph_url,
         "URLParams": entry.url_params,
@@ -360,38 +434,47 @@ document.addEventListener('DOMContentLoaded', () => {
    * Display next Question in question array
    */
   function displayNextQuestion() {
+    // currentQuestionIndex += 1;
     const currentQuestionObj = data2DArray[currentQuestionIndex];
 
-    currentCorrectAnswer = currentQuestionObj["currentQuestion"];
-    let options =  currentQuestionObj["options"]; 
+    let options =  currentQuestionObj["options"];
     if(typeof options == "string")
-    {
-      options =  JSON.parse( currentQuestionObj["options"]); 
-    }
-   
+      {
+        options =  JSON.parse( currentQuestionObj["options"]);
+      }
+      
     const graphURL = currentQuestionObj["graphURL"];
     const graphId = currentQuestionObj["graphId"];
     const questionId = currentQuestionObj["questionID"];
     const questionType = currentQuestionObj["questionType"];
     const questionText = currentQuestionObj["questionText"];
     const answerType = currentQuestionObj["answerType"];
-
+    const questionName = currentQuestionObj["questionName"]
+    const questionAnswer = currentQuestionObj["correctAnswer"];
+      
     // Assign value to the question text
     questionElement.textContent = currentQuestion.value = `${currentQuestionIndex + 1}. ${questionText}`;
-    optionsElement.innerHTML = "";
-    chartPlaceholder.innerHTML = "";
 
     // Set vars
+    let prevGraphId = currentGraphId;
+    currentGraphId = graphId;
     currentQuestionId = questionId;
+    currentQuestionName = questionName;
+    currentCorrectAnswer = questionAnswer;
 
     // Create iframe element using graphURL and URLParams
     iframeElement = document.createElement("iframe");
     iframeElement.src = `${graphURL}`;
-    iframeElement.width = "50%";
-    iframeElement.height = "600px";
+    iframeElement.width = "100%";
+    iframeElement.height = "150%";
+    iframeElement.style.transform = "scale(0.70)";
+    iframeElement.style.transformOrigin = "50% top"
+    // iframeElement.style.marginBottom = "-400px";
     iframeElement.style.border = "none";
     
-    displayGraph(graphId)
+    if(prevGraphId !== currentGraphId) {
+      displayGraph(graphId)
+    }
 
     clearFrqInput();
 
@@ -402,6 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Initialize Options
+    optionsElement.innerHTML = "";
     options.forEach((option, index) => {
       const label = document.createElement("label");
       const input = document.createElement("input");
@@ -412,19 +496,27 @@ document.addEventListener('DOMContentLoaded', () => {
       label.appendChild(document.createTextNode(option));
       optionsElement.appendChild(label);
     });
-
-    currentQuestionIndex++;
   }
 
   /**
    * Displays appropriate graph based on graphId
    */
   function displayGraph(graphId) {
+    chartPlaceholder.innerHTML = "";
     if(graphId === 1){
       displayMyEquityGapsMajorGaps(chartPlaceholder);
     } 
     else if(graphId === 2){
       displayStudentProgressUnits(chartPlaceholder);
+    }
+    else if(graphId === 3){
+      displayGoalTrajectories(chartPlaceholder);
+    }
+    else if(graphId === 4){
+      displayWhatPathDoTheyFollow(chartPlaceholder);
+    }
+    else if(graphId === 5){
+      displayEnrollingAndGraduating(chartPlaceholder);
     }
     else {
       chartPlaceholder.appendChild(iframeElement);

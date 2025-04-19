@@ -1,6 +1,6 @@
-const questionService = require('../services/questionService'); 
-const userService = require('../services/userService');
-const responseService = require('../services/standardAndNonStandardGraphComparisonService');
+const questionService = require('../../services/standardAndNonStandardGraphComparisonServices/questionService'); 
+const userService = require('../../services/standardAndNonStandardGraphComparisonServices/userService');
+const responseService = require('../../services/standardAndNonStandardGraphComparisonServices/standardAndNonStandardGraphComparisonService');
 
 /**
  * GraphController handles all requests including user management, retrieving main study questions, and handling user response recording
@@ -62,7 +62,9 @@ class StandardAndNonStandardGraphComparisonController {
 
     // Method to add a main study response
     async postMainStudyResponse(req, res) {
+        debugger;
         const responseData = req.body; // Assuming response data is sent in the request body
+        console.log(req.body);
         try {
             const response = await responseService.insertMainstudyResponse(responseData);
             return res.status(201).json(response);

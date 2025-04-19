@@ -1,14 +1,22 @@
 // models/MainStudyResponse.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db'); // Your database configuration
+const sequelize = require('../../config/db'); // Your database configuration
 
 const MainStudyResponse = sequelize.define('MainStudyResponse', {
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    questionNumber: {
+    graphId: {
         type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    questionOrderIndex: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    questionName: {
+        type: DataTypes.STRING,
         allowNull: false
     },
     question: {
@@ -17,11 +25,11 @@ const MainStudyResponse = sequelize.define('MainStudyResponse', {
     },
     userAnswer: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     isCorrect: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     }
 }, {
     tableName: 'mainstudy_responses',
