@@ -20,7 +20,12 @@ class ResponseService {
     // Add a Pre Study Response
     async insertPrestudyResponse(data) {
         try {
-            const response = await PreStudyResponse.create(data);
+            const response = await PreStudyResponse.create({
+                userId: data.userId,
+                question: data.question,
+                userAnswer: data.userAnswer,
+                isCorrect: data.isCorrect
+            });
             return response;
         } catch (error) {
             console.error("Error adding pre study response:", error);

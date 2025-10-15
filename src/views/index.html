@@ -42,7 +42,12 @@
     <div class="prestudy-question-alignment" style="display: flex; flex-direction: column; margin-bottom: 20px;">
       <p id="prestudy-question" style="margin-bottom: 10px;margin: 0;"></p> 
     </div>
-    <input type="text" id="inputText" placeholder="Enter your answer" style="margin-bottom: 20px;"/>
+    
+    <div class="prestudy-input-div">
+        <input type="text" id="inputText" placeholder="Enter your answer" style="margin-bottom: 5px; display: none;"/>
+        <small id="numeric-helper-text" style="color: red; display: none; margin-bottom: 15px;">Please enter numeric value only</small>
+        <div id="prestudy-options" style="margin-bottom: 20px;"></div>
+    </div>
 
     <button id="prestudy-submit-button" class="study-button" style="margin-bottom: 20px;">SUBMIT</button>
     <button id="start-calibration-button" class="study-button" style="display: none;">NEXT</button>

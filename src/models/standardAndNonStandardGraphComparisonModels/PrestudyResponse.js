@@ -14,6 +14,10 @@ const PreStudyResponse = sequelize.define('PreStudyResponse', {
     userAnswer: {
         type: DataTypes.STRING,
         allowNull: true
+    },
+    isCorrect: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true
     }
 }, {
     tableName: 'prestudy_responses',

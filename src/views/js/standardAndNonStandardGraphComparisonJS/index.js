@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const prestudyMsgElement = document.getElementById("prestudy-msg");
   const prestudyChart = document.getElementById("prestudy-chart");
   const inputElement = document.getElementById("inputText");
+  const prestudyOptionsElement = document.getElementById("prestudy-options");
+  const numericHelperText = document.getElementById("numeric-helper-text");
 
   // Prestudy Variables
   let currentPrestudyQuestionIndex = 0;
@@ -223,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPrestudyQuestionIndex = 0;
     prestudyChart.innerHTML = "";
     inputElement.style.display = "none";
+    numericHelperText.style.display = "none";
   }
 
   /**
@@ -245,29 +248,68 @@ document.addEventListener('DOMContentLoaded', () => {
    *  - displays next question or displays mainstudy Screen
    */
   async function handlePrestudyQuestionSubmit() {
-    const inputValue = inputElement.value;
-    if (!inputValue) {
-      alert("Please enter an answer.");
-      currentAnswer.value = null;
-      return;
+    let answerValue = null;
+    
+    // Check if this is a multiple choice question
+    const questionData = userQuestions[currentPrestudyQuestionIndex - 1]; // -1 because we incremented in displayNextPrestudyQuestion
+    const questionType = questionData[3] || "free-response";
+    
+    if (questionType === "multiple-choice") {
+      // Get selected radio button
+      const selectedOption = document.querySelector('input[name="prestudy-option"]:checked');
+      if (!selectedOption) {
+        alert("Please select an option.");
+        currentAnswer.value = null;
+        return;
+      }
+      answerValue = selectedOption.value;
     } else {
-      currentAnswer.value = inputValue;
+      // Get text input value
+      answerValue = inputElement.value;
+      if (!answerValue) {
+        alert("Please enter an answer.");
+        currentAnswer.value = null;
+        return;
+      }
+      
+      // Validate numeric input for numeric-input type questions
+      if (questionType === "numeric-input") {
+        // Remove % sign if present for validation
+        const valueToValidate = answerValue.trim().replace('%', '');
+        // Check if the input contains any alphabetic characters
+        if (/[a-zA-Z]/.test(valueToValidate)) {
+          alert("Please enter a numeric value.");
+          return;
+        }
+        // Check if it's a valid number
+        if (isNaN(parseFloat(valueToValidate))) {
+          alert("Please enter a valid numeric value.");
+          return;
+        }
+      }
     }
+    
+    currentAnswer.value = answerValue;
 
-    if (currentPrestudyQuestionIndex == 0) {
+    if (currentPrestudyQuestionIndex == 1) { // Age question (index 0)
       await updateUser(userId, {
         age: parseInt(currentAnswer.value),
       });
     }
-    else if (currentPrestudyQuestionIndex == 1) {
+    else if (currentPrestudyQuestionIndex == 2) { // Major question (index 1)
       await updateUser(userId, {
         major: currentAnswer.value,
       });
     }
 
-    await recordPrestudyResponse(userId, currentQuestion, currentAnswer);
+    // Pass the question index (currentPrestudyQuestionIndex - 1) to recordPrestudyResponse
+    await recordPrestudyResponse(userId, currentQuestion, currentAnswer, currentPrestudyQuestionIndex - 1);
     await recordInteraction(userId, "Submit", false, true, currentGraphId, currentQuestionId, currentQuestion, currentAnswer);
+    
+    // Clear inputs
     inputElement.value = "";
+    const radioButtons = document.querySelectorAll('input[name="prestudy-option"]');
+    radioButtons.forEach(radio => radio.checked = false);
   
     if (currentPrestudyQuestionIndex < 6) {
       displayNextPrestudyQuestion();
@@ -414,17 +456,64 @@ document.addEventListener('DOMContentLoaded', () => {
    *  Display next prestudy question
    */
   function displayNextPrestudyQuestion() {
-    prestudyQuestionElement.innerHTML = currentQuestion.value = userQuestions[currentPrestudyQuestionIndex][0];
+    const questionData = userQuestions[currentPrestudyQuestionIndex];
+    prestudyQuestionElement.innerHTML = currentQuestion.value = questionData[0];
     prestudyChart.innerHTML = "";
+    
+    // Clear previous options and input
+    prestudyOptionsElement.innerHTML = "";
+    inputElement.value = "";
   
     var imageElement = document.createElement("img");
-    if (userQuestions[currentPrestudyQuestionIndex][1] != null) {
+    if (questionData[1] != null) {
       imageElement.src =
-        "img/prestudy-img/" + userQuestions[currentPrestudyQuestionIndex][1];
+        "img/prestudy-img/" + questionData[1];
       imageElement.alt = "prestudy Chart";
       imageElement.style.width = "auto";
       imageElement.style.height = "400px";
       prestudyChart.appendChild(imageElement);
+    }
+
+    // Handle different question types
+    const questionType = questionData[3] || "free-response";
+    
+    if (questionType === "multiple-choice") {
+      // Show options, hide text input
+      inputElement.style.display = "none";
+      numericHelperText.style.display = "none";
+      prestudyOptionsElement.style.display = "block";
+      
+      // Create radio buttons for options
+      questionData[2].forEach((option, index) => {
+        const optionDiv = document.createElement("div");
+        optionDiv.className = "form-check";
+        
+        const radioInput = document.createElement("input");
+        radioInput.type = "radio";
+        radioInput.className = "form-check-input";
+        radioInput.name = "prestudy-option";
+        radioInput.id = `option-${index}`;
+        radioInput.value = option;
+        
+        const label = document.createElement("label");
+        label.className = "form-check-label";
+        label.htmlFor = `option-${index}`;
+        label.textContent = option;
+        
+        optionDiv.appendChild(radioInput);
+        optionDiv.appendChild(label);
+        prestudyOptionsElement.appendChild(optionDiv);
+      });
+    } else if (questionType === "numeric-input") {
+      // Show text input and helper text for numeric input
+      inputElement.style.display = "block";
+      numericHelperText.style.display = "block";
+      prestudyOptionsElement.style.display = "none";
+    } else {
+      // Show text input, hide helper text and options (for free-response)
+      inputElement.style.display = "block";
+      numericHelperText.style.display = "none";
+      prestudyOptionsElement.style.display = "none";
     }
 
     currentPrestudyQuestionIndex++;
@@ -500,25 +589,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * Displays appropriate graph based on graphId
+   * GraphIds 1-5 are standard charts, 6-10 are ALT charts
+   * But they map to the same chart types:
+   * - GraphId 1 or 6 = Equity chart
+   * - GraphId 2 or 7 = Student Progress chart
+   * - GraphId 3 or 8 = Goal Trajectories chart
+   * - GraphId 4 or 9 = Path chart
+   * - GraphId 5 or 10 = Enrollment chart
    */
   function displayGraph(graphId) {
     chartPlaceholder.innerHTML = "";
-    if(graphId === 1){
+    
+    // Map graphId to chart type (normalize ALT graphIds to standard ones)
+    const chartType = graphId <= 5 ? graphId : graphId - 5;
+    
+    if(chartType === 1){
+      // GraphId 1 or 6: Equity chart
       displayMyEquityGapsMajorGaps(chartPlaceholder);
     } 
-    else if(graphId === 2){
+    else if(chartType === 2){
+      // GraphId 2 or 7: Student Progress chart
       displayStudentProgressUnits(chartPlaceholder);
     }
-    else if(graphId === 3){
+    else if(chartType === 3){
+      // GraphId 3 or 8: Goal Trajectories chart
       displayGoalTrajectories(chartPlaceholder);
     }
-    else if(graphId === 4){
+    else if(chartType === 4){
+      // GraphId 4 or 9: Path chart
       displayWhatPathDoTheyFollow(chartPlaceholder);
     }
-    else if(graphId === 5){
+    else if(chartType === 5){
+      // GraphId 5 or 10: Enrollment chart
       displayEnrollingAndGraduating(chartPlaceholder);
     }
     else {
+      // Fallback: use iframe
       chartPlaceholder.appendChild(iframeElement);
     }
   }
