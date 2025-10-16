@@ -601,25 +601,25 @@ document.addEventListener('DOMContentLoaded', () => {
     chartPlaceholder.innerHTML = "";
     
     // Map graphId to chart type (normalize ALT graphIds to standard ones)
-    const chartType = graphId <= 5 ? graphId : graphId - 5;
+    // const chartType = graphId <= 5 ? graphId : graphId - 5;
     
-    if(chartType === 1){
+    if(graphId === 6){
       // GraphId 1 or 6: Equity chart
       displayMyEquityGapsMajorGaps(chartPlaceholder);
     } 
-    else if(chartType === 2){
+    else if(graphId === 7){
       // GraphId 2 or 7: Student Progress chart
       displayStudentProgressUnits(chartPlaceholder);
     }
-    else if(chartType === 3){
+    else if(graphId === 8){
       // GraphId 3 or 8: Goal Trajectories chart
       displayGoalTrajectories(chartPlaceholder);
     }
-    else if(chartType === 4){
+    else if(graphId === 9){
       // GraphId 4 or 9: Path chart
       displayWhatPathDoTheyFollow(chartPlaceholder);
     }
-    else if(chartType === 5){
+    else if(graphId === 10){
       // GraphId 5 or 10: Enrollment chart
       displayEnrollingAndGraduating(chartPlaceholder);
     }
