@@ -38,7 +38,7 @@ export const prestudyQuestions = [
 
 // Correct answers for scoring
 export const prestudyCorrectAnswers = {
-    2: ["25", "25%"], // Question 1 (index 2): accepts both "25%" and "25"
+    2: ["25", "25%","1/4","0.25"], // Question 1 (index 2): accepts both "25%" and "25"
     3: ["They are equal"], // Question 2 (index 3): multiple-choice
     4: ["20"], // Question 3 (index 4): numeric input
     5: ["Can not say"] // Question 4 (index 5): multiple-choice
